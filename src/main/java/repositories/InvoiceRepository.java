@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import domain.Audit;
-import domain.Issue;
+import domain.Invoice;
 
 @Repository
-public interface IssueRepository extends JpaRepository<Issue,Integer>{
+public interface InvoiceRepository extends JpaRepository<Invoice,Integer>{
 	
 }

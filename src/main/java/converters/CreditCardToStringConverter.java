@@ -4,22 +4,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Actor;
+import domain.CreditCard;
 
 @Component
 @Transactional
-public class ActorToStringConverter implements Converter<Actor, String> {
+public class CreditCardToStringConverter implements Converter<CreditCard,String>{
 
-
-	public String convert(Actor actor) {
+	public String convert(CreditCard creditCard) {
 		String result;
 
-		if (actor == null)
+		if (creditCard == null)
 			result = null;
 		else
-			result = String.valueOf(actor.getId());
+			result = String.valueOf(creditCard.getId());
 
 		return result;
 	}
-
 }

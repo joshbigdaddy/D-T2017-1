@@ -4,22 +4,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Actor;
+import domain.Finder;
 
 @Component
 @Transactional
-public class ActorToStringConverter implements Converter<Actor, String> {
+public class FinderToStringConverter implements Converter<Finder,String>{
 
-
-	public String convert(Actor actor) {
+	public String convert(Finder finder) {
 		String result;
 
-		if (actor == null)
+		if (finder == null)
 			result = null;
 		else
-			result = String.valueOf(actor.getId());
+			result = String.valueOf(finder.getId());
 
 		return result;
 	}
-
 }

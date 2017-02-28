@@ -4,22 +4,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Actor;
+import domain.Invoice;
 
 @Component
 @Transactional
-public class ActorToStringConverter implements Converter<Actor, String> {
+public class InvoiceToStringConverter implements Converter<Invoice,String>{
 
-
-	public String convert(Actor actor) {
+	public String convert(Invoice invoice) {
 		String result;
 
-		if (actor == null)
+		if (invoice == null)
 			result = null;
 		else
-			result = String.valueOf(actor.getId());
+			result = String.valueOf(invoice.getId());
 
 		return result;
 	}
-
 }

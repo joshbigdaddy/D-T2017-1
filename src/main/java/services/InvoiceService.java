@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.IssueRepository;
+import repositories.InvoiceRepository;
 
 @Service
 @Transactional
-public class IssueService {
+public class InvoiceService {
 
 	@Autowired
-	private IssueRepository issueRepository;
+	private InvoiceRepository invoiceRepository;
 
-	public IssueService() {
+	public InvoiceService() {
 		super();
 	}
 

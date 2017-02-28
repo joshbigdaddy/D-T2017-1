@@ -5,30 +5,27 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.AdministratorRepository;
-import domain.Administrator;
+import repositories.AuditorRepository;
+import domain.Auditor;
 
 @Component
 @Transactional
-public class StringToAdministratorConverter implements
-		Converter<String, Administrator> {
+public class StringToAuditorConverter implements Converter<String, Auditor> {
 
 	@Autowired
-	AdministratorRepository administratorRepository;
+	AuditorRepository auditorRepository;
 
-	
-	public Administrator convert(String text) {
-		Administrator result;
+	public Auditor convert(String text) {
+		Auditor result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			result = administratorRepository.findOne(id);
+			result = auditorRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
 
 		return result;
 	}
-
 }

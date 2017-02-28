@@ -19,12 +19,12 @@ import javax.persistence.OneToOne;
 		}
 
 	//RELATIONSHIPS
-	private Collection<Issue> issues;	
+	private Collection<Invoice> issues;	
 	@OneToMany()
-	public Collection<Issue> getIssues(){
+	public Collection<Invoice> getIssues(){
 	return issues;	
 	}
-	public void setIssues(Collection<Issue> issues){
+	public void setIssues(Collection<Invoice> issues){
 		this.issues=issues;
 	}
 	

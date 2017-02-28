@@ -11,7 +11,7 @@ import domain.Administrator;
 public class AdministratorToStringConverter implements
 		Converter<Administrator, String> {
 
-	@Override
+
 	public String convert(Administrator administrator) {
 		String result;
 

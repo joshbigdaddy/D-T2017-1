@@ -12,9 +12,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Issue extends DomainEntity{
+public class Invoice extends DomainEntity{
 
-	public Issue() {
+	public Invoice() {
 		super();
 	}
 	
