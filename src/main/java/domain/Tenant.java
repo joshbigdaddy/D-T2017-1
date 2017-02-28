@@ -46,5 +46,39 @@ import javax.persistence.OneToOne;
 		this.finder=finder;
 	}
 	
+	//Propiedades derivadas
+		public Integer getAcceptedRequests() {
+			Integer total=0;
+			for(Request r:requests){
+				if(r.getState().equalsIgnoreCase("ACCEPTED"))
+					total++;
+			}
+			
+			return total;
+		}
+		public Integer getDeniedRequests() {
+			Integer total=0;
+			for(Request r:requests){
+				if(r.getState().equalsIgnoreCase("DENIED"))
+					total++;
+			}
+			
+			return total;
+		}
+		public Integer getPendingRequests() {
+			Integer total=0;
+			for(Request r:requests){
+				if(r.getState().equalsIgnoreCase("PENDING"))
+					total++;
+			}
+			
+			return total;
+		}
+		public Double getRatioRequests() {
+			Double total = (double) (getAcceptedRequests()/getRequests().size());
+			total=Math.floor(total * 10) / 10;
+
+			return total;
+		}
 	
 }
