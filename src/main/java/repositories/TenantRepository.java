@@ -20,4 +20,12 @@ public interface TenantRepository extends JpaRepository<Tenant,Integer>{
 	Collection<Tenant> maxRatio();
 	@Query("Select l from Tenant l where l.ratioRequests=(select min(l1.ratioRequests) from Tenant l1)")
 	Collection<Tenant> minRatio();
+	
+	@Query("Select min(l.invoices.size) from Tenant l")
+	Integer minInvoicesPerTenant();
+	@Query("Select max(l.invoices.size) from Tenant l")
+	Integer maxInvoicesPerTenant();
+	@Query("Select avg(l.invoices.size) from Tenant l")
+	Double avgInvoicesPerTenant();
+
 }

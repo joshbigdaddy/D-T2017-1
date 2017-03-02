@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -20,7 +21,6 @@ public class Invoice extends DomainEntity{
 	
 	private String creditCardNumber;
 	private String details;
-	private String tenantInfo;
 	private Double amount;
 	private Integer vatNumber;
 	private Date moment;
@@ -39,13 +39,6 @@ public class Invoice extends DomainEntity{
 	}
 	public void setDetails(String details) {
 		this.details = details;
-	}
-	@NotNull
-	public String getTenantInfo() {
-		return tenantInfo;
-	}
-	public void setTenantInfo(String tenantInfo) {
-		this.tenantInfo = tenantInfo;
 	}
 	@NotNull
 	public Double getAmount() {
@@ -70,6 +63,14 @@ public class Invoice extends DomainEntity{
 	public void setMoment(Date moment) {
 		this.moment = moment;
 	}
+	private Tenant tenant;
 	
+	@ManyToOne
+	public Tenant getTenant() {
+		return tenant;
+	}
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
+	}
 	
 }

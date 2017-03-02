@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -48,7 +49,7 @@ public class Audit extends DomainEntity{
 	
 	private Property property;
 	
-	@OneToOne
+	@ManyToOne
 	public Property getProperty() {
 		return property;
 	}

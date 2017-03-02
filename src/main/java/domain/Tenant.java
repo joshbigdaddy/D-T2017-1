@@ -36,6 +36,14 @@ import javax.persistence.OneToOne;
 	public void setRequests(Collection<Request> requests){
 		this.requests=requests;
 	}
+	private Collection<Invoice> invoices;	
+	@OneToMany()
+	public Collection<Invoice> getInvoices(){
+	return invoices;	
+	}
+	public void setInvoices(Collection<Invoice> invoices){
+		this.invoices=invoices;
+	}
 	
 	private Finder finder;	
 	@OneToOne()

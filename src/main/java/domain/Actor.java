@@ -1,9 +1,12 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -75,15 +78,15 @@ public class Actor extends DomainEntity {
 		this.picture = picture;
 	}
 
-	private SocialIdentity socialIdentity;
+	private Collection<SocialIdentity> socialIdentities;
 
-	@OneToOne(optional = true)
-	public SocialIdentity getSocialIdentity() {
-		return socialIdentity;
+	@OneToMany
+	public Collection<SocialIdentity>  getSocialIdentity() {
+		return socialIdentities;
 	}
 
-	public void setSocialIdentity(SocialIdentity socialIdentity) {
-		this.socialIdentity = socialIdentity;
+	public void setSocialIdentity(Collection<SocialIdentity>  socialIdentities) {
+		this.socialIdentities = socialIdentities;
 	}
 
 	private UserAccount userAccount;

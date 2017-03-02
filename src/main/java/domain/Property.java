@@ -47,7 +47,16 @@ public class Property extends DomainEntity{
 	
 	private Collection<Attribute> attributes;
 	private Collection<Request> requests;
-
+	private Collection<Audit> audits;
+	
+	
+	@OneToMany()
+	public Collection<Audit> getAudits() {
+		return audits;
+	}
+	public void setAudits(Collection<Audit> audits) {
+		this.audits = audits;
+	}
 	@OneToMany()
 	public Collection<Attribute> getAttributes() {
 		return attributes;
