@@ -37,6 +37,8 @@ public class Lessor extends SocialUser {
 
 		return total;
 	}
+	public void setRequests(Integer ratio) {
+	}
 	public Integer getAcceptedRequests() {
 		Integer total = 0;
 		for (Property p : properties) {
@@ -49,7 +51,8 @@ public class Lessor extends SocialUser {
 
 		return total;
 	}
-
+	public void setAcceptedRequests(Integer ratio) {
+	}
 	public Integer getDeniedRequests() {
 		Integer total = 0;
 		for (Property p : properties) {
@@ -62,7 +65,8 @@ public class Lessor extends SocialUser {
 
 		return total;
 	}
-
+	public void setDeniedRequests(Integer ratio) {
+	}
 	public Integer getPendingRequests() {
 		Integer total = 0;
 		for (Property p : properties) {
@@ -75,11 +79,15 @@ public class Lessor extends SocialUser {
 
 		return total;
 	}
+	public void setPendingRequests(Integer ratio) {
+	}
 	public Double getRatioRequests() {
 		Double total = (double) (getAcceptedRequests()/getRequests());
 		total=Math.floor(total * 10) / 10;
 
 		return total;
+	}
+	public void setRatioRequests(Double ratio) {
 	}
 	
 	

@@ -81,6 +81,8 @@ public class Property extends DomainEntity{
 		
 		return total;
 	}
+	public void setAcceptedRequests(Integer ratio) {
+	}
 	public Integer getDeniedRequests() {
 		Integer total=0;
 		for(Request r:requests){
@@ -89,6 +91,8 @@ public class Property extends DomainEntity{
 		}
 		
 		return total;
+	}
+	public void setDeniedRequests(Integer ratio) {
 	}
 	public Integer getPendingRequests() {
 		Integer total=0;
@@ -99,5 +103,6 @@ public class Property extends DomainEntity{
 		
 		return total;
 	}
-	
+	public void setPendingRequests(Integer ratio) {
+	}
 }

@@ -64,6 +64,8 @@ import javax.persistence.OneToOne;
 			
 			return total;
 		}
+		public void setAcceptedRequests(Integer ratio) {
+		}
 		public Integer getDeniedRequests() {
 			Integer total=0;
 			for(Request r:requests){
@@ -72,6 +74,8 @@ import javax.persistence.OneToOne;
 			}
 			
 			return total;
+		}
+		public void setDeniedRequests(Integer ratio) {
 		}
 		public Integer getPendingRequests() {
 			Integer total=0;
@@ -82,11 +86,15 @@ import javax.persistence.OneToOne;
 			
 			return total;
 		}
+		public void setPendingRequests(Integer ratio) {
+		}
 		public Double getRatioRequests() {
 			Double total = (double) (getAcceptedRequests()/getRequests().size());
 			total=Math.floor(total * 10) / 10;
 
 			return total;
+		}
+		public void setRatioRequests(Double ratio) {
 		}
 	
 }
