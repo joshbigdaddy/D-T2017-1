@@ -19,14 +19,6 @@ import javax.persistence.OneToOne;
 		}
 
 	//RELATIONSHIPS
-	private Collection<Invoice> issues;	
-	@OneToMany()
-	public Collection<Invoice> getIssues(){
-	return issues;	
-	}
-	public void setIssues(Collection<Invoice> issues){
-		this.issues=issues;
-	}
 	
 	private Collection<Request> requests;	
 	@OneToMany()
@@ -89,9 +81,11 @@ import javax.persistence.OneToOne;
 		public void setPendingRequests(Integer ratio) {
 		}
 		public Double getRatioRequests() {
-			Double total = (double) (getAcceptedRequests()/getRequests().size());
+			Double total=0.;
+			if(getRequests().size()!=0){
+			total = (double) (getAcceptedRequests()/getRequests().size());
 			total=Math.floor(total * 10) / 10;
-
+			}
 			return total;
 		}
 		public void setRatioRequests(Double ratio) {

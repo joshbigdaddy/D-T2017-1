@@ -180,7 +180,14 @@
 		<property name="cvvCode" value="103" />
 	</bean>
 	
-	
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="brandName" value="Brand Name 2" />
+		<property name="holderName" value="Holder Name 2" />
+		<property name="number" value="4916410161778424" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="1999" />
+		<property name="cvvCode" value="103" />
+	</bean>
 	
 	
 	<bean id="socialIdentity1" class="domain.SocialIdentity">
@@ -380,5 +387,221 @@
 		<property name="property" ref="property3" />
 	</bean>
 	
+	<bean id="invoice1" class="domain.Invoice">
+		<property name="moment" value="5/1/2015" />
+		<property name="vatNumber" value="1" />
+		<property name="details" value="details" />
+		<property name="creditCardNumber" value="4916410161778424" />
+		<property name="amount" value="1111.0" />
+	</bean>
+	
+	<bean id="invoice2" class="domain.Invoice">
+		<property name="moment" value="5/1/2015" />
+		<property name="vatNumber" value="2" />
+		<property name="details" value="details" />
+		<property name="creditCardNumber" value="4916410161778424" />
+		<property name="amount" value="1111.0" />
+	</bean>
+	
+	<bean id="invoice3" class="domain.Invoice">
+		<property name="moment" value="5/1/2015" />
+		<property name="vatNumber" value="3" />
+		<property name="details" value="details" />
+		<property name="creditCardNumber" value="4916410161778424" />
+		<property name="amount" value="1111.0" />
+	</bean>
+	
+	
+	<bean id="lessor1" class="domain.Lessor">
+		<property name="name" value="Lessor 1" />
+		<property name="surname" value=" Surname 1" />
+		<property name="email" value="lessor1@lessor.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="properties">
+			<list>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount4" />
+		<property name="creditCards">
+			<list>
+			<ref bean="creditCard1" />
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="lessor2" class="domain.Lessor">
+		<property name="name" value="Lessor 2" />
+		<property name="surname" value=" Surname 2" />
+		<property name="email" value="lessor1@lessor.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="properties">
+			<list>
+			<ref bean="property1" />
+			<ref bean="property2" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount5" />
+		<property name="creditCards">
+			<list>
+			
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="lessor3" class="domain.Lessor">
+		<property name="name" value="Lessor 3" />
+		<property name="surname" value=" Surname 3" />
+		<property name="email" value="lessor3@lessor.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="properties">
+			<list>
+			<ref bean="property3" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount6" />
+		<property name="creditCards">
+			<list>
+			
+			</list>
+		</property>
+		
+	</bean>
+	
+	
+	<bean id="tenant1" class="domain.Tenant">
+		<property name="name" value="tenant 1" />
+		<property name="surname" value=" Surname 1" />
+		<property name="email" value="tenant1@tenant.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="requests">
+			<list>
+			
+			</list>
+		</property>
+		<property name="invoices">
+			<list>
+			</list>
+		</property>
+		<property name="finder" ref="finder1" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="creditCards">
+			<list>
+			<ref bean="creditCard2" />
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="tenant2" class="domain.Tenant">
+		<property name="name" value="tenant 2" />
+		<property name="surname" value=" Surname 2" />
+		<property name="email" value="tenant2@tenant.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="requests">
+			<list>
+			<ref bean="request1" />
+			<ref bean="request2" />
+			</list>
+		</property>
+		<property name="invoices">
+			<list>
+			<ref bean="invoice2" />
+			</list>
+		</property>
+		<property name="finder" ref="finder2" />
+		<property name="userAccount" ref="userAccount8" />
+		<property name="creditCards">
+			<list>
+			
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="tenant3" class="domain.Tenant">
+		<property name="name" value="tenant 3" />
+		<property name="surname" value=" Surname 3" />
+		<property name="email" value="tenant3@tenant.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="requests">
+			<list>
+			<ref bean="request3" />
+			</list>
+		</property>
+		<property name="invoices">
+			<list>
+			<ref bean="invoice1" />
+			<ref bean="invoice3" />
+			</list>
+		</property>
+		<property name="finder" ref="finder3" />
+		<property name="userAccount" ref="userAccount9" />
+		<property name="creditCards">
+			<list>
+		
+			</list>
+		</property>
+		
+	</bean>
+	
+	
+	<bean id="auditor1" class="domain.Auditor">
+		<property name="name" value="Auditor 1" />
+		<property name="surname" value=" Surname 1" />
+		<property name="email" value="auditor1@auditor.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="company" value="repsol" />
+		<property name="audits">
+			<list>
+			<ref bean="audit1" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount10" />
+			
+		
+	</bean>
+	
+	<bean id="auditor2" class="domain.Auditor">
+		<property name="name" value="Auditor 2" />
+		<property name="surname" value=" Surname 2" />
+		<property name="email" value="auditor2@auditor.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="company" value="repsol" />
+		<property name="audits">
+			<list>
+			<ref bean="audit3" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount11" />
+			
+		
+	</bean>
+	
+	<bean id="auditor3" class="domain.Auditor">
+		<property name="name" value="Auditor 3" />
+		<property name="surname" value=" Surname 3" />
+		<property name="email" value="auditor3@auditor.es" />
+		<property name="phone" value="975398899" />
+		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+		<property name="company" value="repsol" />
+		<property name="audits">
+			<list>
+			<ref bean="audit2" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount12" />
+			
+		
+	</bean>
 	
 </beans>

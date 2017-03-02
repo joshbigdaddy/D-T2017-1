@@ -82,9 +82,11 @@ public class Lessor extends SocialUser {
 	public void setPendingRequests(Integer ratio) {
 	}
 	public Double getRatioRequests() {
-		Double total = (double) (getAcceptedRequests()/getRequests());
+		Double total=0.;
+		if(getRequests()!=0){
+		 total = (double) (getAcceptedRequests()/getRequests());
 		total=Math.floor(total * 10) / 10;
-
+		}
 		return total;
 	}
 	public void setRatioRequests(Double ratio) {
