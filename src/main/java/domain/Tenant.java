@@ -50,7 +50,7 @@ import javax.persistence.OneToOne;
 	public Finder getFinder(){
 	return finder;	
 	}
-	public void setRequests(Finder finder){
+	public void setFinder(Finder finder){
 		this.finder=finder;
 	}
 	
