@@ -235,4 +235,150 @@
 		<property name="userAccount" ref="userAccount3" />
 		
 	</bean>
+	
+	
+	<bean id="comment1" class="domain.Comment">
+		<property name="moment" value="23/4/2016" />
+		<property name="title" value="Comentario de prueba" />
+		<property name="text" value="texto de prueba" />
+		<property name="starRating" value="4" />
+	</bean>
+
+	<bean id="comment2" class="domain.Comment">
+		<property name="moment" value="24/4/2016" />
+		<property name="title" value="Comentario de prueba" />
+		<property name="text" value="texto de prueba" />
+		<property name="starRating" value="3" />
+	</bean>
+
+	<bean id="comment3" class="domain.Comment">
+		<property name="moment" value="28/4/2016" />
+		<property name="title" value="Comentario de prueba" />
+		<property name="text" value="texto de prueba" />
+		<property name="starRating" value="5" />
+	</bean>
+	
+	<bean id="attribute1" class="domain.Attribute">
+		<property name="name" value="Attribute1" />
+		<property name="value" value="Value1" />
+	</bean>
+	
+	<bean id="attribute2" class="domain.Attribute">
+		<property name="name" value="Attribute2" />
+		<property name="value" value="Value2" />
+	</bean>
+	
+	<bean id="attribute3" class="domain.Attribute">
+		<property name="name" value="Attribute3" />
+		<property name="value" value="Value3" />
+	</bean>
+	
+	<bean id="finder1" class="domain.Finder">
+		<property name="destinationCity" value="Seville" />
+		<property name="minPrice" value="50.0" />
+		<property name="maxPrice" value="150.0" />
+		<property name="keyword" value="keyword1" />
+	</bean>
+	
+	<bean id="finder2" class="domain.Finder">
+		<property name="destinationCity" value="Gibraltar" />
+		<property name="minPrice" value="50.0" />
+		<property name="maxPrice" value="150.0" />
+		<property name="keyword" value="keyword3" />
+	</bean>
+	
+	<bean id="finder3" class="domain.Finder">
+		<property name="destinationCity" value="Algeciras" />
+		<property name="minPrice" value="50.0" />
+		<property name="maxPrice" value="150.0" />
+		<property name="keyword" value="keyword3" />
+	</bean>
+	
+	
+	
+	<bean id="request1" class="domain.Request">
+		<property name="checkinDate" value="5/1/2017" />
+		<property name="checkoutDate" value="5/1/2017" />
+		<property name="smoker" value="true" />
+		<property name="creditCardNumber" value="4916410161778424" />
+		<property name="state" value="Madrid" />
+		<property name="property" ref="property1" />
+	</bean>
+	
+	<bean id="request2" class="domain.Request">
+		<property name="checkinDate" value="5/1/2017" />
+		<property name="checkoutDate" value="5/1/2017" />
+		<property name="smoker" value="true" />
+		<property name="creditCardNumber" value="4916410161778424" />
+		<property name="state" value="Madrid" />
+		<property name="property" ref="property1" />
+	</bean>
+	
+	<bean id="request3" class="domain.Request">
+		<property name="checkinDate" value="5/1/2017" />
+		<property name="checkoutDate" value="5/1/2017" />
+		<property name="smoker" value="true" />
+		<property name="creditCardNumber" value="4916410161778424" />
+		<property name="state" value="Madrid" />
+		<property name="property" ref="property2" />
+	</bean>
+	
+	<bean id="property1" class="domain.Property">
+		<property name="name" value="Property1" />
+		<property name="rate" value="5" />
+		<property name="description" value="Description 1" />
+		<property name="address" value="C/Trebol" />
+		<property name="requests">
+			<list>
+			<ref bean="request1" />
+			<ref bean="request2" />
+			</list>
+		</property>
+	</bean>	
+	
+	<bean id="property2" class="domain.Property">
+		<property name="name" value="Property2" />
+		<property name="rate" value="5" />
+		<property name="description" value="Description 1" />
+		<property name="address" value="C/Trebol" />
+		<property name="requests">
+			<list>
+			<ref bean="request3" />
+			</list>
+		</property>
+	</bean>	
+	
+	<bean id="property3" class="domain.Property">
+		<property name="name" value="Property3" />
+		<property name="rate" value="5" />
+		<property name="description" value="Description 1" />
+		<property name="address" value="C/Trebol" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>	
+	
+	<bean id="audit1" class="domain.Audit">
+		<property name="moment" value="5/1/2015" />
+		<property name="text" value="text" />
+		<property name="attachment" value="111" />
+		<property name="property" ref="property2" />
+	</bean>
+	
+	<bean id="audit2" class="domain.Audit">
+		<property name="moment" value="5/1/2015" />
+		<property name="text" value="text" />
+		<property name="attachment" value="111" />
+		<property name="property" ref="property2" />
+	</bean>
+	
+	<bean id="audit3" class="domain.Audit">
+		<property name="moment" value="5/1/2015" />
+		<property name="text" value="text" />
+		<property name="attachment" value="111" />
+		<property name="property" ref="property3" />
+	</bean>
+	
+	
 </beans>

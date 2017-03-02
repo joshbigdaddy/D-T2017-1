@@ -4,7 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -19,7 +21,7 @@ public class Request extends DomainEntity{
 	}
 	
 	private String state;
-	private String creditCardName;
+	private String creditCardNumber;
 	private boolean smoker;
 	private Date checkinDate;
 	private Date checkoutDate;
@@ -33,11 +35,11 @@ public class Request extends DomainEntity{
 	}
 	
 	@NotBlank
-	public String getCreditCardName() {
-		return creditCardName;
+	public String getCreditCardNumber() {
+		return creditCardNumber;
 	}
-	public void setCreditCardName(String creditCardName) {
-		this.creditCardName = creditCardName;
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
 	}
 	@NotNull
 	public boolean isSmoker() {
@@ -63,7 +65,8 @@ public class Request extends DomainEntity{
 	
 	private Property property;
 	
-	@ManyToOne()
+	@ManyToOne(optional =false, 
+			fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	public Property getProperty() {
 		return property;
 	}

@@ -64,7 +64,7 @@ public class Property extends DomainEntity{
 	public void setAttributes(Collection<Attribute> attributes) {
 		this.attributes = attributes;
 	}
-	@OneToMany()
+	@OneToMany(mappedBy= "property")
 	public Collection<Request> getRequests() {
 		return requests;
 	}
