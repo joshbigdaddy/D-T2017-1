@@ -19,8 +19,8 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -31,32 +31,208 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="admin2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="ADMIN" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="admin3" />
+		<property name="password" value="32cacb2f994f6b42183a1300d9a3e8d6" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
 					<property name="authority" value="ADMIN" />
 				</bean>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="ADMIN" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="lessor1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="lessor2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="lessor3" />
+		<property name="password" value="32cacb2f994f6b42183a1300d9a3e8d6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="tenant1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="tenant2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="tenant3" />
+		<property name="password" value="32cacb2f994f6b42183a1300d9a3e8d6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+				
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="auditor1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="auditor2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="auditor3" />
+		<property name="password" value="32cacb2f994f6b42183a1300d9a3e8d6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+				
+			</list>
+		</property>
+	</bean>
 	<!-- Other domain beans come here -->	
 	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="brandName" value="Brand Name 1" />
+		<property name="holderName" value="Holder Name 1" />
+		<property name="number" value="4916410161778424" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="1999" />
+		<property name="cvvCode" value="103" />
+	</bean>
+	
+	
+	
+	
+	<bean id="socialIdentity1" class="domain.SocialIdentity">
+
+		<property name="nick" value="nick1" />
+		<property name="name" value="Name 1" />
+		<property name="link" value="http://www.random3.com/" />
+		<property name="picture" value="http://www.youtube.com/" />
+	</bean>
+	<bean id="socialIdentity2" class="domain.SocialIdentity">
+
+		<property name="nick" value="nick2" />
+		<property name="name" value="Name 2" />
+		<property name="link" value="http://www.random3.com/" />
+		<property name="picture" value="http://www.youtube.com/" />
+	</bean>
+	<bean id="socialIdentity3" class="domain.SocialIdentity">
+
+		<property name="nick" value="nick3" />
+		<property name="name" value="Name 3" />
+		<property name="link" value="http://www.random3.com/" />
+		<property name="picture" value="http://www.youtube.com/" />
+	</bean>
+	
+	
+	<bean id="administrator1" class="domain.Administrator">
+		
+		<property name="name" value="Admin 1" />
+		<property name="surname" value="Surname 1" />
+		<property name="email" value="admin@super.es" />
+		<property name="phone" value="975398899" />
+		<property name="userAccount" ref="userAccount1" />
+		
+	</bean>
+	
+	<bean id="administrator2" class="domain.Administrator">
+		
+		<property name="name" value="Admin 2" />
+		<property name="surname" value="Surname 2" />
+		<property name="email" value="admin@super.es" />
+		<property name="phone" value="975398899" />
+		<property name="userAccount" ref="userAccount2" />
+		
+	</bean>
+	
+	<bean id="administrator3" class="domain.Administrator">
+		
+		<property name="name" value="Admin 3" />
+		<property name="surname" value="Surname 3" />
+		<property name="email" value="admin@super.es" />
+		<property name="phone" value="975398899" />
+		<property name="userAccount" ref="userAccount3" />
+		
+	</bean>
 </beans>
