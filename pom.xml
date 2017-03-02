@@ -28,9 +28,7 @@
 
 	<!-- Indexing information -->
 
-	<name>Sample Project</name>
-	<url>http://www.sample-project.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<url>http://www.acme-bnb.com</url>
 	
 	<!-- Build commands -->
 
@@ -323,4 +321,6 @@
 		
 	</dependencies>
 
+	<description>This project is the first one in the 2nd Term</description>
+	<name>Acme-BnB</name>
 </project> 
