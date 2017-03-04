@@ -10,17 +10,13 @@ import domain.Tenant;
 
 @Repository
 public interface TenantRepository extends JpaRepository<Tenant,Integer>{
-	@Query("Select l from Tenant l where l.acceptedRequests=(select max(l1.acceptedRequests) from Tenant l1)")
+	@Query("select t,(select count(r) from Tenant t2 join t2.requests r where r.state = 'ACCEPTED' and t.id=t2.id) as mr from Tenant t order by mr DESC")
 	Collection<Tenant> maxRequestsApprovedTenant();
-	@Query("Select l from Tenant l where l.deniedRequests=(select max(l1.deniedRequests) from Tenant l1)")
+	@Query("select t,(select count(r) from Tenant t2 join t2.requests r where r.state = 'DENIED' and t.id=t2.id) as mr from Tenant t order by mr DESC")
 	Collection<Tenant> maxRequestsDeniedTenant();
-	@Query("Select l from Tenant l where l.pendingRequests=(select max(l1.pendingRequests) from Tenant l1)")
+	@Query("select t,(select count(r) from Tenant t2 join t2.requests r where r.state = 'PENDING' and t.id=t2.id) as mr from Tenant t order by mr DESC")
 	Collection<Tenant> maxRequestsPendingTenant();
-	@Query("Select l from Tenant l where l.ratioRequests=(select max(l1.ratioRequests) from Tenant l1)")
-	Collection<Tenant> maxRatio();
-	@Query("Select l from Tenant l where l.ratioRequests=(select min(l1.ratioRequests) from Tenant l1)")
-	Collection<Tenant> minRatio();
-	
+
 	@Query("Select min(l.invoices.size) from Tenant l")
 	Integer minInvoicesPerTenant();
 	@Query("Select max(l.invoices.size) from Tenant l")

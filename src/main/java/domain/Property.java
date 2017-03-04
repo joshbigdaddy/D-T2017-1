@@ -2,10 +2,7 @@ package domain;
 
 import java.util.Collection;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -45,7 +42,8 @@ public class Property extends DomainEntity{
 		this.rate = rate;
 	}
 	
-	private Collection<Attribute> attributes;
+	private Collection<AttributeValue> attributeValues;
+
 	private Collection<Request> requests;
 	private Collection<Audit> audits;
 	
@@ -57,52 +55,21 @@ public class Property extends DomainEntity{
 	public void setAudits(Collection<Audit> audits) {
 		this.audits = audits;
 	}
-	@OneToMany()
-	public Collection<Attribute> getAttributes() {
-		return attributes;
-	}
-	public void setAttributes(Collection<Attribute> attributes) {
-		this.attributes = attributes;
-	}
-	@OneToMany(mappedBy= "property")
+
+    @OneToMany(mappedBy = "property")
+    public Collection<AttributeValue> getAttributeValues() {
+        return attributeValues;
+    }
+
+    public void setAttributeValues(Collection<AttributeValue> attributeValues) {
+        this.attributeValues = attributeValues;
+    }
+
+    @OneToMany(mappedBy= "property")
 	public Collection<Request> getRequests() {
 		return requests;
 	}
 	public void setRequests(Collection<Request> requests) {
 		this.requests = requests;
-	}
-	//Propiedades derivadas
-	public Integer getAcceptedRequests() {
-		Integer total=0;
-		for(Request r:requests){
-			if(r.getState().equalsIgnoreCase("ACCEPTED"))
-				total++;
-		}
-		
-		return total;
-	}
-	public void setAcceptedRequests(Integer ratio) {
-	}
-	public Integer getDeniedRequests() {
-		Integer total=0;
-		for(Request r:requests){
-			if(r.getState().equalsIgnoreCase("DENIED"))
-				total++;
-		}
-		
-		return total;
-	}
-	public void setDeniedRequests(Integer ratio) {
-	}
-	public Integer getPendingRequests() {
-		Integer total=0;
-		for(Request r:requests){
-			if(r.getState().equalsIgnoreCase("PENDING"))
-				total++;
-		}
-		
-		return total;
-	}
-	public void setPendingRequests(Integer ratio) {
 	}
 }

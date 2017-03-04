@@ -2,12 +2,7 @@ package domain;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -16,21 +11,26 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Request extends DomainEntity{
 
+	public enum RequestType {
+		PENDING,ACCEPTED,DENIED
+	}
+
+
 	public Request() {
 		super();
 	}
 	
-	private String state;
+	private RequestType state;
 	private String creditCardNumber;
 	private boolean smoker;
 	private Date checkinDate;
 	private Date checkoutDate;
-	
-	@NotBlank
-	public String getState() {
+
+	@Enumerated(EnumType.STRING)
+	public RequestType getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(RequestType state) {
 		this.state = state;
 	}
 	

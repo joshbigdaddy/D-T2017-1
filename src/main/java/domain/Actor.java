@@ -20,7 +20,7 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Actor extends DomainEntity {
+public abstract class Actor extends DomainEntity {
 
 	public Actor() {
 		super();
@@ -81,11 +81,11 @@ public class Actor extends DomainEntity {
 	private Collection<SocialIdentity> socialIdentities;
 
 	@OneToMany
-	public Collection<SocialIdentity>  getSocialIdentity() {
+	public Collection<SocialIdentity> getSocialIdentities() {
 		return socialIdentities;
 	}
 
-	public void setSocialIdentity(Collection<SocialIdentity>  socialIdentities) {
+	public void setSocialIdentities(Collection<SocialIdentity> socialIdentities) {
 		this.socialIdentities = socialIdentities;
 	}
 

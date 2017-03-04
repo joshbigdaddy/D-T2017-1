@@ -266,19 +266,24 @@
 	</bean>
 	
 	<bean id="attribute1" class="domain.Attribute">
-		<property name="name" value="Attribute1" />
-		<property name="value" value="Value1" />
+		<property name="name" value="country" />
 	</bean>
 	
 	<bean id="attribute2" class="domain.Attribute">
-		<property name="name" value="Attribute2" />
-		<property name="value" value="Value2" />
+		<property name="name" value="province" />
 	</bean>
 	
 	<bean id="attribute3" class="domain.Attribute">
-		<property name="name" value="Attribute3" />
-		<property name="value" value="Value3" />
+		<property name="name" value="state" />
 	</bean>
+
+	<bean id="attribute4" class="domain.Attribute">
+		<property name="name" value="city" />
+	</bean>
+
+    <bean id="attribute5" class="domain.Attribute">
+        <property name="name" value="capacity" />
+    </bean>
 	
 	<bean id="finder1" class="domain.Finder">
 		<property name="destinationCity" value="Seville" />
@@ -300,15 +305,14 @@
 		<property name="maxPrice" value="150.0" />
 		<property name="keyword" value="keyword3" />
 	</bean>
-	
-	
+
 	
 	<bean id="request1" class="domain.Request">
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
 		<property name="creditCardNumber" value="4916410161778424" />
-		<property name="state" value="Madrid" />
+		<property name="state" value="PENDING" />
 		<property name="property" ref="property1" />
 	</bean>
 	
@@ -317,7 +321,7 @@
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
 		<property name="creditCardNumber" value="4916410161778424" />
-		<property name="state" value="Madrid" />
+		<property name="state" value="DENIED" />
 		<property name="property" ref="property1" />
 	</bean>
 	
@@ -326,7 +330,7 @@
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
 		<property name="creditCardNumber" value="4916410161778424" />
-		<property name="state" value="Madrid" />
+		<property name="state" value="PENDING" />
 		<property name="property" ref="property2" />
 	</bean>
 	
@@ -364,7 +368,38 @@
 			<list>
 			</list>
 		</property>
-	</bean>	
+	</bean>
+
+    <bean id="attributeValue1" class="domain.AttributeValue">
+        <property name="property" ref="property1"/>
+        <property name="attribute" ref="attribute1"/>
+        <property name="value" value="Test"/>
+    </bean>
+    <bean id="attributeValue2" class="domain.AttributeValue">
+        <property name="property" ref="property2"/>
+        <property name="attribute" ref="attribute1"/>
+        <property name="value" value="Test"/>
+    </bean>
+    <bean id="attributeValue3" class="domain.AttributeValue">
+        <property name="property" ref="property3"/>
+        <property name="attribute" ref="attribute2"/>
+        <property name="value" value="Test"/>
+    </bean>
+    <bean id="attributeValue4" class="domain.AttributeValue">
+        <property name="property" ref="property1"/>
+        <property name="attribute" ref="attribute3"/>
+        <property name="value" value="Test"/>
+    </bean>
+    <bean id="attributeValue5" class="domain.AttributeValue">
+        <property name="property" ref="property2"/>
+        <property name="attribute" ref="attribute3"/>
+        <property name="value" value="Test"/>
+    </bean>
+    <bean id="attributeValue6" class="domain.AttributeValue">
+        <property name="property" ref="property3"/>
+        <property name="attribute" ref="attribute2"/>
+        <property name="value" value="Test"/>
+    </bean>
 	
 	<bean id="audit1" class="domain.Audit">
 		<property name="moment" value="5/1/2015" />

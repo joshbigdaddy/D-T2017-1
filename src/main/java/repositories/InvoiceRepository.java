@@ -10,7 +10,7 @@ import domain.Invoice;
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice,Integer>{
 	
-	@Query("Select sum(i.value) from Invoice i")
+	@Query("select sum(i.amount) from Invoice i")
 	Double totalSumOfMoney();
 	
 }

@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
 import domain.Actor;
+import security.Authority;
 
 @Service
 @Transactional
@@ -60,4 +63,14 @@ public class ActorService {
 			actorRepository.delete(actor);
 		}
 
+
+    public void register(Actor actor, String s) {
+        Assert.notNull(actor);
+        List<Authority> authorities = new ArrayList<Authority>();
+        Authority a = new Authority();
+        a.setAuthority(s);
+        authorities.add(a);
+        actor.getUserAccount().setAuthorities(authorities);
+        actorRepository.save(actor);
+    }
 }
