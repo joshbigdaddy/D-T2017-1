@@ -12,6 +12,8 @@ import org.springframework.util.Assert;
 import repositories.ActorRepository;
 import domain.Actor;
 import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -73,4 +75,11 @@ public class ActorService {
         actor.getUserAccount().setAuthorities(authorities);
         actorRepository.save(actor);
     }
+
+	// Other business methods -------------------------------------------------
+
+	public Actor findActorByPrincipal() {
+		UserAccount userAccount = LoginService.getPrincipal();
+		return actorRepository.findActorByUserAccount(userAccount);
+	}
 }

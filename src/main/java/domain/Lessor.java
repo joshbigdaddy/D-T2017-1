@@ -19,7 +19,7 @@ public class Lessor extends SocialUser {
 	// RELATIONSHIPS
 	private Collection<Property> properties;
 
-	@OneToMany()
+	@OneToMany(mappedBy = "lessor")
 	public Collection<Property> getProperties() {
 		return properties;
 	}

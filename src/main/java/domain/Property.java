@@ -16,6 +16,7 @@ public class Property extends DomainEntity{
 	private String description;
 	private String address;
 	private Integer rate;
+	private Lessor lessor;
 	
 	public String getName() {
 		return name;
@@ -48,7 +49,7 @@ public class Property extends DomainEntity{
 	private Collection<Audit> audits;
 	
 	
-	@OneToMany()
+	@OneToMany( cascade = CascadeType.REMOVE)
 	public Collection<Audit> getAudits() {
 		return audits;
 	}
@@ -56,7 +57,7 @@ public class Property extends DomainEntity{
 		this.audits = audits;
 	}
 
-    @OneToMany(mappedBy = "property")
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,orphanRemoval = false)
     public Collection<AttributeValue> getAttributeValues() {
         return attributeValues;
     }
@@ -65,11 +66,20 @@ public class Property extends DomainEntity{
         this.attributeValues = attributeValues;
     }
 
-    @OneToMany(mappedBy= "property")
+    @OneToMany(mappedBy= "property", cascade = CascadeType.REMOVE)
 	public Collection<Request> getRequests() {
 		return requests;
 	}
 	public void setRequests(Collection<Request> requests) {
 		this.requests = requests;
+	}
+
+	@ManyToOne
+	public Lessor getLessor() {
+		return lessor;
+	}
+
+	public void setLessor(Lessor lessor) {
+		this.lessor = lessor;
 	}
 }

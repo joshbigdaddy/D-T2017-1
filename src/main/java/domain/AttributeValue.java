@@ -21,7 +21,7 @@ public class AttributeValue extends DomainEntity {
         this.value = value;
     }
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     public Attribute getAttribute() {
         return attribute;
     }
@@ -30,7 +30,7 @@ public class AttributeValue extends DomainEntity {
         this.attribute = attribute;
     }
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     public Property getProperty() {
         return property;
     }

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Actor;
-
+import security.UserAccount;
 
 
 @Repository
@@ -23,4 +23,7 @@ public interface ActorRepository extends JpaRepository<Actor,Integer>{
 	Integer maxSocialIdentitiesPerActor();
 	@Query("select avg(a.socialIdentities.size) from Actor a")
 	Double avgSocialIdentitiesPerActor();
+
+	@Query("select a from Actor a where a.userAccount = ?1 ")
+	Actor findActorByUserAccount(UserAccount userAccount);
 }

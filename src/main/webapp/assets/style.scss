@@ -15,17 +15,18 @@ h1 {
 }
 
 header {
-  color: $white2;
+  color: $white2!important;
   padding: 10px;
   background-color: $grey4;
-  h1 {
-    a, a:link, a:visited {
+  a, a:link, a:visited {
+    color: $white1;
+    &:hover {
       color: $white1;
-      &:hover {
-        color: $white1;
-        text-decoration: underline;
-      }
+      text-decoration: underline;
     }
+  }
+  h1{
+    width:25%;
   }
   article, h1 {
     display: inline-table;
@@ -37,20 +38,14 @@ header {
     }
   }
   .user-section {
-    width: 46%;
+    width: 29%;
     font-size: 1.2em;
     ul {
       li {
         display: inline-table;
         position: relative;
-        a {
-          color: $black-4;
-          &:hover {
-            color: $black-3;
-          }
-        }
+        margin-right:5%;
         ul {
-          color: $black-2;
           position: absolute;
           top: 20px;
           border: 1px solid $grey2;
@@ -63,7 +58,7 @@ header {
             padding: 10px;
             width: 250px;
             a {
-              color: $black-2;
+              color:$black-3!important;
               &:hover {
                 text-decoration: underline;
               }

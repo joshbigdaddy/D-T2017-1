@@ -59,7 +59,7 @@
 	
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="lessor1" />
-		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="password" value="5b61d56842232fc77308dbd3e99d99d4" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -306,8 +306,93 @@
 		<property name="keyword" value="keyword3" />
 	</bean>
 
-	
-	<bean id="request1" class="domain.Request">
+    <bean id="lessor1" class="domain.Lessor">
+        <property name="name" value="Lessor 1" />
+        <property name="surname" value=" Surname 1" />
+        <property name="email" value="lessor1@lessor.es" />
+        <property name="phone" value="975398899" />
+        <property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+        <property name="userAccount" ref="userAccount4" />
+        <property name="creditCards">
+            <list>
+                <ref bean="creditCard1" />
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="lessor2" class="domain.Lessor">
+        <property name="name" value="Lessor 2" />
+        <property name="surname" value=" Surname 2" />
+        <property name="email" value="lessor1@lessor.es" />
+        <property name="phone" value="975398899" />
+        <property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+        <property name="userAccount" ref="userAccount5" />
+        <property name="creditCards">
+            <list>
+
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="lessor3" class="domain.Lessor">
+        <property name="name" value="Lessor 3" />
+        <property name="surname" value=" Surname 3" />
+        <property name="email" value="lessor3@lessor.es" />
+        <property name="phone" value="975398899" />
+        <property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
+        <property name="userAccount" ref="userAccount6" />
+        <property name="creditCards">
+            <list>
+
+            </list>
+        </property>
+
+    </bean>
+
+
+    <bean id="property1" class="domain.Property">
+        <property name="name" value="Property1" />
+        <property name="rate" value="5" />
+        <property name="description" value="Description 1" />
+        <property name="address" value="C/Trebol" />
+        <property name="requests">
+            <list>
+                <ref bean="request1" />
+                <ref bean="request2" />
+            </list>
+        </property>
+        <property name="lessor" ref="lessor1"/>
+    </bean>
+
+    <bean id="property2" class="domain.Property">
+        <property name="name" value="Property2" />
+        <property name="rate" value="5" />
+        <property name="description" value="Description 1" />
+        <property name="address" value="C/Trebol" />
+        <property name="requests">
+            <list>
+                <ref bean="request3" />
+            </list>
+        </property>
+        <property name="lessor" ref="lessor2"/>
+    </bean>
+
+    <bean id="property3" class="domain.Property">
+        <property name="name" value="Property3" />
+        <property name="rate" value="5" />
+        <property name="description" value="Description 1" />
+        <property name="address" value="C/Trebol" />
+        <property name="requests">
+            <list>
+            </list>
+        </property>
+        <property name="lessor" ref="lessor3"/>
+    </bean>
+
+
+    <bean id="request1" class="domain.Request">
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
@@ -333,42 +418,7 @@
 		<property name="state" value="PENDING" />
 		<property name="property" ref="property2" />
 	</bean>
-	
-	<bean id="property1" class="domain.Property">
-		<property name="name" value="Property1" />
-		<property name="rate" value="5" />
-		<property name="description" value="Description 1" />
-		<property name="address" value="C/Trebol" />
-		<property name="requests">
-			<list>
-			<ref bean="request1" />
-			<ref bean="request2" />
-			</list>
-		</property>
-	</bean>	
-	
-	<bean id="property2" class="domain.Property">
-		<property name="name" value="Property2" />
-		<property name="rate" value="5" />
-		<property name="description" value="Description 1" />
-		<property name="address" value="C/Trebol" />
-		<property name="requests">
-			<list>
-			<ref bean="request3" />
-			</list>
-		</property>
-	</bean>	
-	
-	<bean id="property3" class="domain.Property">
-		<property name="name" value="Property3" />
-		<property name="rate" value="5" />
-		<property name="description" value="Description 1" />
-		<property name="address" value="C/Trebol" />
-		<property name="requests">
-			<list>
-			</list>
-		</property>
-	</bean>
+
 
     <bean id="attributeValue1" class="domain.AttributeValue">
         <property name="property" ref="property1"/>
@@ -446,66 +496,7 @@
 		<property name="amount" value="1111.0" />
 	</bean>
 	
-	
-	<bean id="lessor1" class="domain.Lessor">
-		<property name="name" value="Lessor 1" />
-		<property name="surname" value=" Surname 1" />
-		<property name="email" value="lessor1@lessor.es" />
-		<property name="phone" value="975398899" />
-		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
-		<property name="properties">
-			<list>
-			</list>
-		</property>
-		<property name="userAccount" ref="userAccount4" />
-		<property name="creditCards">
-			<list>
-			<ref bean="creditCard1" />
-			</list>
-		</property>
-		
-	</bean>
-	
-	<bean id="lessor2" class="domain.Lessor">
-		<property name="name" value="Lessor 2" />
-		<property name="surname" value=" Surname 2" />
-		<property name="email" value="lessor1@lessor.es" />
-		<property name="phone" value="975398899" />
-		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
-		<property name="properties">
-			<list>
-			<ref bean="property1" />
-			<ref bean="property2" />
-			</list>
-		</property>
-		<property name="userAccount" ref="userAccount5" />
-		<property name="creditCards">
-			<list>
-			
-			</list>
-		</property>
-		
-	</bean>
-	
-	<bean id="lessor3" class="domain.Lessor">
-		<property name="name" value="Lessor 3" />
-		<property name="surname" value=" Surname 3" />
-		<property name="email" value="lessor3@lessor.es" />
-		<property name="phone" value="975398899" />
-		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
-		<property name="properties">
-			<list>
-			<ref bean="property3" />
-			</list>
-		</property>
-		<property name="userAccount" ref="userAccount6" />
-		<property name="creditCards">
-			<list>
-			
-			</list>
-		</property>
-		
-	</bean>
+
 	
 	
 	<bean id="tenant1" class="domain.Tenant">
@@ -638,5 +629,6 @@
 			
 		
 	</bean>
-	
+
+
 </beans>

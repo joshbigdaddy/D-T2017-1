@@ -65,8 +65,7 @@ public class Request extends DomainEntity{
 	
 	private Property property;
 	
-	@ManyToOne(optional =false, 
-			fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Property getProperty() {
 		return property;
 	}

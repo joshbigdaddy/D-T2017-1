@@ -10,13 +10,13 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import security.LoginService;
 import services.ActorService;
 
 import javax.validation.Valid;
@@ -27,6 +27,58 @@ public class ActorController extends AbstractController {
 
     @Autowired
     ActorService actorService;
+
+
+    @RequestMapping("/profile/{actor}")
+    public ModelAndView profileUser(@PathVariable Actor actor){
+        Assert.notNull(actor);
+        ModelAndView result = new ModelAndView("actor/profile");
+        result.addObject("actor",actor);
+
+        return result;
+    }
+
+
+    @RequestMapping(value = "/edit")
+    public ModelAndView editProfile() {
+        ModelAndView result;
+        Actor actor;
+        result = new ModelAndView("actor/edit");
+        actor = actorService.findActorByPrincipal();
+        result.addObject("actor", actor);
+        result.addObject("role", actor.getClass().getName());
+
+        return result;
+    }
+
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    public ModelAndView edit(
+            @Valid @ModelAttribute("role") Actor actor, BindingResult binding
+    ) {
+        Actor principal = actorService.findActorByPrincipal();
+        ModelAndView result;
+        result = editProfile();
+
+        if (binding.hasErrors()) {
+            for(ObjectError e: binding.getAllErrors()){
+                System.out.println(e.getDefaultMessage()+e.getCode()+e.getObjectName());
+            }
+            System.out.println(binding.toString());
+        } else {
+            try {
+                actor.setUserAccount(principal.getUserAccount());
+                actorService.save(actor);
+                System.out.println("No error");
+            } catch (Throwable oops) {
+                System.out.print(oops.toString());
+                result.addObject("message", "wrong");
+            }
+
+        }
+
+        return result;
+    }
 
     @RequestMapping("/register/tenant")
     public ModelAndView registerTenant() {
