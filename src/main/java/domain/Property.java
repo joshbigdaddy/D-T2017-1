@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -43,7 +44,7 @@ public class Property extends DomainEntity{
 		this.rate = rate;
 	}
 	
-	private Collection<AttributeValue> attributeValues;
+	private List<AttributeValue> attributeValues;
 
 	private Collection<Request> requests;
 	private Collection<Audit> audits;
@@ -58,11 +59,11 @@ public class Property extends DomainEntity{
 	}
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,orphanRemoval = false)
-    public Collection<AttributeValue> getAttributeValues() {
+    public List<AttributeValue> getAttributeValues() {
         return attributeValues;
     }
 
-    public void setAttributeValues(Collection<AttributeValue> attributeValues) {
+    public void setAttributeValues(List<AttributeValue> attributeValues) {
         this.attributeValues = attributeValues;
     }
 
@@ -82,4 +83,18 @@ public class Property extends DomainEntity{
 	public void setLessor(Lessor lessor) {
 		this.lessor = lessor;
 	}
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", rate=" + rate +
+                ", lessor=" + lessor +
+                ", attributeValues=" + attributeValues +
+                ", requests=" + requests +
+                ", audits=" + audits +
+                '}';
+    }
 }

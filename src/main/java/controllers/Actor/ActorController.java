@@ -61,17 +61,12 @@ public class ActorController extends AbstractController {
         result = editProfile();
 
         if (binding.hasErrors()) {
-            for(ObjectError e: binding.getAllErrors()){
-                System.out.println(e.getDefaultMessage()+e.getCode()+e.getObjectName());
-            }
-            System.out.println(binding.toString());
+            result.addObject("message", "wrong");
         } else {
             try {
                 actor.setUserAccount(principal.getUserAccount());
                 actorService.save(actor);
-                System.out.println("No error");
             } catch (Throwable oops) {
-                System.out.print(oops.toString());
                 result.addObject("message", "wrong");
             }
 

@@ -50,6 +50,10 @@
                                 access="hasAnyRole('LESSOR')"/>
         <security:intercept-url pattern="/actor/lessor/property/delete/*"
                                 access="hasAnyRole('LESSOR')"/>
+        <security:intercept-url pattern="/actor/lessor/property/edit/*"
+                                access="hasAnyRole('LESSOR')"/>
+		<security:intercept-url pattern="/actor/lessor/property/new.do"
+								access="hasAnyRole('LESSOR')"/>
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

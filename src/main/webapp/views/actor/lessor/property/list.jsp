@@ -15,9 +15,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <h1><spring:message code="propertieslist"/> </h1>
 
+<a class="button" href="actor/lessor/property/new.do"></a>
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="properties" requestURI="${requestURI}" id="row">
     <spring:message code="name" var="nameHeader"/>
     <display:column property="name" title="${nameHeader}" sortable="true"/>
@@ -33,6 +35,11 @@
 
     <spring:message code="rate" var="rateHeader"/>
     <display:column property="rate" title="${rateHeader}" sortable="true"/>
+
+    <spring:message code="edit" var="editHeader"/>
+    <display:column title="${editHeader}">
+        <a href="actor/lessor/property/edit/${row.id}.do"><spring:message code="edit"/> </a>
+    </display:column>
 
     <spring:message code="delete" var="deleteHeader"/>
     <display:column title="${deleteHeader}">

@@ -1,16 +1,18 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import domain.AttributeValue;
-import domain.Request;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.PropertyRepository;
-import domain.Property;
 
 @Service
 @Transactional
@@ -24,11 +26,16 @@ public class PropertyService {
     private TenantService tenantService;
 
 	@Autowired
+    private ActorService actorService;
+
+	@Autowired
     private AttributeValueService attributeValueService;
 
 	@Autowired
     private RequestService requestService;
 
+	@Autowired
+    private Validator validator;
 	// Constructor
 	public PropertyService() {
 		super();
@@ -53,6 +60,9 @@ public class PropertyService {
 
 	public void save(Property property) {
 		Assert.notNull(property);
+		for(AttributeValue e: property.getAttributeValues()){
+		    attributeValueService.save(e);
+        }
 		propertyRepository.save(property);
 	}
 
@@ -73,4 +83,21 @@ public class PropertyService {
 		property = propertyRepository.save(property);
 		propertyRepository.delete(property);
 	}
+
+    public Property reconstruct(Property property, List<AttributeValue> attributesValue, BindingResult bindingResult,Boolean edit) {
+        Property result;
+
+        if (!edit){
+            result = property;
+        }else {
+            result = propertyRepository.findOne(property.getId());
+            result.setAttributeValues(attributesValue);
+            result.setAddress(property.getAddress());
+            result.setName(property.getName());
+            result.setDescription(property.getDescription());
+            validator.validate(result, bindingResult);
+        }
+        result.setLessor((Lessor) actorService.findActorByPrincipal());
+        return result;
+    }
 }
