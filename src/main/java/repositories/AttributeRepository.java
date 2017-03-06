@@ -13,9 +13,9 @@ import java.util.Collection;
 public interface AttributeRepository extends JpaRepository<Attribute,Integer>{
 	/**
 	 * A listing in which the attributes are sorted in descending order regarding the
-number of times they have been used to describe a property ESTA FALTA
+number of times they have been used to describe a property 
 	 */
 //
-//	@Query("select a from Attribute a order by (select (")
-//Collection<Attribute> getAllAttributesByNumberOfTimesInProperty();
+	@Query("select a,(select count(at) from Property p join p.attributeValues at where at.attribute.id=a.id) as mr  from Attribute a order by mr DESC")
+	Collection<Attribute> getAllAttributesByNumberOfTimesInProperty();
 }

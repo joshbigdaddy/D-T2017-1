@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Lessor;
 import domain.Property;
 
 @Repository
@@ -30,13 +31,13 @@ public interface PropertyRepository extends JpaRepository<Property,Integer>{
 	@Query("select p from Lessor l join l.properties p where l.id=?1 order by p.requests.size")
 	Collection<Property> propertiesOrderByRequests(int lessorId);
 	
-//	@Query("select p from Lessor l join l.properties p where l.id=?1 order by p.acceptedRequests.size")
-//	Collection<Property> propertiesOrderByAcceptedRequests(int lessorId);
-//
-//	@Query("select p from Lessor l join l.properties p where l.id=?1 order by p.deniedRequests.size")
-//	Collection<Property> propertiesOrderByDeniedRequests(int lessorId);
-//
-//	@Query("select p from Lessor l join l.properties p where l.id=?1 order by p.pendingRequests.size")
-//	Collection<Property> propertiesOrderByPendingRequests(int lessorId);
+	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'ACCEPTED' and p2.lessor.id=?1 and p.id=p2.id) as mr from Property p order by mr DESC")
+	Collection<Property> propertiesOrderByAcceptedRequests(int lessorId);
+	
+	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'DENIED' and p2.lessor.id=?1 and p.id=p2.id) as mr from Property p order by mr DESC")
+	Collection<Property> propertiesOrderByDeniedRequests(int lessorId);
+	
+	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'PENDING' and p2.lessor.id=?1 and p.id=p2.id) as mr from Property p order by mr DESC")
+	Collection<Property> propertiesOrderByPendingRequests(int lessorId);
 	
 }

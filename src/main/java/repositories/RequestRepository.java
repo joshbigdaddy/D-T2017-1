@@ -9,9 +9,11 @@ import domain.Request;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request,Integer>{
+/** Adri: esto lo he hecho en servicios */
 //	@Query("select avg(l.deniedRequests) from Lessor l")
 //	Double avgDeniedRequestsPerLessor();
-//	@Query("select avg(t.deniedRequests) from Tenant t")
-//	Double avgDeniedRequestsPerTenant();
+	
+	//	@Query("select avg(t.deniedRequests) from Tenant t")
+	//	Double avgDeniedRequestsPerTenant();
 	
 }

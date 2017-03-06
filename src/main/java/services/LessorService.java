@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import org.springframework.util.Assert;
 
 import repositories.LessorRepository;
 import domain.Lessor;
+import domain.Property;
+import domain.Request;
+import domain.Request.RequestType;
 
 @Service
 @Transactional
@@ -52,4 +56,19 @@ public class LessorService {
 		lessorRepository.delete(lessor);
 	}
 
+	Double avgDeniedRequestsPerLessor() {
+		List<Lessor> lessors = lessorRepository.findAll();
+		int denied = 0;
+		int total = 0;
+		for (Lessor l : lessors) {
+			for (Property p : l.getProperties()) {
+				for (Request r : p.getRequests()) {
+					if (r.getState() == RequestType.DENIED)
+						denied++;
+					total++;
+				}
+			}
+		}
+		return (double) (denied / total);
+	}
 }
