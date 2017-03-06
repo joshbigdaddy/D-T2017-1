@@ -1,9 +1,13 @@
 package controllers.Actor;
 
+import java.util.Date;
+
 import domain.Actor;
 import domain.CreditCard;
+import domain.Lessor;
 import domain.Property;
 import domain.SocialUser;
+import domain.Tenant;
 import forms.EditPropertyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import services.ActorService;
+import services.CreditCardService;
+import services.LessorService;
+import services.TenantService;
 
 @Controller
 @RequestMapping("/actor/creditcard")
@@ -23,6 +30,15 @@ public class CreditCardController {
 
     @Autowired
     ActorService actorService;
+    
+    @Autowired
+    CreditCardService creditCardService;
+    
+    @Autowired
+    LessorService lessorService;
+    
+    @Autowired
+    TenantService tenantService;
 
     @RequestMapping("/edit")
     public ModelAndView editCreditCard(){
@@ -50,7 +66,23 @@ public class CreditCardController {
             return result;
         }else{
             try{
-                // TODO
+                Date fecha=new Date(creditCard.getExpirationYear(),creditCard.getExpirationMonth(),7);
+                Date ahora=new Date();
+                if(!ahora.after(fecha)){
+                	Lessor l=lessorService.findLessorByPrincipal();
+                	Tenant t=tenantService.findTenantByPrincipal();
+                	if(l!=null){
+                		CreditCard c=creditCardService.save(creditCard);
+                		l.setCreditCard(c);
+                		lessorService.save(l);
+                	}
+                	if(t!=null){
+                		CreditCard c=creditCardService.save(creditCard);
+                		t.setCreditCard(c);
+                		tenantService.save(t);
+                	}
+                	
+                }
                 return result;
             }catch (Throwable oops){
                 System.out.println(oops.getLocalizedMessage());

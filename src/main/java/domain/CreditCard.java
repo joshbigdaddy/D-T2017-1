@@ -23,7 +23,6 @@ public class CreditCard extends DomainEntity {
 	private Integer expirationYear;
 	private Integer cvvCode;
 	private Double fee;
-
 	@NotBlank
 	public String getBrandName() {
 		return brandName;
@@ -79,12 +78,15 @@ public class CreditCard extends DomainEntity {
 	public void setCvvCode(Integer cvvCode) {
 		this.cvvCode = cvvCode;
 	}
+	@NotNull
+	public Double getFee() {
+		return fee;
+	}
 
-    public Double getFee() {
-        return fee;
-    }
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
+	
 
-    public void setFee(Double fee) {
-        this.fee = fee;
-    }
+
 }

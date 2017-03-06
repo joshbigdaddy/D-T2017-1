@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Lessor;
 import domain.Tenant;
 
 @Repository
@@ -23,5 +24,6 @@ public interface TenantRepository extends JpaRepository<Tenant,Integer>{
 	Integer maxInvoicesPerTenant();
 	@Query("Select avg(l.invoices.size) from Tenant l")
 	Double avgInvoicesPerTenant();
-
+	@Query("select a from Tenant a where a.userAccount.id = ?1")
+	Tenant findByUserAccountId(int userAccountId);
 }

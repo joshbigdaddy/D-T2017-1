@@ -28,7 +28,7 @@ import javax.persistence.*;
 	return creditCard;
 	}
 
-	public void setCreditCard(CreditCard creditCards){
+	public void setCreditCard(CreditCard creditCard){
 		this.creditCard=creditCard;
 	}
 	

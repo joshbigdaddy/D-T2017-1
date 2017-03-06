@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.LessorRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Administrator;
 import domain.Lessor;
 import domain.Property;
 import domain.Request;
@@ -99,4 +102,13 @@ public class LessorService {
         Assert.notNull(result);
         return result;
     }
+	public Lessor findLessorByPrincipal() {
+		Lessor result;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		result = lessorRepository.findByUserAccountId(userAccount.getId());
+
+		return result;
+		}
 }
