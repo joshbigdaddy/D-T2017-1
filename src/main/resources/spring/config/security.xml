@@ -50,8 +50,13 @@
                                 access="hasAnyRole('ADMIN','LESSOR','TENANT','AUDITOR')"/>
         <security:intercept-url pattern="/actor/lessor/property/list.do"
                                 access="hasAnyRole('LESSOR')"/>
+
         <security:intercept-url pattern="/actor/lessor/property/delete/*"
                                 access="hasAnyRole('LESSOR')"/>
+
+        <security:intercept-url pattern="/actor/tenant/finder/*"
+                                access="hasAnyRole('TENANT')"/>
+
         <security:intercept-url pattern="/actor/lessor/property/edit/*"
                                 access="hasAnyRole('LESSOR')"/>
 		<security:intercept-url pattern="/actor/lessor/property/new.do"

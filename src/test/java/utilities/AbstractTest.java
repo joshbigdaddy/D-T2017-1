@@ -31,7 +31,7 @@ public class AbstractTest {
 	@Before
 	public void setUp() {		
 		// Uncomment the following line if you wish your database to be re-populated on every test.
-		 PopulateDatabase.main(null);
+		// PopulateDatabase.main(null);
 	}
 
 	// Supporting methods ---------------------------------

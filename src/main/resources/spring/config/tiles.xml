@@ -19,6 +19,7 @@
 		<value>/views/welcome/tiles.xml</value>
 		<value>/views/actor/tiles.xml</value>
 		<value>/views/actor/lessor/tiles.xml</value>
+		<value>/views/actor/tenant/tiles.xml</value>
 		<value>/views/actor/lessor/property/tiles.xml</value>
 		<value>/views/property/tiles.xml</value>
 	</util:list>

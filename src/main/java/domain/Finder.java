@@ -15,20 +15,22 @@ public class Finder extends DomainEntity{
 		super();
 	}
 	
-	private String destinationCity;
+	private String city;
 	private String keyword;
 	private Double maxPrice;
 	private Double minPrice;
 	private Tenant tenant;
-	
+
 	@NotBlank
-	public String getDestinationCity() {
-		return destinationCity;
-	}
-	public void setDestinationCity(String destinationCity) {
-		this.destinationCity = destinationCity;
-	}
-	public String getKeyword() {
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getKeyword() {
 		return keyword;
 	}
 	public void setKeyword(String keyword) {

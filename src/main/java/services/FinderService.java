@@ -2,11 +2,15 @@ package services;
 
 import java.util.Collection;
 
+import domain.Property;
+import domain.Tenant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import org.springframework.validation.BindingResult;
 import repositories.FinderRepository;
 import domain.Finder;
 
@@ -17,6 +21,9 @@ public class FinderService {
 	// Managed repositories
 	@Autowired
 	private FinderRepository finderRepository;
+
+	@Autowired
+    private ActorService actorService;
 
 	// Constructor
 	public FinderService() {
@@ -51,4 +58,29 @@ public class FinderService {
 		finderRepository.delete(finder);
 	}
 
+    @Cacheable(value = "default")
+	public Collection<Property> executeFinder(Finder finder){
+        Assert.notNull(finder);
+        Integer maxprice = (finder.getMaxPrice()!=null) ? finder.getMaxPrice().intValue() : 10000000;
+        Integer minprice = (finder.getMinPrice()!=null) ? finder.getMinPrice().intValue() : -1;
+        return finderRepository.executeFinder(finder.getCity(),
+                minprice,maxprice,finder.getKeyword());
+    }
+
+    public Finder reconstruct(Finder finder, BindingResult bindingResult) {
+        Tenant tenant = (Tenant) actorService.findActorByPrincipal();
+        Finder result;
+        if (tenant.getFinder()==null){
+            result = finder;
+        }else{
+            result = tenant.getFinder();
+            result.setCity(finder.getCity());
+            result.setKeyword(finder.getKeyword());
+            result.setMinPrice(finder.getMinPrice());
+            result.setMaxPrice(finder.getMaxPrice());
+        }
+        result.setTenant(tenant);
+
+        return result;
+    }
 }

@@ -286,21 +286,21 @@
     </bean>
 	
 	<bean id="finder1" class="domain.Finder">
-		<property name="destinationCity" value="Seville" />
+		<property name="city" value="Seville" />
 		<property name="minPrice" value="50.0" />
 		<property name="maxPrice" value="150.0" />
 		<property name="keyword" value="keyword1" />
 	</bean>
 	
 	<bean id="finder2" class="domain.Finder">
-		<property name="destinationCity" value="Gibraltar" />
+		<property name="city" value="Gibraltar" />
 		<property name="minPrice" value="50.0" />
 		<property name="maxPrice" value="150.0" />
 		<property name="keyword" value="keyword3" />
 	</bean>
 	
 	<bean id="finder3" class="domain.Finder">
-		<property name="destinationCity" value="Algeciras" />
+		<property name="city" value="Algeciras" />
 		<property name="minPrice" value="50.0" />
 		<property name="maxPrice" value="150.0" />
 		<property name="keyword" value="keyword3" />

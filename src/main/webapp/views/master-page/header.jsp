@@ -22,10 +22,18 @@
                 <li><a href="#">User</a>
                 <ul>
                     <li><a href="/actor/edit.do"><spring:message code="edit" /><spring:message code="profile"/> </a> </li>
-                    <security:authorize access="hasAnyRole('LESSOR')">
+                    <security:authorize access="hasAnyRole('LESSOR','TENANT')">
                         <li><a href="/actor/creditcard/edit.do"><spring:message code="editcreditcard"/> </a> </li>
                     </security:authorize>
                 </ul></li>
+                <security:authorize access="hasAnyRole('TENANT')">
+                    <li><a href="/actor/tenant/finder/configure.do"><spring:message code="finder"/> </a>
+                        <ul>
+                            <li><a href="/actor/tenant/finder/configure.do"><spring:message code="configurefinder"/> </a> </li>
+                            <li><a href="/actor/tenant/finder/search.do"><spring:message code="executefinder"/> </a> </li>
+                        </ul>
+                    </li>
+                </security:authorize>
                 <li><a href="property/list.do"><spring:message code="properties"/> </a> </li>
                 <security:authorize access="hasAnyRole('LESSOR')">
                 <li><a href="#"><spring:message code="lessor"/></a>
@@ -42,7 +50,7 @@
                 <li><a href="#"><spring:message code="register"/> </a>
                     <ul>
                     <li><a href="actor/register/lessor.do"><spring:message code="register"/> <spring:message code="aslessor"/> </a></li>
-                    <li><a href="actor/register/lessor.do"><spring:message code="register"/> <spring:message code="astenant"/> </a></li>
+                    <li><a href="actor/register/tenant.do"><spring:message code="register"/> <spring:message code="astenant"/> </a></li>
                     </ul>
                 </li>
 		</ul>

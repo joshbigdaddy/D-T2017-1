@@ -106,7 +106,9 @@ public class ActorController extends AbstractController {
     public ModelAndView registerTenantPost(
             @ModelAttribute("actor") Tenant actor, BindingResult binding
     ) {
-
+        actor.setFinder(null);
+        actor.setInvoices(null);
+        actor.setRequests(null);
         return registerPost(actor,binding,"tenant");
     }
 
@@ -127,10 +129,10 @@ public class ActorController extends AbstractController {
                 actor.getUserAccount().setPassword(md5PasswordEncoder
                         .encodePassword(actor.getUserAccount().getPassword(), null));
                 actorService.register(actor,uri.toUpperCase());
-                result = new ModelAndView("redirect:../");
+                result = new ModelAndView("redirect:../../");
             } catch (Throwable oops) {
                 System.out.print(oops.getLocalizedMessage());
-                result = register(actor,"actor/register/lessor.do");
+                result = register(actor,"actor/register/"+uri+".do");
             }
 
         }

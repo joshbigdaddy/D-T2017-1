@@ -18,7 +18,7 @@
 	">
 
 	<util:set id="cacheSet">
-		<bean name="default" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" />		
+		<bean name="default" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" />
 	</util:set>
 
 </beans>

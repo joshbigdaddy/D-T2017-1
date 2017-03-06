@@ -68,7 +68,7 @@ public class ActorService {
 
     public void register(Actor actor, String s) {
         Assert.notNull(actor);
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         Authority a = new Authority();
         a.setAuthority(s);
         authorities.add(a);
