@@ -25,6 +25,7 @@ public class Request extends DomainEntity{
 	private boolean smoker;
 	private Date checkinDate;
 	private Date checkoutDate;
+	private Tenant tenant;
 
 	@Enumerated(EnumType.STRING)
 	public RequestType getState() {
@@ -72,8 +73,15 @@ public class Request extends DomainEntity{
 	public void setProperty(Property property) {
 		this.property = property;
 	}
-	
 
+	@ManyToOne()
+	public Tenant getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
+	}
 }
 
 	

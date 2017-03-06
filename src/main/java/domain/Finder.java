@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -18,6 +19,7 @@ public class Finder extends DomainEntity{
 	private String keyword;
 	private Double maxPrice;
 	private Double minPrice;
+	private Tenant tenant;
 	
 	@NotBlank
 	public String getDestinationCity() {
@@ -44,9 +46,14 @@ public class Finder extends DomainEntity{
 	public void setMinPrice(Double minPrice) {
 		this.minPrice = minPrice;
 	}
-	
-	
-	
-	
+
+	@OneToOne
+	public Tenant getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
+	}
 }
 

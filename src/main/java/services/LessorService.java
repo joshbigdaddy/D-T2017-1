@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -73,9 +74,29 @@ public class LessorService {
 	}
 
 	public Collection<Request> getAllRequestsByLessor(int id){
-		Collection<Request> result = lessorRepository.getAllRequestsByLessor(id);
+		List<Request> result = new ArrayList<>();
+		Lessor lessor = lessorRepository.findOne(id);
+		Assert.notNull(lessor);
+		for(Property p:lessor.getProperties()){
+			result.addAll(p.getRequests());
+		}
 		Assert.notNull(result);
 
 		return result;
 	}
+
+    public Collection<Request> getAllRequestsPendingByLessor(int id){
+        List<Request> result = new ArrayList<>();
+        Lessor lessor = lessorRepository.findOne(id);
+        Assert.notNull(lessor);
+        for(Property p:lessor.getProperties()) {
+            for (Request r : p.getRequests()) {
+                if (r.getState() == RequestType.PENDING) {
+                    result.add(r);
+                }
+            }
+        }
+        Assert.notNull(result);
+        return result;
+    }
 }

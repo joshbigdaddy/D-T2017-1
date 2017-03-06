@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TenantRepository;
-import domain.Lessor;
-import domain.Property;
 import domain.Request;
 import domain.Tenant;
 import domain.Request.RequestType;
@@ -22,6 +21,9 @@ public class TenantService {
 	// Managed repositories
 	@Autowired
 	private TenantRepository tenantRepository;
+
+	@Autowired
+    private ConfigurationService configurationService;
 
 	// Constructor
 	public TenantService() {
@@ -70,4 +72,17 @@ public class TenantService {
 		}
 		return (double) (denied / total);
 	}
+
+    public void chargeTenant(Request request) {
+        Double fee = (double) request.getProperty().getRate();
+        Date startDate = request.getCheckinDate();
+        Date endDate = request.getCheckoutDate();
+        long startTime = startDate.getTime();
+        long endTime = endDate.getTime();
+        long diffTime = endTime - startTime;
+        long diffDays = diffTime / (1000 * 60 * 60 * 24);
+        fee = diffDays*fee;
+        Double actualFee = request.getTenant().getCreditCard().getFee();
+        request.getTenant().getCreditCard().setFee(actualFee+fee);
+    }
 }

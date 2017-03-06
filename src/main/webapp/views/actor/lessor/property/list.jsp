@@ -50,28 +50,38 @@
 <h1><spring:message code="requests"/> </h1>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="requests" requestURI="${requestURI}" id="row">
-    <spring:message code="name" var="nameHeader"/>
-    <display:column property="name" title="${nameHeader}" sortable="true"/>
+    <spring:message code="tenant" var="tenantHeader"/>
+    <display:column property="tenant.name" title="${tenantHeader}" sortable="true"/>
 
-    <spring:message code="name" var="nameHeader"/>
-    <display:column property="name" title="${nameHeader}" sortable="true"/>
+    <spring:message code="checkinDate" var="checkinDateHeader"/>
+    <display:column property="checkinDate" title="${checkinDateHeader}" sortable="true"
+                    format="{0,date,dd/MM/yyyy HH:mm}"/>
 
-    <spring:message code="address" var="addressHeader"/>
-    <display:column property="address" title="${addressHeader}" sortable="true"/>
+    <spring:message code="checkoutDate" var="checkinDateHeader"/>
+    <display:column property="checkinDate" title="${checkinDateHeader}" sortable="true"
+                    format="{0,date,dd/MM/yyyy HH:mm}"/>
 
-    <spring:message code="description" var="descriptionHeader"/>
-    <display:column property="description" title="${descriptionHeader}" sortable="true"/>
-
-    <spring:message code="rate" var="rateHeader"/>
-    <display:column property="rate" title="${rateHeader}" sortable="true"/>
-
-    <spring:message code="edit" var="editHeader"/>
-    <display:column title="${editHeader}">
-        <a href="actor/lessor/property/edit/${row.id}.do"><spring:message code="edit"/> </a>
+    <spring:message code="smoker" var="smokerHeader"/>
+    <display:column title="${smokerHeader}" sortable="true">
+        <jstl:choose><jstl:when test="${row.smoker}"><spring:message code="yes"/></jstl:when><jstl:otherwise><spring:message code="no"/></jstl:otherwise></jstl:choose>
+    </display:column>
+    <h2><spring:message code="feetopay" /> ${fee} </h2>
+    <spring:message code="actions" var="actionsHeader"/>
+    <display:column title="${actionsHeader}" sortable="true">
+        <jstl:if test="${row.state=='PENDING' and creditCard}">
+        <select title="<spring:message code="requests"/> " onchange="location = this.value;">
+            <option value="">
+                ---------------------
+            </option>
+            <option value="actor/lessor/property/request/accept/${row.id}.do">
+                    <spring:message code="accept" />
+            </option>
+            <option value="actor/lessor/property/request/reject/${row.id}.do">
+                <spring:message code="reject" />
+            </option>
+        </select>
+        </jstl:if>
     </display:column>
 
-    <spring:message code="delete" var="deleteHeader"/>
-    <display:column title="${deleteHeader}">
-        <a href="actor/lessor/property/delete/${row.id}.do"><spring:message code="delete"/> </a>
-    </display:column>
+    <small><spring:message code="youneedcreditcard" /> </small>
 </display:table>

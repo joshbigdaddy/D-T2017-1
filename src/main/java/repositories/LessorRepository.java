@@ -19,6 +19,4 @@ public interface LessorRepository extends JpaRepository<Lessor,Integer>{
 	@Query("select t,(select count(r) from Lessor t2 join t2.properties  p join p.requests r where r.state = 'PENDING' and t.id=t2.id) as mr from Lessor t order by mr DESC")
 	Collection<Lessor> maxRequestsPendingLessor();
 
-	@Query("select r from Lessor l join l.properties p join p.requests r where l.id=?1")
-	Collection<Request> getAllRequestsByLessor(Integer id);
 }

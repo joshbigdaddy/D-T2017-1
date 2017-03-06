@@ -67,7 +67,7 @@ public class Property extends DomainEntity{
         this.attributeValues = attributeValues;
     }
 
-    @OneToMany(mappedBy= "property", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy= "property", cascade = CascadeType.ALL)
 	public Collection<Request> getRequests() {
 		return requests;
 	}

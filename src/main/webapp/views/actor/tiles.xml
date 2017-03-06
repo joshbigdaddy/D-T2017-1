@@ -31,5 +31,11 @@
 		<put-attribute name="title" value="Edit Profile" />
 		<put-attribute name="body" value="/views/actor/edit.jsp" />
 	</definition>
-	
+
+
+	<definition name="actor/creditcard/edit" extends="master.page">
+		<put-attribute name="title" value="Edit Creditcard" />
+		<put-attribute name="body" value="/views/actor/creditcardedit.jsp" />
+	</definition>
+
 </tiles-definitions>

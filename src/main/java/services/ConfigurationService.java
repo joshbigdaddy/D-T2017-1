@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +52,11 @@ public class ConfigurationService {
 		Assert.isTrue(configuration.getId() != 0);
 		Assert.isTrue(configurationRepository.exists(configuration.getId()));
 		configurationRepository.delete(configuration);
+	}
+
+	public Configuration getFirstConfiguration(){
+		List<Configuration> configurationList = new ArrayList<>(findAll());
+
+		return configurationList.get(0);
 	}
 }

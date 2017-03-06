@@ -27,6 +27,5 @@ public class Lessor extends SocialUser {
 	public void setProperties(Collection<Property> properties) {
 		this.properties = properties;
 	}
-	
 
 }

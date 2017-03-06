@@ -8,15 +8,11 @@ import javax.persistence.*;
 	@Access(AccessType.PROPERTY)
 	public class Tenant  extends SocialUser{
 
-		public Tenant(){
-			super();
-		
-		}
 
 	//RELATIONSHIPS
 	
 	private Collection<Request> requests;	
-	@OneToMany()
+	@OneToMany(mappedBy = "tenant")
 	public Collection<Request> getRequests(){
 	return requests;	
 	}
@@ -24,7 +20,7 @@ import javax.persistence.*;
 		this.requests=requests;
 	}
 	private Collection<Invoice> invoices;	
-	@OneToMany()
+	@OneToMany(mappedBy = "tenant")
 	public Collection<Invoice> getInvoices(){
 	return invoices;	
 	}
@@ -33,7 +29,7 @@ import javax.persistence.*;
 	}
 	
 	private Finder finder;	
-	@OneToOne()
+	@OneToOne(mappedBy = "tenant")
 	public Finder getFinder(){
 	return finder;	
 	}

@@ -313,11 +313,7 @@
         <property name="phone" value="975398899" />
         <property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
         <property name="userAccount" ref="userAccount4" />
-        <property name="creditCards">
-            <list>
-                <ref bean="creditCard1" />
-            </list>
-        </property>
+        <property name="creditCard" ref="creditCard1" />
 
     </bean>
 
@@ -328,11 +324,6 @@
         <property name="phone" value="975398899" />
         <property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
         <property name="userAccount" ref="userAccount5" />
-        <property name="creditCards">
-            <list>
-
-            </list>
-        </property>
 
     </bean>
 
@@ -343,11 +334,6 @@
         <property name="phone" value="975398899" />
         <property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
         <property name="userAccount" ref="userAccount6" />
-        <property name="creditCards">
-            <list>
-
-            </list>
-        </property>
 
     </bean>
 
@@ -400,7 +386,7 @@
 		<property name="state" value="PENDING" />
 		<property name="property" ref="property1" />
 	</bean>
-	
+
 	<bean id="request2" class="domain.Request">
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
@@ -409,7 +395,7 @@
 		<property name="state" value="DENIED" />
 		<property name="property" ref="property1" />
 	</bean>
-	
+
 	<bean id="request3" class="domain.Request">
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
@@ -505,37 +491,22 @@
 		<property name="email" value="tenant1@tenant.es" />
 		<property name="phone" value="975398899" />
 		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
-		<property name="requests">
-			<list>
-			
-			</list>
-		</property>
 		<property name="invoices">
 			<list>
 			</list>
 		</property>
 		<property name="finder" ref="finder1" />
 		<property name="userAccount" ref="userAccount7" />
-		<property name="creditCards">
-			<list>
-			<ref bean="creditCard2" />
-			</list>
-		</property>
-		
+		<property name="creditCard" ref="creditCard2"/>
+
 	</bean>
-	
+
 	<bean id="tenant2" class="domain.Tenant">
 		<property name="name" value="tenant 2" />
 		<property name="surname" value=" Surname 2" />
 		<property name="email" value="tenant2@tenant.es" />
 		<property name="phone" value="975398899" />
 		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
-		<property name="requests">
-			<list>
-			<ref bean="request1" />
-			<ref bean="request2" />
-			</list>
-		</property>
 		<property name="invoices">
 			<list>
 			<ref bean="invoice2" />
@@ -543,25 +514,14 @@
 		</property>
 		<property name="finder" ref="finder2" />
 		<property name="userAccount" ref="userAccount8" />
-		<property name="creditCards">
-			<list>
-			
-			</list>
-		</property>
-		
 	</bean>
-	
+
 	<bean id="tenant3" class="domain.Tenant">
 		<property name="name" value="tenant 3" />
 		<property name="surname" value=" Surname 3" />
 		<property name="email" value="tenant3@tenant.es" />
 		<property name="phone" value="975398899" />
 		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
-		<property name="requests">
-			<list>
-			<ref bean="request3" />
-			</list>
-		</property>
 		<property name="invoices">
 			<list>
 			<ref bean="invoice1" />
@@ -570,12 +530,6 @@
 		</property>
 		<property name="finder" ref="finder3" />
 		<property name="userAccount" ref="userAccount9" />
-		<property name="creditCards">
-			<list>
-		
-			</list>
-		</property>
-		
 	</bean>
 	
 	

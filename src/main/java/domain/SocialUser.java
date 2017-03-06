@@ -1,14 +1,10 @@
 package domain;
 import java.util.Collection;
 
-import javax.persistence.Access;
-	import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 
-
-	@Entity
+@Entity
 	@Access(AccessType.PROPERTY)
 	public class SocialUser  extends Actor{
 
@@ -19,7 +15,7 @@ import javax.persistence.OneToMany;
 
 	//RELATIONSHIPS
 	private Collection<Comment> comments;	
-	private Collection<CreditCard> creditCards;
+	private CreditCard creditCard;
 	@OneToMany()
 	public Collection<Comment> getComments(){
 	return comments;	
@@ -27,12 +23,13 @@ import javax.persistence.OneToMany;
 	public void setComments(Collection<Comment> comments){
 		this.comments=comments;
 	}
-	@OneToMany()
-	public Collection<CreditCard> getCreditCards(){
-	return creditCards;	
+	@OneToOne()
+	public CreditCard getCreditCard(){
+	return creditCard;
 	}
-	public void setCreditCards(Collection<CreditCard> creditCards){
-		this.creditCards=creditCards;
+
+	public void setCreditCard(CreditCard creditCards){
+		this.creditCard=creditCard;
 	}
 	
 }

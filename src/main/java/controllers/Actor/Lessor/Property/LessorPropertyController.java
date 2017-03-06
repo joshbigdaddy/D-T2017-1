@@ -43,9 +43,15 @@ public class LessorPropertyController extends AbstractController {
         Collection<Request> requests = lessorService.getAllRequestsByLessor(lessor.getId());
         result.addObject("properties",properties);
         result.addObject("requests",requests);
+        result.addObject("fee", getActualFee());
         result.addObject("requestURI","actor/lessor/property/list.do");
 
         return result;
+    }
+
+    private Double getActualFee() {
+        CreditCard card = ((Lessor) actorService.findActorByPrincipal()).getCreditCard();
+        return (card!=null) ? card.getFee() : 0.;
     }
 
     @RequestMapping(value = "/delete/{property}")

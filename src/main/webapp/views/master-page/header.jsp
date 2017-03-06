@@ -22,6 +22,9 @@
                 <li><a href="#">User</a>
                 <ul>
                     <li><a href="/actor/edit.do"><spring:message code="edit" /><spring:message code="profile"/> </a> </li>
+                    <security:authorize access="hasAnyRole('LESSOR')">
+                        <li><a href="/actor/creditcard/edit.do"><spring:message code="editcreditcard"/> </a> </li>
+                    </security:authorize>
                 </ul></li>
                 <li><a href="property/list.do"><spring:message code="properties"/> </a> </li>
                 <security:authorize access="hasAnyRole('LESSOR')">

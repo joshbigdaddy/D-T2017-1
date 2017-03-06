@@ -24,14 +24,14 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link rel="shortcut icon" href="favicon.ico"/> 
+<link rel="shortcut icon" href="favicon.ico"/>
 
-<script type="text/javascript" src="assets/js/jquery.js"></script>
-
-<link rel="stylesheet" href="assets/style.css" type="text/css">
-
-<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
-
+	<link rel="stylesheet" href="assets/style.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
+	<link rel="stylesheet" href="assets/chosen.css" type="text/css">
+	<script src="assets/js/jquery.js" type="text/javascript"></script>
+	<script src="assets/js/chosen.js" type="text/javascript"></script>
+	<script src="assets/js/app.js" type="text/javascript"></script>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 </head>
