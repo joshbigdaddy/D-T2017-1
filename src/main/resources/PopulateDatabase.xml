@@ -629,6 +629,9 @@
 			
 		
 	</bean>
+	<bean id="configuration1" class="domain.Configuration">
+		<property name="fee" value="1.00" />
+	</bean>
 
 
 </beans>
