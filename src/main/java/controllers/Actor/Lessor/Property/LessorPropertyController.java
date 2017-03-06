@@ -1,10 +1,7 @@
 package controllers.Actor.Lessor.Property;
 
 import controllers.AbstractController;
-import domain.Attribute;
-import domain.AttributeValue;
-import domain.Lessor;
-import domain.Property;
+import domain.*;
 import forms.EditPropertyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AttributeService;
+import services.LessorService;
 import services.PropertyService;
 
 import java.util.Collection;
@@ -34,12 +32,17 @@ public class LessorPropertyController extends AbstractController {
     @Autowired
     AttributeService attributeService;
 
+    @Autowired
+    LessorService lessorService;
+
     @RequestMapping("/list")
     public ModelAndView listProperties() {
         ModelAndView result = new ModelAndView("actor/lessor/property/list");
         Lessor lessor = (Lessor) actorService.findActorByPrincipal();
         Collection<Property> properties = lessor.getProperties();
+        Collection<Request> requests = lessorService.getAllRequestsByLessor(lessor.getId());
         result.addObject("properties",properties);
+        result.addObject("requests",requests);
         result.addObject("requestURI","actor/lessor/property/list.do");
 
         return result;
@@ -60,7 +63,6 @@ public class LessorPropertyController extends AbstractController {
 
     @RequestMapping("/new")
     public ModelAndView newGet() {
-        System.out.print("asdasa");
         return createNewView(new Property());
     }
 
@@ -87,17 +89,17 @@ public class LessorPropertyController extends AbstractController {
     @RequestMapping(value = "/edit/{property2}",method = RequestMethod.POST)
     public ModelAndView editPost(@PathVariable Property property2, @ModelAttribute("form") EditPropertyForm editPropertyForm,
                                  BindingResult bindingResult){
+        ModelAndView result;
         Assert.notNull(property2);
-        ModelAndView result = new ModelAndView("redirect:/actor/lessor/property/list");
         Assert.isTrue(property2.getLessor().getId() == actorService.findActorByPrincipal().getId());
         Property property = propertyService.reconstruct(editPropertyForm.getProperty(),editPropertyForm.getAttributesValue(),bindingResult,true);
-
         if (bindingResult.hasErrors()){
             return createEditView(property);
         }else{
             try{
                 propertyService.save(property);
-                return createEditView(property);
+                result = new ModelAndView("redirect:/actor/lessor/property/list.do");
+                return result;
             }catch (Throwable oops){
                 System.out.println(oops.getLocalizedMessage());
                 return createEditView(property2);
@@ -109,15 +111,15 @@ public class LessorPropertyController extends AbstractController {
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     public ModelAndView createPost(@ModelAttribute("form") EditPropertyForm editPropertyForm,
                                  BindingResult bindingResult){
-        ModelAndView result = new ModelAndView("redirect:/actor/lessor/property/list");
         Property property = propertyService.reconstruct(editPropertyForm.getProperty(),editPropertyForm.getAttributesValue(),bindingResult,false);
-
+        ModelAndView result;
         if (bindingResult.hasErrors()){
             return createNewView(property);
         }else{
             try{
                 propertyService.save(property);
-                return createNewView(property);
+                result = new ModelAndView("redirect:/actor/lessor/property/list.do");
+                return result;
             }catch (Throwable oops){
                 return createNewView(property);
             }

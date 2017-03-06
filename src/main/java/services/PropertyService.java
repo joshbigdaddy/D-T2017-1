@@ -60,10 +60,14 @@ public class PropertyService {
 
 	public void save(Property property) {
 		Assert.notNull(property);
-		for(AttributeValue e: property.getAttributeValues()){
-		    attributeValueService.save(e);
+		List<AttributeValue> attributeValues = new ArrayList<>();
+        for(AttributeValue e: property.getAttributeValues()) {
+            e.setProperty(property);
+            attributeValues.add(e);
         }
-		propertyRepository.save(property);
+        property.setAttributeValues(attributeValues);
+        property = propertyRepository.save(property);
+
 	}
 
 	public void delete(Property property) {
@@ -89,15 +93,17 @@ public class PropertyService {
 
         if (!edit){
             result = property;
+            result.setAttributeValues(attributesValue);
         }else {
             result = propertyRepository.findOne(property.getId());
             result.setAttributeValues(attributesValue);
             result.setAddress(property.getAddress());
             result.setName(property.getName());
             result.setDescription(property.getDescription());
-            validator.validate(result, bindingResult);
         }
         result.setLessor((Lessor) actorService.findActorByPrincipal());
+		validator.validate(result, bindingResult);
+
         return result;
     }
 }

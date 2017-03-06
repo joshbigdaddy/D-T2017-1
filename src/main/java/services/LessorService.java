@@ -71,4 +71,11 @@ public class LessorService {
 		}
 		return (double) (denied / total);
 	}
+
+	public Collection<Request> getAllRequestsByLessor(int id){
+		Collection<Request> result = lessorRepository.getAllRequestsByLessor(id);
+		Assert.notNull(result);
+
+		return result;
+	}
 }

@@ -58,7 +58,7 @@ public class Property extends DomainEntity{
 		this.audits = audits;
 	}
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,orphanRemoval = false)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.MERGE)
     public List<AttributeValue> getAttributeValues() {
         return attributeValues;
     }
@@ -88,6 +88,7 @@ public class Property extends DomainEntity{
     public String toString() {
         return "Property{" +
                 "name='" + name + '\'' +
+				"id='" + getId() + '\'' +
                 ", description='" + description + '\'' +
                 ", address='" + address + '\'' +
                 ", rate=" + rate +
