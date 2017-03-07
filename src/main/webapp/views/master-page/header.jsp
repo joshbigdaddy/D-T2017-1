@@ -33,6 +33,7 @@
                             <li><a href="/actor/tenant/finder/search.do"><spring:message code="executefinder"/> </a> </li>
                         </ul>
                     </li>
+                    <li><a href="/actor/tenant/request/list.do"><spring:message code="yourrequests"/> </a></li>
                 </security:authorize>
                 <li><a href="property/list.do"><spring:message code="properties"/> </a> </li>
                 <security:authorize access="hasAnyRole('LESSOR')">

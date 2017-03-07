@@ -20,7 +20,9 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="properties" requestURI="${requestURI}" id="row">
     <spring:message code="name" var="nameHeader"/>
-    <display:column property="name" title="${nameHeader}" sortable="true"/>
+    <display:column title="${nameHeader}" sortable="true">
+        <a href="property/${row.id}.do">${row.name}</a>
+    </display:column>
 
     <spring:message code="name" var="nameHeader"/>
     <display:column property="name" title="${nameHeader}" sortable="true"/>

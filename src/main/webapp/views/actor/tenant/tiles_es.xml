@@ -28,4 +28,9 @@
 	</definition>
 
 
+	<definition name="actor/tenant/request" extends="master.page">
+		<put-attribute name="title" value="Tu lista de Peticiones" />
+		<put-attribute name="body" value="/views/actor/tenant/requests.jsp" />
+	</definition>
+
 </tiles-definitions>

@@ -12,8 +12,13 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Request extends DomainEntity{
 
 	public enum RequestType {
-		PENDING,ACCEPTED,DENIED
-	}
+		PENDING,ACCEPTED,DENIED;
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+    }
 
 
 	public Request() {
@@ -21,7 +26,6 @@ public class Request extends DomainEntity{
 	}
 	
 	private RequestType state;
-	private String creditCardNumber;
 	private boolean smoker;
 	private Date checkinDate;
 	private Date checkoutDate;
@@ -34,14 +38,7 @@ public class Request extends DomainEntity{
 	public void setState(RequestType state) {
 		this.state = state;
 	}
-	
-	@NotBlank
-	public String getCreditCardNumber() {
-		return creditCardNumber;
-	}
-	public void setCreditCardNumber(String creditCardNumber) {
-		this.creditCardNumber = creditCardNumber;
-	}
+
 	@NotNull
 	public boolean isSmoker() {
 		return smoker;
