@@ -33,6 +33,16 @@
         <put-attribute name="title" value="Editar Profile" />
         <put-attribute name="body" value="/views/actor/edit.jsp" />
     </definition>
+    
+    <definition name="actor/socialidentities/list" extends="master.page">
+		<put-attribute name="title" value="Lista de redes sociales" />
+		<put-attribute name="body" value="/views/actor/socialidlist.jsp" />
+	</definition>
+	
+	 <definition name="actor/socialidentities/edit" extends="master.page">
+		<put-attribute name="title" value="Editar red social" />
+		<put-attribute name="body" value="/views/actor/socialidedit.jsp" />
+	</definition>
 
 
 
