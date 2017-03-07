@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -13,7 +14,7 @@ public class Lessor extends SocialUser {
 
 	public Lessor() {
 		super();
-
+		properties= new ArrayList<Property>();
 	}
 
 	// RELATIONSHIPS

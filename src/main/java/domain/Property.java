@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,7 +12,9 @@ public class Property extends DomainEntity{
 
 	public Property() {
 		super();
-		
+		requests=new ArrayList<Request>();
+		audits=new ArrayList<Audit>();
+		attributeValues=new ArrayList<AttributeValue>();
 	}
 	private String name;
 	private String description;
