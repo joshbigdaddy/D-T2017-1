@@ -138,15 +138,15 @@ public class PropertyService {
 		return propertyRepository.propertiesOrderByRequests(lessorId);
 	}
 	
-	Collection<Property> propertiesOrderByAcceptedRequests(int lessorId){
+	public Collection<Object[]> propertiesOrderByAcceptedRequests(int lessorId){
 		return propertyRepository.propertiesOrderByAcceptedRequests(lessorId);
 	}
 	
-    public Collection<Property> propertiesOrderByDeniedRequests(int lessorId){
+    public Collection<Object[]> propertiesOrderByDeniedRequests(int lessorId){
     	return propertyRepository.propertiesOrderByDeniedRequests(lessorId);
     }
 	
-	public Collection<Property> propertiesOrderByPendingRequests(int lessorId){
+	public Collection<Object[]> propertiesOrderByPendingRequests(int lessorId){
 		return propertyRepository.propertiesOrderByPendingRequests(lessorId);
 	}
 }

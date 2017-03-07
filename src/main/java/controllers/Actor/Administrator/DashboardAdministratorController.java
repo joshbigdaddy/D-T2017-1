@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -24,6 +26,7 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Attribute;
 import domain.Lessor;
+import domain.Property;
 import domain.Tenant;
 
 @Controller
@@ -75,8 +78,10 @@ public class DashboardAdministratorController extends AbstractController{
 				Collection<Tenant> tenantPendingMoreRequest=devuelveMaxTenant(tenantService.maxRequestsPendingTenant());
 				Collection<Tenant> tenantApprovedMoreRequest= devuelveMaxTenant(tenantService.maxRequestsApprovedTenant());
 				Collection<Tenant> tenantDeniedMoreRequest=devuelveMaxTenant(tenantService.maxRequestsDeniedTenant());
-				Collection<Lessor> lessorRatioMaxVsMin=lessorService.leesorRatioMaxVsMin(); 
-				Collection<Tenant> tenantRatioMaxVsMin=tenantService.tenantRatioMaxVsMin();
+				Collection<Lessor> lessorRatioMax=lessorService.maxRatio(); 
+				Collection<Lessor> lessorRatioMin=lessorService.maxRatio(); 
+				Collection<Tenant> tenantRatioMax=tenantService.maxRatio();
+				Collection<Tenant> tenantRatioMin=tenantService.minRatio(); 
 				Integer minResultsPerFinder=finderService.minResultsPerFinder();
 				Integer maxResultsPerFinder=finderService.maxResultsPerFinder();
 				Double avgResultsPerFinder=finderService.avgResultsPerFinder();
@@ -103,20 +108,42 @@ public class DashboardAdministratorController extends AbstractController{
 		
 		result= createDashboardModelAndView(avgAcceptedRequestLessor,avgDeniedRequestLessor,avgDeniedRequestTenant
 				,avgAcceptedRequestTenant,lessorApprovedMoreRequest,lessorDeniedMoreRequest,lessorPendingMoreRequest
-				,tenantPendingMoreRequest,tenantApprovedMoreRequest,tenantDeniedMoreRequest,lessorRatioMaxVsMin
-				,tenantRatioMaxVsMin,minResultsPerFinder,maxResultsPerFinder,avgResultsPerFinder,minAuditPerProperty
+				,tenantPendingMoreRequest,tenantApprovedMoreRequest,tenantDeniedMoreRequest,lessorRatioMax,lessorRatioMin
+				,tenantRatioMax,tenantRatioMin,minResultsPerFinder,maxResultsPerFinder,avgResultsPerFinder,minAuditPerProperty
 				,maxAuditPerProperty,avgAuditPerProperty,attributeDescribePropertyDesc,minSocialIdentityPerActor
 				,maxSocialIdentityPerActor,avgSocialIdentityPerActor,maxInvoicePerTenant,minInvoicePerTenant
 				,avgInvoicePerTenant,invoicesAmount,avgRequestPerPropertyWithAudits,avgRequestPerPropertyWithoutAudits);
 		return result;
 	}
 
+	
+	
+	@RequestMapping(value = "/display/{lessor}", method = RequestMethod.GET)
+	public ModelAndView display(@PathVariable Lessor lessor) {
+		ModelAndView result;
+		
+		result = new ModelAndView("acotr/administrator/display");
+		result.addObject("propertiesOrderedByAudits",propertyService.propertiesOrderByAudits(lessor.getId())) ;
+		result.addObject("propertiesOrderedByDeniedRequest", devuelveAttributes(propertyService.propertiesOrderByDeniedRequests(lessor.getId())));
+		result.addObject("propertiesOrderedByPendingRequest", devuelveAttributes(propertyService.propertiesOrderByPendingRequests(lessor.getId())));
+		result.addObject("propertiesOrderedByAcceptedRequest", devuelveAttributes(propertyService.propertiesOrderByAcceptedRequests(lessor.getId())));
+		
+	
+		
+		
+		result.addObject("requestURI", "/contest/display.do");
+		return result;
+	}
+	
+	
+	
+	
 	protected ModelAndView createDashboardModelAndView(Double avgAcceptedRequestLessor,Double avgDeniedRequestLessor,
 			Double avgDeniedRequestTenant,Double avgAcceptedRequestTenant,Collection<Lessor> lessorApprovedMoreRequest,
 			Collection<Lessor> lessorDeniedMoreRequest,Collection<Lessor> lessorPendingMoreRequest
 			,Collection<Tenant> tenantPendingMoreRequest,Collection<Tenant> tenantApprovedMoreRequest,
-			Collection<Tenant> tenantDeniedMoreRequest,Collection<Lessor> lessorRatioMaxVsMin
-			,Collection<Tenant> tenantRatioMaxVsMin,Integer minResultsPerFinder,Integer maxResultsPerFinder,Double avgResultsPerFinder,
+			Collection<Tenant> tenantDeniedMoreRequest,Collection<Lessor> lessorRatioMax,Collection<Lessor> lessorRatioMin
+			,Collection<Tenant> tenantRatioMax,Collection<Tenant> tenantRatioMin,Integer minResultsPerFinder,Integer maxResultsPerFinder,Double avgResultsPerFinder,
 			Double minAuditPerProperty,Double maxAuditPerProperty,Double avgAuditPerProperty,
 			Collection<Attribute> attributeDescribePropertyDesc,Double minSocialIdentityPerActor
 			,Double maxSocialIdentityPerActor,Double avgSocialIdentityPerActor,Integer maxInvoicePerTenant,
@@ -137,8 +164,10 @@ public class DashboardAdministratorController extends AbstractController{
 		result.addObject("tenantPendingMoreRequest",tenantPendingMoreRequest);
 		result.addObject("tenantApprovedMoreRequest",tenantApprovedMoreRequest);
 		result.addObject("tenantDeniedMoreRequest",tenantDeniedMoreRequest);
-		result.addObject("lessorRatioMaxVsMin",lessorRatioMaxVsMin);
-		result.addObject("tenantRatioMaxVsMin",tenantRatioMaxVsMin);
+		result.addObject("lessorRatioMax",lessorRatioMax);
+		result.addObject("tenantRatioMin",tenantRatioMin);
+		result.addObject("lessorRatioMin",lessorRatioMin);
+		result.addObject("tenantRatioMax",tenantRatioMax);
 		result.addObject("minResultsPerFinder",minResultsPerFinder);
 		result.addObject("maxResultsPerFinder",maxResultsPerFinder);
 		result.addObject("avgResultsPerFinder",avgResultsPerFinder);
@@ -155,7 +184,7 @@ public class DashboardAdministratorController extends AbstractController{
 		result.addObject("invoicesAmount",invoicesAmount);
 		result.addObject("avgRequestPerPropertyWithAudits",avgRequestPerPropertyWithAudits);
 		result.addObject("avgRequestPerPropertyWithoutAudits",avgRequestPerPropertyWithAudits);
-
+		result.addObject("lessor",lessorService.findAll());
 		
 		return result;
 	}
@@ -210,6 +239,15 @@ public class DashboardAdministratorController extends AbstractController{
 			
 		}
 		return lessors;
+		
+	}
+	private Collection<Property> devuelveProperties(Collection<Object[]> col){
+		List<Property> property=new ArrayList<Property>();
+		for(Object[] o:col){
+				property.add((Property) o[0]);
+			
+		}
+		return property;
 		
 	}
 

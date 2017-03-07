@@ -31,12 +31,12 @@ public interface PropertyRepository extends JpaRepository<Property,Integer>{
 	Collection<Property> propertiesOrderByRequests(int lessorId);
 	
 	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'ACCEPTED' and p2.lessor.id=p.lessor.id) as mr from Property p order by mr DESC")
-	Collection<Property> propertiesOrderByAcceptedRequests(int lessorId);
+	Collection<Object[]> propertiesOrderByAcceptedRequests(int lessorId);
 	
 	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'DENIED') as mr from Property p  order by mr DESC")
-	Collection<Property> propertiesOrderByDeniedRequests(int lessorId);
+	Collection<Object[]> propertiesOrderByDeniedRequests(int lessorId);
 	
 	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'PENDING' ) as mr from Property p order by mr DESC")
-	Collection<Property> propertiesOrderByPendingRequests(int lessorId);
+	Collection<Object[]> propertiesOrderByPendingRequests(int lessorId);
 	
 }

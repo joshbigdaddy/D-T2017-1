@@ -79,16 +79,31 @@
 </display:table>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="lessorRatioMaxVsMin" requestURI="${requestURI}"
-	id="lessorRatioMaxVsMin">
-	<spring:message code="administrator.lessorRatioMaxVsMin" var="name" />
+	name="lessorRatioMax" requestURI="${requestURI}"
+	id="lessorRatioMax">
+	<spring:message code="administrator.lessorRatioMax" var="name" />
 	<display:column property="name" title="${name}" sortable="true" />
 </display:table>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="tenantRatioMaxVsMin" requestURI="${requestURI}"
-	id="tenantRatioMaxVsMin">
-	<spring:message code="administrator.tenantRatioMaxVsMin" var="name" />
+	name="lessorRatioMin" requestURI="${requestURI}"
+	id="lessorRatioMin">
+	<spring:message code="administrator.lessorRatioMin" var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="tenantRatioMax" requestURI="${requestURI}"
+	id="tenantRatioMax">
+	<spring:message code="administrator.tenantRatioMax" var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
+
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="tenantRatioMin" requestURI="${requestURI}"
+	id="tenantRatioMin">
+	<spring:message code="administrator.tenantRatioMin" var="name" />
 	<display:column property="name" title="${name}" sortable="true" />
 </display:table>
 
@@ -180,4 +195,30 @@
 	<spring:message code="administrator.avgRequestPerPropertyWithoutAudits" />
 	${avgRequestPerPropertyWithoutAudits}
 </p>
+
+
+
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="lessor" requestURI="${requestURI}" id="row">
+
+	<spring:message code="administrator.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}" sortable="true" />
+
+	<spring:message code="administrator.display" var="lessors" />
+	<display:column title="${lessors}">
+		<a href="actor/administrator/dashboard/display/${row.id}.do"> <spring:message
+				code="administrator.display" />
+		</a>
+	</display:column>
+
+
+
+
+</display:table>
+
+
+
+
+
 <br>
