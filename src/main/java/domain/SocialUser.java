@@ -23,7 +23,7 @@ import javax.persistence.*;
 	public void setComments(Collection<Comment> comments){
 		this.comments=comments;
 	}
-	@OneToOne()
+	@OneToOne(cascade = CascadeType.ALL)
 	public CreditCard getCreditCard(){
 	return this.creditCard;
 	}

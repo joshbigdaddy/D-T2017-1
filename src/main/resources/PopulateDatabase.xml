@@ -382,7 +382,6 @@
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
-		<property name="creditCardNumber" value="4916410161778424" />
 		<property name="state" value="PENDING" />
 		<property name="property" ref="property1" />
 	</bean>
@@ -391,7 +390,6 @@
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
-		<property name="creditCardNumber" value="4916410161778424" />
 		<property name="state" value="DENIED" />
 		<property name="property" ref="property1" />
 	</bean>
@@ -400,7 +398,6 @@
 		<property name="checkinDate" value="5/1/2017" />
 		<property name="checkoutDate" value="5/1/2017" />
 		<property name="smoker" value="true" />
-		<property name="creditCardNumber" value="4916410161778424" />
 		<property name="state" value="PENDING" />
 		<property name="property" ref="property2" />
 	</bean>

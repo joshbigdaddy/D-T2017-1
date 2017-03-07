@@ -49,6 +49,8 @@
 
 <h1><spring:message code="requests"/> </h1>
 
+<h2><spring:message code="feetopay" /> ${fee} </h2>
+
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="requests" requestURI="${requestURI}" id="row">
     <spring:message code="tenant" var="tenantHeader"/>
     <display:column property="tenant.name" title="${tenantHeader}" sortable="true"/>
@@ -65,7 +67,7 @@
     <display:column title="${smokerHeader}" sortable="true">
         <jstl:choose><jstl:when test="${row.smoker}"><spring:message code="yes"/></jstl:when><jstl:otherwise><spring:message code="no"/></jstl:otherwise></jstl:choose>
     </display:column>
-    <h2><spring:message code="feetopay" /> ${fee} </h2>
+
     <spring:message code="actions" var="actionsHeader"/>
     <display:column title="${actionsHeader}" sortable="true">
         <jstl:if test="${row.state=='PENDING' and creditCard}">
@@ -83,5 +85,7 @@
         </jstl:if>
     </display:column>
 
-    <small><spring:message code="youneedcreditcard" /> </small>
 </display:table>
+
+
+<small><spring:message code="youneedcreditcard" /> </small>

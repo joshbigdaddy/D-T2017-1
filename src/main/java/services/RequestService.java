@@ -2,14 +2,16 @@ package services;
 
 import java.util.Collection;
 
-import domain.Lessor;
+import com.sun.org.apache.regexp.internal.RE;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.RequestRepository;
-import domain.Request;
 
 @Service
 @Transactional
@@ -27,6 +29,9 @@ public class RequestService {
 
 	@Autowired
     private TenantService tenantService;
+
+	@Autowired
+    Validator validator;
 	// Constructor
 	public RequestService() {
 		super();
@@ -86,4 +91,14 @@ public class RequestService {
 
 		save(request);
 	}
+
+    public Request reconstruct(Request request, BindingResult bindingResult, Property property) {
+        Tenant tenant = tenantService.findTenantByPrincipal();
+        request.setTenant(tenant);
+        request.setState(Request.RequestType.PENDING);
+        request.setProperty(property);
+        validator.validate(request,bindingResult);
+
+        return request;
+    }
 }
