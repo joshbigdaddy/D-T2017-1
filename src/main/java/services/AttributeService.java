@@ -52,7 +52,7 @@ public class AttributeService {
 		attributeRepository.delete(attribute);
 	}
 	
-	public Collection<Attribute> getAllAttributesByNumberOfTimesInProperty(){
+	public Collection<Object[]> getAllAttributesByNumberOfTimesInProperty(){
 		return attributeRepository.getAllAttributesByNumberOfTimesInProperty();
 	}
 }

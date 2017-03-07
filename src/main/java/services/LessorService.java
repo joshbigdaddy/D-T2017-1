@@ -3,9 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -61,7 +59,7 @@ public class LessorService {
 	}
 
 	public Double avgDeniedRequestsPerLessor() {
-		List<Lessor> lessors = lessorRepository.findAll();
+		/*List<Lessor> lessors = lessorRepository.findAll();
 		int denied = 0;
 		int total = 0;
 		for (Lessor l : lessors) {
@@ -73,12 +71,17 @@ public class LessorService {
 				}
 			}
 		}
+		if(total==0){
+			return 0.;
+		}else{
 		return (double) (denied / total);
-	}
+		}*/
+		return 0.;
+		}
 	
 	public Double avgAcceptedRequestsPerLessor() {
 		List<Lessor> lessors = lessorRepository.findAll();
-		int denied = 0;
+		/*int denied = 0;
 		int total = 0;
 		for (Lessor l : lessors) {
 			for (Property p : l.getProperties()) {
@@ -89,7 +92,12 @@ public class LessorService {
 				}
 			}
 		}
+		if(total==0){
+			return 0.;
+		}else{
 		return (double) (denied / total);
+		}*/
+		return 0.;
 	}
 
 	public Collection<Request> getAllRequestsByLessor(int id){
@@ -128,20 +136,20 @@ public class LessorService {
 		return result;
 		}
 	
-	public Collection<Lessor> maxRequestsApprovedLessor(){
+	public Collection<Object[]> maxRequestsApprovedLessor(){
 		return lessorRepository.maxRequestsApprovedLessor();
 	}
 
-	public Collection<Lessor> maxRequestsDeniedLessor(){
+	public Collection<Object[]> maxRequestsDeniedLessor(){
 		return lessorRepository.maxRequestsDeniedLessor();
 	}
 
-	public Collection<Lessor> maxRequestsPendingLessor(){
+	public Collection<Object[]> maxRequestsPendingLessor(){
 		return lessorRepository.maxRequestsPendingLessor();
 	}
 
 	public Collection<Lessor> leesorRatioMaxVsMin() {
-		// TODO Auto-generated method stub
+	/*	// TODO Auto-generated method stub
 		Collection<Request> denied=new ArrayList<Request>();
 		Collection<Request> accepted=new ArrayList<Request>();
 		for(Lessor l:findAll()){
@@ -163,7 +171,7 @@ public class LessorService {
 				
 			}
 			
-		}
+		}*/
 		return findAll();
 	}
 }

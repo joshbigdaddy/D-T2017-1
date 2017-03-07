@@ -16,7 +16,7 @@
        
 <tiles-definitions>
 
-	<definition name="administrator/dashboard" extends="master.page">
+	<definition name="actor/administrator/dashboard" extends="master.page">
 		<put-attribute name="title" value="DashBoard" />
 		<put-attribute name="body" value="/views/actor/administrator/dashboard.jsp" />
 	</definition>

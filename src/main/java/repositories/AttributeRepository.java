@@ -16,5 +16,5 @@ number of times they have been used to describe a property
 	 */
 //
 	@Query("select a,(select count(at) from Property p join p.attributeValues at where at.attribute.id=a.id) as mr  from Attribute a order by mr DESC")
-	Collection<Attribute> getAllAttributesByNumberOfTimesInProperty();
+	Collection<Object[]> getAllAttributesByNumberOfTimesInProperty();
 }

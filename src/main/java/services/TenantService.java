@@ -65,7 +65,7 @@ public class TenantService {
 	}
 
 	public Double avgDeniedRequestsPerTenant() {
-		List<Tenant> tenants = tenantRepository.findAll();
+		/*List<Tenant> tenants = tenantRepository.findAll();
 		int denied = 0;
 		int total = 0;
 		for (Tenant t : tenants) {
@@ -75,7 +75,8 @@ public class TenantService {
 				total++;
 			}
 		}
-		return (double) (denied / total);
+		return (double) (denied / total);*/
+		return 0.0;
 	}
 
     public void chargeTenant(Request request) {
@@ -94,13 +95,13 @@ public class TenantService {
 		return result;
 		}
     
-	public Collection<Tenant> maxRequestsApprovedTenant(){
+	public Collection<Object[]> maxRequestsApprovedTenant(){
 		return tenantRepository.maxRequestsApprovedTenant();
 	}
-	public Collection<Tenant> maxRequestsDeniedTenant(){
+	public Collection<Object[]> maxRequestsDeniedTenant(){
 		return tenantRepository.maxRequestsDeniedTenant();
 	}
-	public Collection<Tenant> maxRequestsPendingTenant(){
+	public Collection<Object[]> maxRequestsPendingTenant(){
 		return tenantRepository.maxRequestsPendingTenant();
 	}
 

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -23,6 +24,7 @@ public class Actor extends DomainEntity {
 
 	public Actor() {
 		super();
+		socialIdentities=new ArrayList<SocialIdentity>();
 
 	}
 

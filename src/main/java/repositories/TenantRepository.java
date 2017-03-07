@@ -11,11 +11,11 @@ import domain.Tenant;
 @Repository
 public interface TenantRepository extends JpaRepository<Tenant,Integer>{
 	@Query("select t,(select count(r) from Tenant t2 join t2.requests r where r.state = 'ACCEPTED' and t.id=t2.id) as mr from Tenant t order by mr DESC")
-	Collection<Tenant> maxRequestsApprovedTenant();
+	Collection<Object[]> maxRequestsApprovedTenant();
 	@Query("select t,(select count(r) from Tenant t2 join t2.requests r where r.state = 'DENIED' and t.id=t2.id) as mr from Tenant t order by mr DESC")
-	Collection<Tenant> maxRequestsDeniedTenant();
+	Collection<Object[]> maxRequestsDeniedTenant();
 	@Query("select t,(select count(r) from Tenant t2 join t2.requests r where r.state = 'PENDING' and t.id=t2.id) as mr from Tenant t order by mr DESC")
-	Collection<Tenant> maxRequestsPendingTenant();
+	Collection<Object[]> maxRequestsPendingTenant();
 
 	@Query("Select min(l.invoices.size) from Tenant l")
 	Integer minInvoicesPerTenant();

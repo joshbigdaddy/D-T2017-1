@@ -1,6 +1,9 @@
 package controllers.Actor.Administrator;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,7 @@ import services.RequestService;
 import services.TenantService;
 
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Attribute;
 import domain.Lessor;
 import domain.Tenant;
@@ -61,12 +65,16 @@ public class DashboardAdministratorController extends AbstractController{
 				Double avgDeniedRequestLessor= lessorService.avgDeniedRequestsPerLessor();
 				Double avgDeniedRequestTenant=tenantService.avgDeniedRequestsPerTenant();
 				Double avgAcceptedRequestTenant=tenantService.avgDeniedRequestsPerTenant();
-				Collection<Lessor> lessorApprovedMoreRequest=lessorService.maxRequestsApprovedLessor();
-				Collection<Lessor> lessorDeniedMoreRequest=lessorService.maxRequestsDeniedLessor();
-				Collection<Lessor> lessorPendingMoreRequest= lessorService.maxRequestsPendingLessor();
-				Collection<Tenant> tenantPendingMoreRequest=tenantService.maxRequestsPendingTenant();
-				Collection<Tenant> tenantApprovedMoreRequest= tenantService.maxRequestsApprovedTenant();
-				Collection<Tenant> tenantDeniedMoreRequest=tenantService.maxRequestsDeniedTenant();
+				
+				Collection<Lessor> lessorApprovedMoreRequest=devuelveMaxLessor(lessorService.maxRequestsApprovedLessor());
+				
+				
+				
+				Collection<Lessor> lessorDeniedMoreRequest=devuelveMaxLessor(lessorService.maxRequestsDeniedLessor());
+				Collection<Lessor> lessorPendingMoreRequest= devuelveMaxLessor(lessorService.maxRequestsPendingLessor());
+				Collection<Tenant> tenantPendingMoreRequest=devuelveMaxTenant(tenantService.maxRequestsPendingTenant());
+				Collection<Tenant> tenantApprovedMoreRequest= devuelveMaxTenant(tenantService.maxRequestsApprovedTenant());
+				Collection<Tenant> tenantDeniedMoreRequest=devuelveMaxTenant(tenantService.maxRequestsDeniedTenant());
 				Collection<Lessor> lessorRatioMaxVsMin=lessorService.leesorRatioMaxVsMin(); 
 				Collection<Tenant> tenantRatioMaxVsMin=tenantService.tenantRatioMaxVsMin();
 				Integer minResultsPerFinder=finderService.minResultsPerFinder();
@@ -75,9 +83,12 @@ public class DashboardAdministratorController extends AbstractController{
 				Double minAuditPerProperty=propertyService.minAuditsPerProperty();
 				Double maxAuditPerProperty= propertyService.maxAuditsPerProperty();
 				Double avgAuditPerProperty= propertyService.avgAuditsPerProperty();;
-				Collection<Attribute> attributeDescribePropertyDesc= attributeService.getAllAttributesByNumberOfTimesInProperty();
-				Integer minSocialIdentityPerActor=actorService.minSocialIdentitiesPerActor();
-				Integer maxSocialIdentityPerActor=actorService.maxSocialIdentitiesPerActor();
+				
+				Collection<Attribute> attributeDescribePropertyDesc=devuelveAttributes(attributeService.getAllAttributesByNumberOfTimesInProperty());
+				
+				Double minSocialIdentityPerActor=actorService.minSocialIdentitiesPerActor();
+				Double maxSocialIdentityPerActor=actorService.maxSocialIdentitiesPerActor();
+				
 				Double avgSocialIdentityPerActor=actorService.avgSocialIdentitiesPerActor();
 				Integer maxInvoicePerTenant= tenantService.maxInvoicesPerTenant();
 				Integer minInvoicePerTenant= tenantService.minInvoicesPerTenant();
@@ -107,13 +118,13 @@ public class DashboardAdministratorController extends AbstractController{
 			Collection<Tenant> tenantDeniedMoreRequest,Collection<Lessor> lessorRatioMaxVsMin
 			,Collection<Tenant> tenantRatioMaxVsMin,Integer minResultsPerFinder,Integer maxResultsPerFinder,Double avgResultsPerFinder,
 			Double minAuditPerProperty,Double maxAuditPerProperty,Double avgAuditPerProperty,
-			Collection<Attribute> attributeDescribePropertyDesc,Integer minSocialIdentityPerActor
-			,Integer maxSocialIdentityPerActor,Double avgSocialIdentityPerActor,Integer maxInvoicePerTenant,
+			Collection<Attribute> attributeDescribePropertyDesc,Double minSocialIdentityPerActor
+			,Double maxSocialIdentityPerActor,Double avgSocialIdentityPerActor,Integer maxInvoicePerTenant,
 			Integer minInvoicePerTenant,Double avgInvoicePerTenant,Double invoicesAmount,
 			Double avgRequestPerPropertyWithAudits,Double avgRequestPerPropertyWithoutAudits){
 		ModelAndView result;
 		
-		result = new ModelAndView("administrator/dashboard");
+		result = new ModelAndView("actor/administrator/dashboard");
 		
 		
 		result.addObject("avgAcceptedRequestLessor",avgAcceptedRequestLessor);
@@ -147,6 +158,59 @@ public class DashboardAdministratorController extends AbstractController{
 
 		
 		return result;
+	}
+	private Collection<Lessor> devuelveMaxLessor(Collection<Object[]> col){
+		long i=123456;
+		List<Lessor> lessors=new ArrayList<Lessor>();
+		for(Object[] o:col){
+			if(i==123456){
+				i=(long) o[1];
+				lessors.add((Lessor) o[0]);
+			}else{
+				long e=(long) o[1];
+				if(e>i){
+					lessors.clear();
+					lessors.add((Lessor) o[0]);
+					i=e;
+				}else if(e==i){
+					lessors.add((Lessor) o[0]);
+				}
+			}
+		}
+		return lessors;
+		
+	}
+	
+	private Collection<Tenant> devuelveMaxTenant(Collection<Object[]> col){
+		long i=123456;
+		List<Tenant> lessors=new ArrayList<Tenant>();
+		for(Object[] o:col){
+			if(i==123456){
+				i=(long) o[1];
+				lessors.add((Tenant) o[0]);
+			}else{
+				long e=(long) o[1];
+				if(e>i){
+					lessors.clear();
+					lessors.add((Tenant) o[0]);
+					i=e;
+				}else if(e==i){
+					lessors.add((Tenant) o[0]);
+				}
+			}
+		}
+		return lessors;
+		
+	}
+	
+	private Collection<Attribute> devuelveAttributes(Collection<Object[]> col){
+		List<Attribute> lessors=new ArrayList<Attribute>();
+		for(Object[] o:col){
+				lessors.add((Attribute) o[0]);
+			
+		}
+		return lessors;
+		
 	}
 
 }

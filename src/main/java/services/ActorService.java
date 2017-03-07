@@ -90,11 +90,11 @@ public class ActorService {
 	
 	
 	//Query Methods for Dashboard
-	public Integer minSocialIdentitiesPerActor(){
+	public Double minSocialIdentitiesPerActor(){
 		return actorRepository.minSocialIdentitiesPerActor();
 	}
 	
-	public Integer maxSocialIdentitiesPerActor(){
+	public Double maxSocialIdentitiesPerActor(){
 		return actorRepository.maxSocialIdentitiesPerActor();
 	}
 	
