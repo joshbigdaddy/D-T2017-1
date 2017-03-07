@@ -14,6 +14,7 @@ import org.hibernate.validator.constraints.Range;
 public class CreditCard extends DomainEntity {
 	public CreditCard() {
 		super();
+		this.fee=0.;
 	}
 
 	private String brandName;
