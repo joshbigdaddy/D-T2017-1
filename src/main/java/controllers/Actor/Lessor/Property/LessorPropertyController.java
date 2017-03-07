@@ -58,6 +58,7 @@ public class LessorPropertyController extends AbstractController {
     public ModelAndView deleteRecipe(@PathVariable Property property) {
         System.out.println(property);
         Assert.notNull(property);
+        Assert.isTrue(property.getLessor()==lessorService.findLessorByPrincipal());
         try {
             propertyService.delete(property);
         } catch (Throwable throwable) {
