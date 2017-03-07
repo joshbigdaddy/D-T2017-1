@@ -135,7 +135,7 @@
 	
 		<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="auditor1" />
-		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="password" value="175d2e7a63f386554a4dd66e865c3e14" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -147,7 +147,7 @@
 
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="auditor2" />
-		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="password" value="04dd94ba3212ac52ad3a1f4cbfb52d4f" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -159,7 +159,7 @@
 
 	<bean id="userAccount12" class="security.UserAccount">
 		<property name="username" value="auditor3" />
-		<property name="password" value="32cacb2f994f6b42183a1300d9a3e8d6" />
+		<property name="password" value="fc2073dbe4f65dfd71e46602f8e6a5f3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -226,27 +226,7 @@
     </bean>
 	
 	
-	<bean id="socialIdentity1" class="domain.SocialIdentity">
 
-		<property name="nick" value="nick1" />
-		<property name="name" value="Name 1" />
-		<property name="link" value="http://www.random3.com/" />
-		<property name="picture" value="http://www.youtube.com/" />
-	</bean>
-	<bean id="socialIdentity2" class="domain.SocialIdentity">
-
-		<property name="nick" value="nick2" />
-		<property name="name" value="Name 2" />
-		<property name="link" value="http://www.random3.com/" />
-		<property name="picture" value="http://www.youtube.com/" />
-	</bean>
-	<bean id="socialIdentity3" class="domain.SocialIdentity">
-
-		<property name="nick" value="nick3" />
-		<property name="name" value="Name 3" />
-		<property name="link" value="http://www.random3.com/" />
-		<property name="picture" value="http://www.youtube.com/" />
-	</bean>
 	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -373,6 +353,31 @@
         <property name="userAccount" ref="userAccount6" />
         <property name="creditCard" ref="creditCard4"/>
 
+    </bean>
+
+    <bean id="socialIdentity1" class="domain.SocialIdentity">
+
+        <property name="nick" value="nick1" />
+        <property name="name" value="Name 1" />
+        <property name="link" value="http://www.random3.com/" />
+        <property name="picture" value="http://www.youtube.com/" />
+        <property name="actor" ref="lessor1"/>
+    </bean>
+    <bean id="socialIdentity2" class="domain.SocialIdentity">
+
+        <property name="nick" value="nick2" />
+        <property name="name" value="Name 2" />
+        <property name="link" value="http://www.random3.com/" />
+        <property name="picture" value="http://www.youtube.com/" />
+        <property name="actor" ref="lessor2"/>
+    </bean>
+    <bean id="socialIdentity3" class="domain.SocialIdentity">
+
+        <property name="nick" value="nick3" />
+        <property name="name" value="Name 3" />
+        <property name="link" value="http://www.random3.com/" />
+        <property name="picture" value="http://www.youtube.com/" />
+        <property name="actor" ref="lessor3"/>
     </bean>
 
 
@@ -508,26 +513,7 @@
         <property name="value" value="Test"/>
     </bean>
 	
-	<bean id="audit1" class="domain.Audit">
-		<property name="moment" value="5/1/2015" />
-		<property name="text" value="text1" />
-		<property name="attachment" value="https://www.dropbox.com/" />
-		<property name="property" ref="property2" />
-	</bean>
-	
-	<bean id="audit2" class="domain.Audit">
-		<property name="moment" value="5/1/2015" />
-		<property name="text" value="text2" />
-		<property name="attachment" value="https://www.dropbox.com/" />
-		<property name="property" ref="property2" />
-	</bean>
-	
-	<bean id="audit3" class="domain.Audit">
-		<property name="moment" value="5/1/2015" />
-		<property name="text" value="text3" />
-		<property name="attachment" value="https://www.dropbox.com/" />
-		<property name="property" ref="property3" />
-	</bean>
+
 
     <bean id="tenant1" class="domain.Tenant">
         <property name="name" value="tenant 1" />
@@ -596,11 +582,6 @@
 		<property name="phone" value="975398899" />
 		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
 		<property name="company" value="repsol" />
-		<property name="audits">
-			<list>
-			<ref bean="audit1" />
-			</list>
-		</property>
 		<property name="userAccount" ref="userAccount10" />
 			
 		
@@ -613,14 +594,9 @@
 		<property name="phone" value="975398899" />
 		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
 		<property name="company" value="repsol" />
-		<property name="audits">
-			<list>
-			<ref bean="audit3" />
-			</list>
-		</property>
 		<property name="userAccount" ref="userAccount11" />
 			
-		
+
 	</bean>
 	
 	<bean id="auditor3" class="domain.Auditor">
@@ -630,11 +606,6 @@
 		<property name="phone" value="975398899" />
 		<property name="picture" value="https://1.bp.blogspot.com/-xGwcGp_8cIs/VrsoYTTAoUI/AAAAAAAABuE/vL9Fpe1C4BM/s640/tenant-approved.png" />
 		<property name="company" value="repsol" />
-		<property name="audits">
-			<list>
-			<ref bean="audit2" />
-			</list>
-		</property>
 		<property name="userAccount" ref="userAccount12" />
 			
 		
@@ -643,6 +614,33 @@
 		<property name="fee" value="1.00" />
 		<property name="vat" value="1243422" />
 	</bean>
+
+    <bean id="audit1" class="domain.Audit">
+        <property name="moment" value="5/1/2015" />
+        <property name="final" value="true"/>
+        <property name="text" value="text1" />
+        <property name="attachment" value="https://www.dropbox.com/" />
+        <property name="property" ref="property2" />
+        <property name="auditor" ref="auditor1"/>
+    </bean>
+
+    <bean id="audit2" class="domain.Audit">
+        <property name="moment" value="5/1/2015" />
+        <property name="final" value="true"/>
+        <property name="text" value="text2" />
+        <property name="attachment" value="https://www.dropbox.com/" />
+        <property name="property" ref="property2" />
+        <property name="auditor" ref="auditor2"/>
+    </bean>
+
+    <bean id="audit3" class="domain.Audit">
+        <property name="moment" value="5/1/2015" />
+        <property name="final" value="true"/>
+        <property name="text" value="text3" />
+        <property name="attachment" value="https://www.dropbox.com/" />
+        <property name="property" ref="property3" />
+        <property name="auditor" ref="auditor3"/>
+    </bean>
 
 
 </beans>

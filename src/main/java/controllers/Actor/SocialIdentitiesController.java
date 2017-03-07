@@ -34,9 +34,8 @@ public class SocialIdentitiesController {
 	public ModelAndView listSocialIdentities() {
 
 		SocialUser user;
-		user = (SocialUser) actorService.findActorByPrincipal();
 		ModelAndView result = new ModelAndView("actor/socialidentities/list");
-		result.addObject("socialidentities", user.getSocialIdentities());
+		result.addObject("socialidentities", actorService.findActorByPrincipal().getSocialIdentities());
 		result.addObject("requestURI", "actor/socialidentities/list.do");
 
 		return result;

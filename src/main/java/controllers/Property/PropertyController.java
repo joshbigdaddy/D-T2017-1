@@ -1,5 +1,6 @@
 package controllers.Property;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import controllers.AbstractController;
 import domain.*;
 import forms.EditAuditForm;
@@ -23,6 +24,7 @@ import services.PropertyService;
 import services.RequestService;
 
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/property")
@@ -49,6 +51,20 @@ public class PropertyController extends AbstractController {
         return result;
     }
 
+    @RequestMapping("/{property}/audit/delete")
+    public ModelAndView deleteAudit(@PathVariable Property property) {
+        ModelAndView result = new ModelAndView("redirect:../audit.do");
+        Audit audit = auditService.findByAuditor(actorService.findActorByPrincipal(),property);
+        if (audit==null){
+            return result;
+        }
+        Assert.isTrue(!audit.getFinal());
+        auditService.delete(audit);
+
+        return result;
+    }
+
+
     @RequestMapping("/{property}")
     public ModelAndView index(@PathVariable Property property) {
         ModelAndView result = new ModelAndView("property/index");
@@ -65,35 +81,51 @@ public class PropertyController extends AbstractController {
     public ModelAndView audit(@PathVariable Property property) {
         ModelAndView result = new ModelAndView("property/audit");
         EditAuditForm form=new EditAuditForm();
-        form.setAudit(new Audit());
+        Audit audit = auditService.findByAuditor(actorService.findActorByPrincipal(),property);
+        if (audit==null) audit = new Audit();
+        form.setAudit(audit);
         form.setPropertyId(property.getId());
-        
+        result.addObject("canaudit",canAudit((Auditor) actorService.findActorByPrincipal(),property));
         result.addObject("form",form);
+        result.addObject("uri","property/"+property.getId()+"/audit/");
 
         return result;
     }
-    
+
+    private Boolean canAudit(Auditor actorByPrincipal, Property property) {
+        Boolean result = true;
+        for(Audit a:actorByPrincipal.getAudits()){
+            if (a.getProperty().getId()==property.getId() && a.getFinal()){
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/{property}/audit",method = RequestMethod.POST)
-    public ModelAndView createPost(@ModelAttribute("form") EditAuditForm form,
+    public ModelAndView createPost(@PathVariable Property property, @ModelAttribute("form") EditAuditForm form,
                                  BindingResult bindingResult){
     	Integer id=form.getPropertyId();
         Audit audit = auditService.reconstruct(form.getAudit(),bindingResult);
         ModelAndView result;
+        if (!canAudit((Auditor) actorService.findActorByPrincipal(),property)) {
+            return new ModelAndView("redirect:../../" + property.getId() + ".do");
+        }
         if (bindingResult.hasErrors()){
             result= new ModelAndView("property/audit");
             result.addObject("form",form);
             return result;
         }else{
             try{
-                Property p=propertyService.findOne(id);
-                Audit a=auditService.save(audit);
-                p.getAudits().add(a);
-                Property p2=propertyService.save(p);
-                a.setProperty(p2);
-                auditService.save(a);
+                audit.setProperty(propertyService.findOne(id));
+                audit.setAuditor((Auditor) actorService.findActorByPrincipal());
+                audit.setMoment(new Date());
+                auditService.save(audit);
                 return new ModelAndView("redirect:/property/audits/"+id+".do");
             }catch (Throwable oops){
             	 result= new ModelAndView("property/audit");
+            	 System.out.print(oops.getMessage());
                  result.addObject("form",form);
                  return result;
             }
@@ -107,7 +139,7 @@ public class PropertyController extends AbstractController {
     public ModelAndView audits(@PathVariable Property property) {
         ModelAndView result = new ModelAndView("property/audits");
         
-        result.addObject("audits",property.getAudits());
+        result.addObject("audits",auditService.findAllFinal(property));
         result.addObject("requestURI","property/audits/"+property.getId()+".do");
 
         return result;

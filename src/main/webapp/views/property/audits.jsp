@@ -22,6 +22,7 @@
 	<spring:message code="audits" />
 </h1>
 
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="audits" requestURI="${requestURI}" id="row">
 

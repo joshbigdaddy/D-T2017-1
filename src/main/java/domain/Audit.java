@@ -2,10 +2,7 @@ package domain;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -17,11 +14,13 @@ public class Audit extends DomainEntity{
 
 	public Audit() {
 		super();
+
 	}
 	
 	private String text;
 	private Date moment;
 	private String attachment;
+	private Boolean isFinal;
 	
 	@NotBlank
 	public String getText() {
@@ -31,7 +30,6 @@ public class Audit extends DomainEntity{
 		this.text = text;
 	}
 	@NotNull
-	@Past
 	public Date getMoment() {
 		return moment;
 	}
@@ -48,15 +46,31 @@ public class Audit extends DomainEntity{
 	
 	private Property property;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Property getProperty() {
 		return property;
 	}
 	public void setProperty(Property property) {
 		this.property = property;
 	}
-	
-	
-	
+
+	private Auditor auditor;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	public Auditor getAuditor() {
+		return auditor;
+	}
+
+	public void setAuditor(Auditor auditor) {
+		this.auditor = auditor;
+	}
+
+    public Boolean getFinal() {
+        return isFinal;
+    }
+
+    public void setFinal(Boolean aFinal) {
+        isFinal = aFinal;
+    }
 }
 

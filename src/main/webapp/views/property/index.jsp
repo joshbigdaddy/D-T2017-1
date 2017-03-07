@@ -42,8 +42,8 @@
 	<security:authorize access="isAuthenticated()">
 		<jstl:if test="${property.audits.size()!=0}">
 			<div>
-				<a href="property/audits/${property.id}.do"><spring:message
-						code="audits" /></a>
+				<h1><a href="property/audits/${property.id}.do"><spring:message
+						code="audits" /></a></h1>
 			</div>
 		</jstl:if>
 	</security:authorize>
@@ -71,7 +71,7 @@
 	<jstl:if test="${empty user.creditCard}">
 		<p>
 			<spring:message code="registercreditmakerequests" />
-			<br> <a href="http://localhost:8080/actor/creditcard/edit.do">http://localhost:8080/actor/creditcard/edit.do</a>
+			<br> <a href="http://localhost:8080/actor/creditcard/edit.do"><spring:message code="go" /> </a>
 		</p>
 	</jstl:if>
 </security:authorize>

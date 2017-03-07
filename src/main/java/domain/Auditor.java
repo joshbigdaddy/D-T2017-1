@@ -2,10 +2,7 @@ package domain;
 
 import java.util.Collection;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -32,7 +29,7 @@ public class Auditor extends Actor {
 	// RELATIONSHIPS
 	private Collection<Audit> audits;
 
-	@OneToMany()
+	@OneToMany(mappedBy = "auditor",cascade = CascadeType.ALL)
 	public Collection<Audit> getAudits() {
 		return audits;
 	}
