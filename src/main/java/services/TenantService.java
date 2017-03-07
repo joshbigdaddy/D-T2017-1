@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -95,4 +96,25 @@ public class TenantService {
 
 		return result;
 		}
+    
+	public Collection<Tenant> maxRequestsApprovedTenant(){
+		return tenantRepository.maxRequestsApprovedTenant();
+	}
+	public Collection<Tenant> maxRequestsDeniedTenant(){
+		return tenantRepository.maxRequestsDeniedTenant();
+	}
+	public Collection<Tenant> maxRequestsPendingTenant(){
+		return tenantRepository.maxRequestsPendingTenant();
+	}
+
+	public Integer minInvoicesPerTenant(){
+		return tenantRepository.minInvoicesPerTenant();
+	}
+	public Integer maxInvoicesPerTenant(){
+		return tenantRepository.maxInvoicesPerTenant();
+	}
+	public Double avgInvoicesPerTenant(){
+		return tenantRepository.avgInvoicesPerTenant();
+	}
+	
 }

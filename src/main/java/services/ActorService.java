@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -82,4 +83,25 @@ public class ActorService {
 		UserAccount userAccount = LoginService.getPrincipal();
 		return actorRepository.findByUserAccountId(userAccount.getId());
 	}
+	
+	
+	
+	
+	
+	
+	//Query Methods for Dashboard
+	public Integer minSocialIdentitiesPerActor(){
+		return actorRepository.minSocialIdentitiesPerActor();
+	}
+	
+	public Integer maxSocialIdentitiesPerActor(){
+		return actorRepository.maxSocialIdentitiesPerActor();
+	}
+	
+	
+	public Double avgSocialIdentitiesPerActor(){
+		return actorRepository.avgSocialIdentitiesPerActor();
+	}
+	
+	
 }

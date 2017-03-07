@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -110,4 +111,16 @@ public class LessorService {
 
 		return result;
 		}
+	
+	public Collection<Lessor> maxRequestsApprovedLessor(){
+		return lessorRepository.maxRequestsApprovedLessor();
+	}
+
+	public Collection<Lessor> maxRequestsDeniedLessor(){
+		return lessorRepository.maxRequestsDeniedLessor();
+	}
+
+	public Collection<Lessor> maxRequestsPendingLessor(){
+		return lessorRepository.maxRequestsPendingLessor();
+	}
 }

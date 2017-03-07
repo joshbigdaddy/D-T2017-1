@@ -51,4 +51,8 @@ public class AttributeService {
 		Assert.isTrue(attributeRepository.exists(attribute.getId()));
 		attributeRepository.delete(attribute);
 	}
+	
+	public Collection<Attribute> getAllAttributesByNumberOfTimesInProperty(){
+		return attributeRepository.getAllAttributesByNumberOfTimesInProperty();
+	}
 }

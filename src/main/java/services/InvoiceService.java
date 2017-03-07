@@ -53,4 +53,7 @@ public class InvoiceService {
 		invoiceRepository.delete(invoice);
 	}
 
+	public Double totalSumOfMoney(){
+		return invoiceRepository.totalSumOfMoney();
+	}
 }
