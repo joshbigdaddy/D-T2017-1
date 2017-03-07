@@ -21,7 +21,7 @@ public class Audit extends DomainEntity{
 	
 	private String text;
 	private Date moment;
-	private Integer attachment;
+	private String attachment;
 	
 	@NotBlank
 	public String getText() {
@@ -38,11 +38,11 @@ public class Audit extends DomainEntity{
 	public void setMoment(Date moment) {
 		this.moment = moment;
 	}
-	@NotNull
-	public Integer getAttachment() {
+	@NotBlank
+	public String getAttachment() {
 		return attachment;
 	}
-	public void setAttachment(Integer attachment) {
+	public void setAttachment(String attachment) {
 		this.attachment = attachment;
 	}
 	

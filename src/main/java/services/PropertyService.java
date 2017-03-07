@@ -59,7 +59,7 @@ public class PropertyService {
 		return result;
 	}
 
-	public void save(Property property) {
+	public Property save(Property property) {
 		Assert.notNull(property);
 		List<AttributeValue> attributeValues = new ArrayList<>();
         for(AttributeValue e: property.getAttributeValues()) {
@@ -68,6 +68,7 @@ public class PropertyService {
         }
         property.setAttributeValues(attributeValues);
         property = propertyRepository.save(property);
+        return property;
 
 	}
 

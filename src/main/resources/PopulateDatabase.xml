@@ -511,21 +511,21 @@
 	<bean id="audit1" class="domain.Audit">
 		<property name="moment" value="5/1/2015" />
 		<property name="text" value="text1" />
-		<property name="attachment" value="111" />
+		<property name="attachment" value="https://www.dropbox.com/" />
 		<property name="property" ref="property2" />
 	</bean>
 	
 	<bean id="audit2" class="domain.Audit">
 		<property name="moment" value="5/1/2015" />
 		<property name="text" value="text2" />
-		<property name="attachment" value="111" />
+		<property name="attachment" value="https://www.dropbox.com/" />
 		<property name="property" ref="property2" />
 	</bean>
 	
 	<bean id="audit3" class="domain.Audit">
 		<property name="moment" value="5/1/2015" />
 		<property name="text" value="text3" />
-		<property name="attachment" value="111" />
+		<property name="attachment" value="https://www.dropbox.com/" />
 		<property name="property" ref="property3" />
 	</bean>
 

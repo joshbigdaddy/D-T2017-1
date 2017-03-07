@@ -36,6 +36,7 @@
 		<security:intercept-url pattern="/styles/**" access="permitAll" />
 		<security:intercept-url pattern="/property/list.do" access="permitAll" />
         <security:intercept-url pattern="/property/*.do" access="permitAll" />
+        <security:intercept-url pattern="/property/*/audit.do" access="hasAnyRole('AUDITOR')" />
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
