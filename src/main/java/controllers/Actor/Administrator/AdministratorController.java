@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import services.ActorService;
 import services.AdministratorService;
 import services.AttributeService;
 import services.AuditorService;
@@ -44,6 +45,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
     private AuditorService auditorService;
+
+	@Autowired
+    private ActorService actorService;
 		
 	// Action-1 ---------------------------------------------------------------		
 
@@ -141,11 +145,13 @@ public class AdministratorController extends AbstractController {
                 auditor.getUserAccount().setPassword(md5PasswordEncoder
                         .encodePassword(auditor.getUserAccount().getPassword(), null));
                 auditor.setAudits(null);
-                auditorService.save(auditor);
-                result = new ModelAndView("redirect:../../");
+                actorService.register(auditor,"AUDITOR");
+                result = new ModelAndView("redirect:../../../");
                 return result;
             } catch (Throwable oops) {
                 System.out.println(oops.getMessage());
+                System.out.println(oops.getLocalizedMessage());
+                System.out.print(oops.toString());
                 result = new ModelAndView("actor/administrator/registerAuditor");
                 result.addObject("actor", auditor);
 

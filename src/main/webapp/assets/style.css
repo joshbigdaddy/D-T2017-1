@@ -2862,7 +2862,7 @@ header {
     header .search-section input {
       display: inline-table; }
   header .user-section {
-    width: 29%;
+    width: 50%;
     font-size: 1.2em; }
     header .user-section ul li {
       display: inline-table;

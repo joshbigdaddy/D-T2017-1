@@ -102,4 +102,16 @@ public class Actor extends DomainEntity {
 		this.userAccount = userAccount;
 	}
 
+	@Override
+	public String toString() {
+		return "Actor{" +
+				"name='" + name + '\'' +
+				", surname='" + surname + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", picture='" + picture + '\'' +
+				", socialIdentities=" + socialIdentities +
+				", userAccount=" + userAccount +
+				'}';
+	}
 }

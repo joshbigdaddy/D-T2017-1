@@ -29,7 +29,7 @@ public class Auditor extends Actor {
 	// RELATIONSHIPS
 	private Collection<Audit> audits;
 
-	@OneToMany(mappedBy = "auditor",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "auditor")
 	public Collection<Audit> getAudits() {
 		return audits;
 	}
@@ -38,4 +38,11 @@ public class Auditor extends Actor {
 		this.audits = audits;
 	}
 
+    @Override
+    public String toString() {
+        return super.toString()+"Auditor{" +
+                "company='" + company + '\'' +
+                ", audits=" + audits +
+                '}';
+    }
 }
