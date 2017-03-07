@@ -75,6 +75,22 @@ public class LessorService {
 		}
 		return (double) (denied / total);
 	}
+	
+	public Double avgAcceptedRequestsPerLessor() {
+		List<Lessor> lessors = lessorRepository.findAll();
+		int denied = 0;
+		int total = 0;
+		for (Lessor l : lessors) {
+			for (Property p : l.getProperties()) {
+				for (Request r : p.getRequests()) {
+					if (r.getState() == RequestType.ACCEPTED)
+						denied++;
+					total++;
+				}
+			}
+		}
+		return (double) (denied / total);
+	}
 
 	public Collection<Request> getAllRequestsByLessor(int id){
 		List<Request> result = new ArrayList<>();
@@ -122,5 +138,32 @@ public class LessorService {
 
 	public Collection<Lessor> maxRequestsPendingLessor(){
 		return lessorRepository.maxRequestsPendingLessor();
+	}
+
+	public Collection<Lessor> leesorRatioMaxVsMin() {
+		// TODO Auto-generated method stub
+		Collection<Request> denied=new ArrayList<Request>();
+		Collection<Request> accepted=new ArrayList<Request>();
+		for(Lessor l:findAll()){
+			
+			for(Property p: l.getProperties()){
+				denied.addAll(p.getRequests());
+				accepted.addAll(p.getRequests());
+				for(Request rq:denied){
+					if(rq.getState()!=RequestType.DENIED){
+						denied.remove(rq);
+					}
+				}
+				for(Request rq:accepted){
+					if(rq.getState()!=RequestType.ACCEPTED){
+						accepted.remove(rq);
+					}
+				}
+				
+				
+			}
+			
+		}
+		return findAll();
 	}
 }

@@ -83,4 +83,49 @@ public class FinderService {
 
         return result;
     }
+    
+
+	public Integer minResultsPerFinder() {
+		// TODO Auto-generated method stub
+		Integer min=0;
+		Integer counter=1;
+		for(Finder f:findAll()){
+			Integer size=executeFinder(f).size();
+			if(counter==1){
+				min=size;
+				counter++;
+			}else if(min>executeFinder(f).size()){
+				min=size;
+			}
+		}
+		return min;
+	}
+	
+	public Integer maxResultsPerFinder() {
+		// TODO Auto-generated method stub
+		Integer max=0;
+		Integer counter=1;
+		for(Finder f:findAll()){
+			Integer size=executeFinder(f).size();
+			if(counter==1){
+				max=size;
+				counter++;
+			}else if(max<executeFinder(f).size()){
+				max=size;
+			}
+		}
+		return max;
+	}
+	public Double avgResultsPerFinder(){
+		Integer memory=0;
+		Integer total=findAll().size();
+		for(Finder f:findAll()){
+			memory+=executeFinder(f).size();
+		}
+		if(total==0){
+			return 0.;
+		}else{
+		return (double) (memory/total);
+		}
+	}
 }

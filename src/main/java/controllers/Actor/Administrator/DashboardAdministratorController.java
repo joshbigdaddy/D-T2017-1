@@ -23,7 +23,7 @@ import domain.Lessor;
 import domain.Tenant;
 
 @Controller
-@RequestMapping("/administrator/dashboard")
+@RequestMapping("/actor/administrator/dashboard")
 public class DashboardAdministratorController extends AbstractController{
 	
 	//SERVICES ------------------------------------------
@@ -53,62 +53,100 @@ public class DashboardAdministratorController extends AbstractController{
 	
 	//Methods
 	
-//	@RequestMapping(method = RequestMethod.GET)
-//	public ModelAndView displayDashboard(){
-//		ModelAndView result;
-//
-//				Double	avgAcceptedRequestLessor= ;
-//				Double avgDeniedRequestLessor= ;
-//				Double avgDeniedRequestTenant= ;
-//				Double avgAcceptedRequestTenant= ;
-//				Collection<Lessor> lessorApprovedMoreRequest=lessorService.maxRequestsApprovedLessor();
-//				Collection<Lessor> lessorDeniedMoreRequest=lessorService.maxRequestsDeniedLessor();
-//				Collection<Lessor> lessorPendingMoreRequest= lessorService.maxRequestsPendingLessor();
-//				Collection<Tenant> tenantPendingMoreRequest=tenantService.maxRequestsPendingTenant();
-//				Collection<Tenant> tenantApprovedMoreRequest= tenantService.maxRequestsApprovedTenant();
-//				Collection<Tenant> tenantDeniedMoreRequest=tenantService.maxRequestsDeniedTenant();
-//				lessorRatioMaxVsMin=;
-//				tenantRatioMaxVsMin=;
-//				minResultsPerFinder= ;
-//				maxResultsPerFinder= ;
-//				avgResultsPerFinder=;
-//				Double minAuditPerProperty=propertyService.minAuditsPerProperty();
-//				Double maxAuditPerProperty= propertyService.maxAuditsPerProperty();
-//				Double avgAuditPerProperty= propertyService.avgAuditsPerProperty();;
-//				Collection<Attribute> attributeDescribePropertyDesc= attributeService.getAllAttributesByNumberOfTimesInProperty();
-//				Integer minSocialIdentityPerActor=actorService.minSocialIdentitiesPerActor();
-//				Integer maxSocialIdentityPerActor=actorService.maxSocialIdentitiesPerActor();
-//				Double avgSocialIdentityPerActor=actorService.avgSocialIdentitiesPerActor();
-//				Integer maxInvoicePerTenant= tenantService.maxInvoicesPerTenant();
-//				Integer minInvoicePerTenant= tenantService.minInvoicesPerTenant();
-//				Double avgInvoicePerTenant= tenantService.avgInvoicesPerTenant();
-//				Double invoicesAmount= invoiceService.totalSumOfMoney();
-//				Double avgRequestPerPropertyWithAudits=propertyService.avgRequestsPerPropertyWithAudits();
-//				Double avgRequestPerPropertyWithoutAudits=propertyService.avgRequestsPerPropertyWithoutAudits();
-//
-//
-//
-//
-//
-//		result= createDashboardModelAndView(avgAcceptedRequestLessor,avgDeniedRequestLessor,avgDeniedRequestTenant
-//				,avgAcceptedRequestTenant,lessorApprovedMoreRequest,lessorDeniedMoreRequest,lessorPendingMoreRequest
-//				,tenantPendingMoreRequest,tenantApprovedMoreRequest,tenantDeniedMoreRequest,lessorRatioMaxVsMin
-//				,tenantRatioMaxVsMin,minResultsPerFinder,maxResultsPerFinder,avgResultsPerFinder,minAuditPerProperty
-//				,maxAuditPerProperty,avgAuditPerProperty,attributeDescribePropertyDesc,minSocialIdentityPerActor
-//				,maxSocialIdentityPerActor,avgSocialIdentityPerActor,maxInvoicePerTenant,minInvoicePerTenant
-//				,avgInvoicePerTenant,invoicesAmount,avgRequestPerPropertyWithAudits,avgRequestPerPropertyWithoutAudits);
-//		return result;
-//	}
-//
-//	protected ModelAndView createDashboardModelAndView(){
-//		ModelAndView result;
-//
-//		result = new ModelAndView("administrator/dashboard");
-//
-//
-//		result.addObject("usersAvgLikes",usersAvgLikes);
-//		result.addObject("usersAvgDislikes",usersAvgDislikes);
-//
-//		return result;
-//	}
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView displayDashboard(){
+		ModelAndView result;
+		
+				Double	avgAcceptedRequestLessor= lessorService.avgAcceptedRequestsPerLessor();
+				Double avgDeniedRequestLessor= lessorService.avgDeniedRequestsPerLessor();
+				Double avgDeniedRequestTenant=tenantService.avgDeniedRequestsPerTenant();
+				Double avgAcceptedRequestTenant=tenantService.avgDeniedRequestsPerTenant();
+				Collection<Lessor> lessorApprovedMoreRequest=lessorService.maxRequestsApprovedLessor();
+				Collection<Lessor> lessorDeniedMoreRequest=lessorService.maxRequestsDeniedLessor();
+				Collection<Lessor> lessorPendingMoreRequest= lessorService.maxRequestsPendingLessor();
+				Collection<Tenant> tenantPendingMoreRequest=tenantService.maxRequestsPendingTenant();
+				Collection<Tenant> tenantApprovedMoreRequest= tenantService.maxRequestsApprovedTenant();
+				Collection<Tenant> tenantDeniedMoreRequest=tenantService.maxRequestsDeniedTenant();
+				Collection<Lessor> lessorRatioMaxVsMin=lessorService.leesorRatioMaxVsMin(); 
+				Collection<Tenant> tenantRatioMaxVsMin=tenantService.tenantRatioMaxVsMin();
+				Integer minResultsPerFinder=finderService.minResultsPerFinder();
+				Integer maxResultsPerFinder=finderService.maxResultsPerFinder();
+				Double avgResultsPerFinder=finderService.avgResultsPerFinder();
+				Double minAuditPerProperty=propertyService.minAuditsPerProperty();
+				Double maxAuditPerProperty= propertyService.maxAuditsPerProperty();
+				Double avgAuditPerProperty= propertyService.avgAuditsPerProperty();;
+				Collection<Attribute> attributeDescribePropertyDesc= attributeService.getAllAttributesByNumberOfTimesInProperty();
+				Integer minSocialIdentityPerActor=actorService.minSocialIdentitiesPerActor();
+				Integer maxSocialIdentityPerActor=actorService.maxSocialIdentitiesPerActor();
+				Double avgSocialIdentityPerActor=actorService.avgSocialIdentitiesPerActor();
+				Integer maxInvoicePerTenant= tenantService.maxInvoicesPerTenant();
+				Integer minInvoicePerTenant= tenantService.minInvoicesPerTenant();
+				Double avgInvoicePerTenant= tenantService.avgInvoicesPerTenant();
+				Double invoicesAmount= invoiceService.totalSumOfMoney();
+				Double avgRequestPerPropertyWithAudits=propertyService.avgRequestsPerPropertyWithAudits();
+				Double avgRequestPerPropertyWithoutAudits=propertyService.avgRequestsPerPropertyWithoutAudits();
+
+				
+				
+				
+		
+		result= createDashboardModelAndView(avgAcceptedRequestLessor,avgDeniedRequestLessor,avgDeniedRequestTenant
+				,avgAcceptedRequestTenant,lessorApprovedMoreRequest,lessorDeniedMoreRequest,lessorPendingMoreRequest
+				,tenantPendingMoreRequest,tenantApprovedMoreRequest,tenantDeniedMoreRequest,lessorRatioMaxVsMin
+				,tenantRatioMaxVsMin,minResultsPerFinder,maxResultsPerFinder,avgResultsPerFinder,minAuditPerProperty
+				,maxAuditPerProperty,avgAuditPerProperty,attributeDescribePropertyDesc,minSocialIdentityPerActor
+				,maxSocialIdentityPerActor,avgSocialIdentityPerActor,maxInvoicePerTenant,minInvoicePerTenant
+				,avgInvoicePerTenant,invoicesAmount,avgRequestPerPropertyWithAudits,avgRequestPerPropertyWithoutAudits);
+		return result;
+	}
+
+	protected ModelAndView createDashboardModelAndView(Double avgAcceptedRequestLessor,Double avgDeniedRequestLessor,
+			Double avgDeniedRequestTenant,Double avgAcceptedRequestTenant,Collection<Lessor> lessorApprovedMoreRequest,
+			Collection<Lessor> lessorDeniedMoreRequest,Collection<Lessor> lessorPendingMoreRequest
+			,Collection<Tenant> tenantPendingMoreRequest,Collection<Tenant> tenantApprovedMoreRequest,
+			Collection<Tenant> tenantDeniedMoreRequest,Collection<Lessor> lessorRatioMaxVsMin
+			,Collection<Tenant> tenantRatioMaxVsMin,Integer minResultsPerFinder,Integer maxResultsPerFinder,Double avgResultsPerFinder,
+			Double minAuditPerProperty,Double maxAuditPerProperty,Double avgAuditPerProperty,
+			Collection<Attribute> attributeDescribePropertyDesc,Integer minSocialIdentityPerActor
+			,Integer maxSocialIdentityPerActor,Double avgSocialIdentityPerActor,Integer maxInvoicePerTenant,
+			Integer minInvoicePerTenant,Double avgInvoicePerTenant,Double invoicesAmount,
+			Double avgRequestPerPropertyWithAudits,Double avgRequestPerPropertyWithoutAudits){
+		ModelAndView result;
+		
+		result = new ModelAndView("administrator/dashboard");
+		
+		
+		result.addObject("avgAcceptedRequestLessor",avgAcceptedRequestLessor);
+		result.addObject("avgDeniedRequestLessor",avgDeniedRequestLessor);
+		result.addObject("avgDeniedRequestTenant",avgDeniedRequestTenant);
+		result.addObject("avgAcceptedRequestTenant",avgAcceptedRequestTenant);
+		result.addObject("lessorApprovedMoreRequest",lessorApprovedMoreRequest);
+		result.addObject("lessorDeniedMoreRequest",lessorDeniedMoreRequest);
+		result.addObject("lessorPendingMoreRequest",lessorPendingMoreRequest);
+		result.addObject("tenantPendingMoreRequest",tenantPendingMoreRequest);
+		result.addObject("tenantApprovedMoreRequest",tenantApprovedMoreRequest);
+		result.addObject("tenantDeniedMoreRequest",tenantDeniedMoreRequest);
+		result.addObject("lessorRatioMaxVsMin",lessorRatioMaxVsMin);
+		result.addObject("tenantRatioMaxVsMin",tenantRatioMaxVsMin);
+		result.addObject("minResultsPerFinder",minResultsPerFinder);
+		result.addObject("maxResultsPerFinder",maxResultsPerFinder);
+		result.addObject("avgResultsPerFinder",avgResultsPerFinder);
+		result.addObject("minAuditPerProperty",minAuditPerProperty);
+		result.addObject("maxAuditPerProperty",maxAuditPerProperty);
+		result.addObject("avgAuditPerProperty",avgAuditPerProperty);
+		result.addObject("attributeDescribePropertyDesc",attributeDescribePropertyDesc);
+		result.addObject("minSocialIdentityPerActor",minSocialIdentityPerActor);
+		result.addObject("maxSocialIdentityPerActor",maxSocialIdentityPerActor);
+		result.addObject("avgSocialIdentityPerActor",avgSocialIdentityPerActor);
+		result.addObject("maxInvoicePerTenant",maxInvoicePerTenant);
+		result.addObject("minInvoicePerTenant",minInvoicePerTenant);
+		result.addObject("avgInvoicePerTenant",avgInvoicePerTenant);
+		result.addObject("invoicesAmount",invoicesAmount);
+		result.addObject("avgRequestPerPropertyWithAudits",avgRequestPerPropertyWithAudits);
+		result.addObject("avgRequestPerPropertyWithoutAudits",avgRequestPerPropertyWithAudits);
+
+		
+		return result;
+	}
+
 }

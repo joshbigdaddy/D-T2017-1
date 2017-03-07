@@ -114,4 +114,10 @@ public class TenantService {
 		return tenantRepository.avgInvoicesPerTenant();
 	}
 	
+
+	public Collection<Tenant> tenantRatioMaxVsMin() {
+		// TODO Auto-generated method stub
+		return findAll();
+	}
+	
 }
