@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -96,8 +97,8 @@ public class SocialIdentitiesController {
 		SocialIdentity socialIdentity = id;
 		try {
 
-			SocialUser user;
-			user = (SocialUser) actorService.findActorByPrincipal();
+			Actor user;
+			user =  actorService.findActorByPrincipal();
 			Collection<SocialIdentity> redes = new ArrayList<>(
 					user.getSocialIdentities());
 			redes.remove(id);
