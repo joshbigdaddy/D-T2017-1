@@ -69,19 +69,19 @@ public class LessorService {
 			for (Property p : l.getProperties()) {
 				for (Request r : p.getRequests()) {
 					if (r.getState() == RequestType.DENIED)
-						denied+=1.;
-					total+=1.;
+						denied += 1.;
+					total += 1.;
 				}
 			}
 		}
-		if(total==0){
+		if (total == 0) {
 			return 0.;
-		}else{
-		return  (denied / total);
+		} else {
+			return (denied / total);
 		}
 
-		}
-	
+	}
+
 	public Double avgAcceptedRequestsPerLessor() {
 		Collection<Lessor> lessors = findAll();
 		double denied = 0;
@@ -90,23 +90,23 @@ public class LessorService {
 			for (Property p : l.getProperties()) {
 				for (Request r : p.getRequests()) {
 					if (r.getState() == RequestType.ACCEPTED)
-						denied+=1.;
-					total+=1.;
+						denied += 1.;
+					total += 1.;
 				}
 			}
 		}
-		if(total==0){
+		if (total == 0) {
 			return 0.;
-		}else{
-		return  (denied / total);
+		} else {
+			return (denied / total);
 		}
 	}
 
-	public Collection<Request> getAllRequestsByLessor(int id){
+	public Collection<Request> getAllRequestsByLessor(int id) {
 		List<Request> result = new ArrayList<>();
 		Lessor lessor = lessorRepository.findOne(id);
 		Assert.notNull(lessor);
-		for(Property p:lessor.getProperties()){
+		for (Property p : lessor.getProperties()) {
 			result.addAll(p.getRequests());
 		}
 		Assert.notNull(result);
@@ -114,34 +114,36 @@ public class LessorService {
 		return result;
 	}
 
-    public Collection<Request> getAllRequestsPendingByLessor(int id){
-        List<Request> result = new ArrayList<>();
-        Lessor lessor = lessorRepository.findOne(id);
-        Assert.notNull(lessor);
-        for(Property p:lessor.getProperties()) {
-            for (Request r : p.getRequests()) {
-                if (r.getState() == RequestType.PENDING) {
-                    result.add(r);
-                }
-            }
-        }
-        Assert.notNull(result);
-        return result;
-    }
-    public Collection<Request> getAllRequestsAcceptedByLessor(int id){
-        List<Request> result = new ArrayList<>();
-        Lessor lessor = lessorRepository.findOne(id);
-        Assert.notNull(lessor);
-        for(Property p:lessor.getProperties()) {
-            for (Request r : p.getRequests()) {
-                if (r.getState() == RequestType.ACCEPTED) {
-                    result.add(r);
-                }
-            }
-        }
-        Assert.notNull(result);
-        return result;
-    }
+	public Collection<Request> getAllRequestsPendingByLessor(int id) {
+		List<Request> result = new ArrayList<>();
+		Lessor lessor = lessorRepository.findOne(id);
+		Assert.notNull(lessor);
+		for (Property p : lessor.getProperties()) {
+			for (Request r : p.getRequests()) {
+				if (r.getState() == RequestType.PENDING) {
+					result.add(r);
+				}
+			}
+		}
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Collection<Request> getAllRequestsAcceptedByLessor(int id) {
+		List<Request> result = new ArrayList<>();
+		Lessor lessor = lessorRepository.findOne(id);
+		Assert.notNull(lessor);
+		for (Property p : lessor.getProperties()) {
+			for (Request r : p.getRequests()) {
+				if (r.getState() == RequestType.ACCEPTED) {
+					result.add(r);
+				}
+			}
+		}
+		Assert.notNull(result);
+		return result;
+	}
+
 	public Lessor findLessorByPrincipal() {
 		Lessor result;
 		UserAccount userAccount;
@@ -150,75 +152,82 @@ public class LessorService {
 		result = lessorRepository.findByUserAccountId(userAccount.getId());
 
 		return result;
-		}
-	
-	public Collection<Object[]> maxRequestsApprovedLessor(){
+	}
+
+	public Collection<Object[]> maxRequestsApprovedLessor() {
 		return lessorRepository.maxRequestsApprovedLessor();
 	}
 
-	public Collection<Object[]> maxRequestsDeniedLessor(){
+	public Collection<Object[]> maxRequestsDeniedLessor() {
 		return lessorRepository.maxRequestsDeniedLessor();
 	}
 
-	public Collection<Object[]> maxRequestsPendingLessor(){
+	public Collection<Object[]> maxRequestsPendingLessor() {
 		return lessorRepository.maxRequestsPendingLessor();
 	}
 
 	public Map<Lessor, Double> lessorRatioMaxVsMin() {
-		
-		Collection<Lessor> lessors=findAll();
-		Map<Lessor, Double> map=new HashMap<Lessor,Double>();
-		for(Lessor l:lessors){
-			double resultado=0.;
+
+		Collection<Lessor> lessors = findAll();
+		Map<Lessor, Double> map = new HashMap<Lessor, Double>();
+		for (Lessor l : lessors) {
+			double resultado = -1.;
 			if (getAllRequestsAcceptedByLessor(l.getId()).size() != 0) {
-				resultado=getAllRequestsAcceptedByLessor(l.getId()).size()/getAllRequestsAcceptedByLessor(l.getId()).size();
+				resultado = getAllRequestsAcceptedByLessor(l.getId()).size()
+						/ getAllRequestsAcceptedByLessor(l.getId()).size();
 
 			}
 			map.put(l, resultado);
 		}
 		return map;
 	}
-	public Collection<Lessor> minRatio(){
-		Map<Lessor, Double> map=lessorRatioMaxVsMin();
-		Collection<Lessor> lessors=map.keySet();
 
-		Collection<Lessor> lessorsRes=new ArrayList<Lessor>();
-		double i=123456.;
-		for(Lessor l:lessors){
-			if(i==123456.){
-				i= map.get(l);
+	public Collection<Lessor> minRatio() {
+		Map<Lessor, Double> map = lessorRatioMaxVsMin();
+		Collection<Lessor> lessors = map.keySet();
+
+		Collection<Lessor> lessorsRes = new ArrayList<Lessor>();
+		double i = 123456.;
+		for (Lessor l : lessors) {
+			if (i == 123456.) {
+				i = map.get(l);
 				lessorsRes.add(l);
-			}else{
-				double e=map.get(l);
-				if(e<i){
-					lessorsRes.clear();
-					lessorsRes.add(l);
-					i=e;
-				}else if(e==i){
-					lessorsRes.add(l);
+			} else {
+				double e = map.get(l);
+				if (e >= 0.) {
+					if (e < i) {
+						lessorsRes.clear();
+						lessorsRes.add(l);
+						i = e;
+					} else if (e == i) {
+						lessorsRes.add(l);
+					}
 				}
 			}
 		}
 		return lessorsRes;
 	}
-	public Collection<Lessor> maxRatio(){
-		Map<Lessor, Double> map=lessorRatioMaxVsMin();
-		Collection<Lessor> lessors=map.keySet();
 
-		Collection<Lessor> lessorsRes=new ArrayList<Lessor>();
-		double i=123456.;
-		for(Lessor l:lessors){
-			if(i==123456.){
-				i= map.get(l);
+	public Collection<Lessor> maxRatio() {
+		Map<Lessor, Double> map = lessorRatioMaxVsMin();
+		Collection<Lessor> lessors = map.keySet();
+
+		Collection<Lessor> lessorsRes = new ArrayList<Lessor>();
+		double i = 123456.;
+		for (Lessor l : lessors) {
+			if (i == 123456.) {
+				i = map.get(l);
 				lessorsRes.add(l);
-			}else{
-				double e=map.get(l);
-				if(e>i){
-					lessorsRes.clear();
-					lessorsRes.add(l);
-					i=e;
-				}else if(e==i){
-					lessorsRes.add(l);
+			} else {
+				double e = map.get(l);
+				if (e >= 0.) {
+					if (e > i) {
+						lessorsRes.clear();
+						lessorsRes.add(l);
+						i = e;
+					} else if (e == i) {
+						lessorsRes.add(l);
+					}
 				}
 			}
 		}

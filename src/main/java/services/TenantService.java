@@ -146,7 +146,7 @@ public class TenantService {
 		Collection<Tenant> tenants = findAll();
 		Map<Tenant, Double> map = new HashMap<Tenant, Double>();
 		for (Tenant l : tenants) {
-			double resultado = 0.;
+			double resultado = -1.;
 			if (l.getRequests().size() != 0) {
 				resultado = getAllRequestsAcceptedByTenant(l.getId()).size()
 						/ l.getRequests().size();
@@ -168,12 +168,14 @@ public class TenantService {
 				tenantsRes.add(l);
 			} else {
 				double e = map.get(l);
-				if (e < i) {
-					tenantsRes.clear();
-					tenantsRes.add(l);
-					i = e;
-				} else if (e == i) {
-					tenantsRes.add(l);
+				if (e >= 0) {
+					if (e < i) {
+						tenantsRes.clear();
+						tenantsRes.add(l);
+						i = e;
+					} else if (e == i) {
+						tenantsRes.add(l);
+					}
 				}
 			}
 		}
@@ -192,12 +194,15 @@ public class TenantService {
 				tenantsRes.add(l);
 			} else {
 				double e = map.get(l);
-				if (e > i) {
-					tenantsRes.clear();
-					tenantsRes.add(l);
-					i = e;
-				} else if (e == i) {
-					tenantsRes.add(l);
+				if (e >= 0) {
+
+					if (e > i) {
+						tenantsRes.clear();
+						tenantsRes.add(l);
+						i = e;
+					} else if (e == i) {
+						tenantsRes.add(l);
+					}
 				}
 			}
 		}
