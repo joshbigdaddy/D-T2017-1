@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 import repositories.LessorRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Administrator;
 import domain.Lessor;
 import domain.Property;
 import domain.Request;

@@ -2,7 +2,6 @@ package services;
 
 import java.util.Collection;
 
-import domain.Configuration;
 import domain.Lessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

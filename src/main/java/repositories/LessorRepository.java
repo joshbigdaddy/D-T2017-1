@@ -2,13 +2,11 @@ package repositories;
 
 import java.util.Collection;
 
-import domain.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Actor;
-import domain.Audit;
+
 import domain.Lessor;
 
 @Repository

@@ -1,6 +1,5 @@
 package services;
 
-import domain.Attribute;
 import domain.AttributeValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;

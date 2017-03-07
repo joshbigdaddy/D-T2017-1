@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 import repositories.TenantRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Lessor;
 import domain.Request;
 import domain.Tenant;
 import domain.Request.RequestType;
@@ -25,8 +24,7 @@ public class TenantService {
 	@Autowired
 	private TenantRepository tenantRepository;
 
-	@Autowired
-    private ConfigurationService configurationService;
+
 
 	// Constructor
 	public TenantService() {

@@ -22,8 +22,7 @@ public class PropertyService {
 	@Autowired
 	private PropertyRepository propertyRepository;
 
-	@Autowired
-    private TenantService tenantService;
+
 
 	@Autowired
     private ActorService actorService;

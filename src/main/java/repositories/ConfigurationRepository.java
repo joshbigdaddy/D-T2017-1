@@ -1,7 +1,6 @@
 package repositories;
 
-import domain.AttributeValue;
-import domain.Auditor;
+
 import domain.Configuration;
 
 import org.springframework.data.jpa.repository.JpaRepository;

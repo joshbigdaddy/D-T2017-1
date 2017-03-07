@@ -4,13 +4,11 @@ import controllers.AbstractController;
 import domain.Finder;
 import domain.Property;
 import domain.Tenant;
-import forms.EditPropertyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +40,6 @@ public class TenantFinderController extends AbstractController {
     @RequestMapping(value = "/configure",method = RequestMethod.POST)
     public ModelAndView configure(@ModelAttribute("finder") Finder finder,
                                  BindingResult bindingResult){
-        ModelAndView result;
         Assert.notNull(finder);
         finder = finderService.reconstruct(finder,bindingResult);
             try{
