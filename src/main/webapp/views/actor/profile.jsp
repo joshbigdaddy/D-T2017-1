@@ -25,9 +25,11 @@
 <b><spring:message code="phone"/> </b> ${actor.phone}<br>
 
 <jstl:if test="${not empty cancomment}">
+    <h1><spring:message code="comment"/> </h1>
     <form:form modelAttribute="comment">
         <acme:textbox path="title" code="title"/>
         <acme:textarea path="text" code="text"/>
+        <br>
         <acme:submit name="submit" code="send"/>
     </form:form>
 </jstl:if>

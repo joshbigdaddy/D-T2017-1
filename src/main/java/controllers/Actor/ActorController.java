@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import security.LoginService;
 import services.ActorService;
 
 import javax.validation.Valid;
@@ -32,8 +33,18 @@ public class ActorController extends AbstractController {
 
         return result;
     }
+    @RequestMapping(value = "/profile/{actor}/comment",method = RequestMethod.POST)
+    public ModelAndView postComment(@PathVariable Actor actor,@ModelAttribute("comment") Comment comment){
+        Assert.notNull(actor);
+        ModelAndView result = new ModelAndView("actor/profile");
+        addCommentsDataSocialUser(result,actor);
+        result.addObject("actor",actor);
+
+        return result;
+    }
 
     private Boolean addCommentsDataSocialUser(ModelAndView result,Actor actor) {
+        if (!LoginService.isAuthorized()) return false;
         Actor principal = actorService.findActorByPrincipal();
         if (!(principal instanceof SocialUser)) return false;
         if (!(actor instanceof SocialUser)) return false;
@@ -60,9 +71,11 @@ public class ActorController extends AbstractController {
         Boolean result = false;
         for(Property e:lessor.getProperties()){
             for(Request r:e.getRequests()){
-                if (r.getTenant().getId() == tenant.getId()){
-                    result = true;
-                    break;
+                if (r.getTenant()!=null) {
+                    if (r.getTenant().getId() == tenant.getId()) {
+                        result = true;
+                        break;
+                    }
                 }
             }
         }
