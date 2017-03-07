@@ -21,4 +21,4 @@
 <a href="?language=es"><spring:message code="spanish"/></a>
 <a href="?language=en"><spring:message code="english"/></a>
 <br>
-<a href="/info/cookies.do">Cookies</a> | <a href="/info/legalinformation.do"><spring:message code="legalinformation"/> </a>
+<a href="info/cookies.do">Cookies</a> | <a href="info/legalinformation.do"><spring:message code="legalinformation"/> </a>

@@ -26,17 +26,17 @@
                         <li><a href="actor/creditcard/edit.do"><spring:message code="editcreditcard"/> </a> </li>
                     </security:authorize>
                     <security:authorize access="hasAnyRole('ADMIN')">
-                        <li><a href="/actor/administrator/attribute/list.do"><spring:message code="attribute"/>s </a> </li>
-                        <li><a href="/actor/administrator/dashboard.do">Dashboard </a> </li>
-                        <li><a href="/actor/administrator/auditor/new.do"><spring:message code="new"/> <spring:message code="auditor"/> </a> </li>
+                        <li><a href="actor/administrator/attribute/list.do"><spring:message code="attribute"/>s </a> </li>
+                        <li><a href="actor/administrator/dashboard.do">Dashboard </a> </li>
+                        <li><a href="actor/administrator/auditor/new.do"><spring:message code="new"/> <spring:message code="auditor"/> </a> </li>
                     </security:authorize>
                 </ul>
             <security:authorize access="isAuthenticated()">
-                <li><a href="/actor/socialidentities/list.do"><spring:message code="managesocialidentities"/> </a> </li>
+                <li><a href="actor/socialidentities/list.do"><spring:message code="managesocialidentities"/> </a> </li>
             </security:authorize>
                 </li>
                 <security:authorize access="hasAnyRole('TENANT')">
-                    <li><a href="/actor/tenant/finder/configure.do"><spring:message code="finder"/> </a>
+                    <li><a href="actor/tenant/finder/configure.do"><spring:message code="finder"/> </a>
                         <ul>
                             <li><a href="actor/tenant/finder/configure.do"><spring:message code="configurefinder"/> </a> </li>
                             <li><a href="actor/tenant/finder/search.do"><spring:message code="executefinder"/> </a> </li>
