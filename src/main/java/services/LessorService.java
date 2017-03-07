@@ -59,7 +59,7 @@ public class LessorService {
 		lessorRepository.delete(lessor);
 	}
 
-	Double avgDeniedRequestsPerLessor() {
+	public Double avgDeniedRequestsPerLessor() {
 		List<Lessor> lessors = lessorRepository.findAll();
 		int denied = 0;
 		int total = 0;

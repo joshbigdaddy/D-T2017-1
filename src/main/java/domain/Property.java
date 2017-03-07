@@ -50,7 +50,7 @@ public class Property extends DomainEntity{
 	private Collection<Audit> audits;
 	
 	
-	@OneToMany( cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy= "property", cascade = CascadeType.REMOVE)
 	public Collection<Audit> getAudits() {
 		return audits;
 	}

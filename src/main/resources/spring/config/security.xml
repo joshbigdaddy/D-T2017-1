@@ -42,6 +42,7 @@
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
+        <security:intercept-url pattern="/property/audits/*.do" access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/actor/register/*" access="isAnonymous()" />
 		<security:intercept-url pattern="/actor/profile/*" access="permitAll" />

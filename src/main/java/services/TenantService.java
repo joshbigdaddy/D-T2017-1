@@ -60,7 +60,7 @@ public class TenantService {
 		tenantRepository.delete(tenant);
 	}
 
-	Double avgDeniedRequestsPerTenant() {
+	public Double avgDeniedRequestsPerTenant() {
 		List<Tenant> tenants = tenantRepository.findAll();
 		int denied = 0;
 		int total = 0;

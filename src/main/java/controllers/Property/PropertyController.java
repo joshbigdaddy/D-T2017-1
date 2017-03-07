@@ -55,6 +55,15 @@ public class PropertyController extends AbstractController {
 
         return result;
     }
+    @RequestMapping("/audits/{property}")
+    public ModelAndView audits(@PathVariable Property property) {
+        ModelAndView result = new ModelAndView("property/audits");
+        
+        result.addObject("audits",property.getAudits());
+        result.addObject("requestURI","property/audits/"+property.getId()+".do");
+
+        return result;
+    }
 
     @RequestMapping(value = "/{property}",method = RequestMethod.POST)
     public ModelAndView index(@PathVariable Property property, @ModelAttribute("request") Request request,

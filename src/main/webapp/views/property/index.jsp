@@ -24,9 +24,15 @@
     <div><b><spring:message code="address" /> :</b> ${property.address}</div>
     <div><b><spring:message code="rate" />:</b> ${property.rate}</div>
     <div><b><spring:message code="lessor" />:</b> ${property.lessor.name}</div>
+    
     <jstl:forEach items="${property.attributeValues}" var="item">
         <div><b><spring:message code="${item.attribute.name}" />:</b> ${item.value}</div>
     </jstl:forEach>
+    <security:authorize access="isAuthenticated()">
+    <jstl:if test="${property.audits.size()!=0}">
+    <div><a href="property/audits/${property.id}.do"><spring:message code="audits" /></a></div>
+    </jstl:if>
+    </security:authorize>
 </div>
 
 <security:authorize access="hasAnyRole('TENANT')">
