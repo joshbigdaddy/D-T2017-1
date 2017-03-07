@@ -386,12 +386,6 @@
         <property name="rate" value="5" />
         <property name="description" value="Description 1" />
         <property name="address" value="C/Trebol" />
-        <property name="requests">
-            <list>
-                <ref bean="request1" />
-                <ref bean="request2" />
-            </list>
-        </property>
         <property name="lessor" ref="lessor1"/>
     </bean>
 
@@ -400,11 +394,6 @@
         <property name="rate" value="5" />
         <property name="description" value="Description 1" />
         <property name="address" value="C/Trebol" />
-        <property name="requests">
-            <list>
-                <ref bean="request3" />
-            </list>
-        </property>
         <property name="audits">
             <list>
                 <ref bean="audit1" />
@@ -419,10 +408,6 @@
         <property name="rate" value="5" />
         <property name="description" value="Description 1" />
         <property name="address" value="C/Trebol" />
-        <property name="requests">
-            <list>
-            </list>
-        </property>
         <property name="audits">
             <list>
                 <ref bean="audit3" />
@@ -431,55 +416,6 @@
         <property name="lessor" ref="lessor3"/>
     </bean>
 
-
-    <bean id="request1" class="domain.Request">
-		<property name="checkinDate" value="5/1/2017" />
-		<property name="checkoutDate" value="5/1/2017" />
-		<property name="smoker" value="true" />
-		<property name="state" value="PENDING" />
-		<property name="property" ref="property1" />
-	</bean>
-
-	<bean id="request2" class="domain.Request">
-		<property name="checkinDate" value="5/1/2017" />
-		<property name="checkoutDate" value="5/1/2017" />
-		<property name="smoker" value="true" />
-		<property name="state" value="DENIED" />
-		<property name="property" ref="property1" />
-	</bean>
-
-	<bean id="request3" class="domain.Request">
-		<property name="checkinDate" value="5/1/2017" />
-		<property name="checkoutDate" value="5/1/2017" />
-		<property name="smoker" value="true" />
-		<property name="state" value="PENDING" />
-		<property name="property" ref="property2" />
-	</bean>
-
-
-    <bean id="request4" class="domain.Request">
-        <property name="checkinDate" value="5/1/2017" />
-        <property name="checkoutDate" value="5/1/2017" />
-        <property name="smoker" value="true" />
-        <property name="state" value="PENDING" />
-        <property name="property" ref="property3" />
-    </bean>
-
-    <bean id="request5" class="domain.Request">
-        <property name="checkinDate" value="5/1/2017" />
-        <property name="checkoutDate" value="5/1/2017" />
-        <property name="smoker" value="true" />
-        <property name="state" value="PENDING" />
-        <property name="property" ref="property2" />
-    </bean>
-
-    <bean id="request6" class="domain.Request">
-        <property name="checkinDate" value="5/1/2017" />
-        <property name="checkoutDate" value="5/1/2017" />
-        <property name="smoker" value="true" />
-        <property name="state" value="PENDING" />
-        <property name="property" ref="property1" />
-    </bean>
 
 
     <bean id="attributeValue1" class="domain.AttributeValue">
@@ -549,6 +485,62 @@
         <property name="creditCard" ref="creditCard6"/>
     </bean>
 
+
+
+    <bean id="request1" class="domain.Request">
+        <property name="checkinDate" value="5/1/2017" />
+        <property name="checkoutDate" value="5/1/2017" />
+        <property name="smoker" value="true" />
+        <property name="state" value="PENDING" />
+        <property name="property" ref="property1" />
+        <property name="tenant" ref="tenant2"/>
+    </bean>
+
+    <bean id="request2" class="domain.Request">
+        <property name="checkinDate" value="5/1/2017" />
+        <property name="checkoutDate" value="5/1/2017" />
+        <property name="smoker" value="true" />
+        <property name="state" value="DENIED" />
+        <property name="property" ref="property1" />
+        <property name="tenant" ref="tenant1"/>
+    </bean>
+
+    <bean id="request3" class="domain.Request">
+        <property name="checkinDate" value="5/1/2017" />
+        <property name="checkoutDate" value="5/1/2017" />
+        <property name="smoker" value="true" />
+        <property name="state" value="PENDING" />
+        <property name="property" ref="property2" />
+        <property name="tenant" ref="tenant2"/>
+    </bean>
+
+
+    <bean id="request4" class="domain.Request">
+        <property name="checkinDate" value="5/1/2017" />
+        <property name="checkoutDate" value="5/1/2017" />
+        <property name="smoker" value="true" />
+        <property name="state" value="PENDING" />
+        <property name="property" ref="property3" />
+        <property name="tenant" ref="tenant3"/>
+    </bean>
+
+    <bean id="request5" class="domain.Request">
+        <property name="checkinDate" value="5/1/2017" />
+        <property name="checkoutDate" value="5/1/2017" />
+        <property name="smoker" value="true" />
+        <property name="state" value="PENDING" />
+        <property name="property" ref="property2" />
+        <property name="tenant" ref="tenant3"/>
+    </bean>
+
+    <bean id="request6" class="domain.Request">
+        <property name="checkinDate" value="5/1/2017" />
+        <property name="checkoutDate" value="5/1/2017" />
+        <property name="smoker" value="true" />
+        <property name="state" value="PENDING" />
+        <property name="property" ref="property1" />
+        <property name="tenant" ref="tenant2"/>
+    </bean>
 
     <bean id="invoice1" class="domain.Invoice">
 		<property name="moment" value="5/1/2015" />
