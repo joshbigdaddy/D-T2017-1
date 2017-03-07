@@ -81,7 +81,7 @@ public class Request extends DomainEntity{
 		this.tenant = tenant;
 	}
 
-	@OneToOne
+	@OneToOne(mappedBy = "request",cascade = CascadeType.ALL)
 	public Invoice getInvoice() {
 		return invoice;
 	}

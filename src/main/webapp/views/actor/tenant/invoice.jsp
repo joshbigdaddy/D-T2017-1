@@ -9,10 +9,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<p><spring:message code="invoice"/> </p>
+<h1><spring:message code="invoice"/> </h1>
 
 <div class="recipe-info">
-    <div><b><spring:message code="property"/> </b> ${invoice.request.property.name}</div>
+    <div><b><spring:message code="property"/>: </b> ${invoice.request.property.name}</div>
+    <div><b>VAT: </b> ${invoice.vat}</div>
     <div><b><spring:message code="quantity"/> </b> ${invoice.amount}</div>
     <p> <h2><spring:message code="details"/> </h2>
     <div><b><spring:message code="checkinDate" /></b>: ${invoice.request.checkinDate}</div>
