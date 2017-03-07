@@ -85,6 +85,8 @@
                                 access="hasAnyRole('ADMIN')"/>
 
 
+        <security:intercept-url pattern="/info/**"
+                                access="permitAll"/>
 
         <security:intercept-url pattern="/actor/lessor/property/edit/*"
                                 access="hasAnyRole('LESSOR')"/>

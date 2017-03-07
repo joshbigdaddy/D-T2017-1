@@ -10,15 +10,19 @@
 
 package controllers.Actor.Administrator;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import controllers.AbstractController;
 import domain.Administrator;
 import domain.Attribute;
+import domain.Auditor;
 import domain.Property;
 import forms.EditPropertyForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
 import services.AttributeService;
+import services.AuditorService;
 
 @Controller
 @RequestMapping("/actor/administrator")
@@ -36,6 +41,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
     private AdministratorService administratorService;
+
+	@Autowired
+    private AuditorService auditorService;
 		
 	// Action-1 ---------------------------------------------------------------		
 
@@ -110,6 +118,38 @@ public class AdministratorController extends AbstractController {
         }
     }
 
+    @RequestMapping("/auditor/new")
+    public ModelAndView createAuditor(){
+        ModelAndView result = new ModelAndView("actor/administrator/registerAuditor");
+        result.addObject("actor",new Auditor());
 
+        return result;
+    }
+
+
+    @RequestMapping(value = "/auditor/new",method = RequestMethod.POST)
+    public ModelAndView createAuditorPost(@ModelAttribute("actor") Auditor auditor,BindingResult binding) {
+        ModelAndView result;
+        if (binding.hasErrors()) {
+            result = new ModelAndView("actor/administrator/registerAuditor");
+            result.addObject("actor", auditor);
+
+            return result;
+        } else {
+            try {
+                Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
+                auditor.getUserAccount().setPassword(md5PasswordEncoder
+                        .encodePassword(auditor.getUserAccount().getPassword(), null));
+                auditorService.save(auditor);
+                result = new ModelAndView("redirect:../../");
+                return result;
+            } catch (Throwable oops) {
+                result = new ModelAndView("actor/administrator/registerAuditor");
+                result.addObject("actor", auditor);
+
+                return result;
+            }
+        }
+    }
 
 }

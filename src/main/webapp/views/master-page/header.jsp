@@ -19,7 +19,7 @@
 		</h1>
         <article class="user-section">
             <ul>
-                <li><a href="#">User</a>
+                <li><a href="#"><spring:message code="user"/> </a>
                 <ul>
                     <li><a href="actor/edit.do"><spring:message code="edit" /><spring:message code="profile"/> </a> </li>
                     <security:authorize access="hasAnyRole('LESSOR','TENANT')">
