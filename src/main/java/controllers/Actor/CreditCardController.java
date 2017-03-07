@@ -7,8 +7,12 @@ import java.util.GregorianCalendar;
 import domain.Actor;
 import domain.CreditCard;
 import domain.Lessor;
+import domain.Property;
 import domain.SocialUser;
 import domain.Tenant;
+import forms.EditCreditCardForm;
+import forms.EditPropertyForm;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -44,7 +48,9 @@ public class CreditCardController {
         checkIsTenantOrLessor();
         SocialUser user =(SocialUser) actorService.findActorByPrincipal();
         CreditCard creditCard = (user.getCreditCard()!=null)? user.getCreditCard() : new CreditCard();
-        result.addObject("creditcard",creditCard);
+        EditCreditCardForm editCreditCardForm = new EditCreditCardForm();
+        editCreditCardForm.setCreditCard(creditCard);
+        result.addObject("creditcard",editCreditCardForm);
 
         return result;
     }
@@ -55,13 +61,13 @@ public class CreditCardController {
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.POST, params = "save")
-    public ModelAndView editCreditCard(@ModelAttribute("creditcard") CreditCard creditCard,
+    public ModelAndView editCreditCard(@ModelAttribute("creditcard") EditCreditCardForm editCreditCardForm,
                                  BindingResult bindingResult){
         ModelAndView result;
 
         result = new ModelAndView("redirect:/actor/creditcard/edit.do");
 
-        Assert.notNull(creditCard);
+        CreditCard creditCard = creditCardService.reconstruct(editCreditCardForm.getCreditCard(),bindingResult,true);
 
        if (bindingResult.hasErrors()){
             return result;
