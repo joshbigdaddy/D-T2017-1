@@ -21,25 +21,28 @@
             <ul>
                 <li><a href="#">User</a>
                 <ul>
-                    <li><a href="/actor/edit.do"><spring:message code="edit" /><spring:message code="profile"/> </a> </li>
+                    <li><a href="actor/edit.do"><spring:message code="edit" /><spring:message code="profile"/> </a> </li>
                     <security:authorize access="hasAnyRole('LESSOR','TENANT')">
-                        <li><a href="/actor/creditcard/edit.do"><spring:message code="editcreditcard"/> </a> </li>
+                        <li><a href="actor/creditcard/edit.do"><spring:message code="editcreditcard"/> </a> </li>
+                    </security:authorize>
+                    <security:authorize access="hasAnyRole('ADMIN')">
+                        <li><a href="/actor/administrator/attribute/list.do"><spring:message code="attribute"/>s </a> </li>
                     </security:authorize>
                 </ul></li>
                 <security:authorize access="hasAnyRole('TENANT')">
                     <li><a href="/actor/tenant/finder/configure.do"><spring:message code="finder"/> </a>
                         <ul>
-                            <li><a href="/actor/tenant/finder/configure.do"><spring:message code="configurefinder"/> </a> </li>
-                            <li><a href="/actor/tenant/finder/search.do"><spring:message code="executefinder"/> </a> </li>
+                            <li><a href="actor/tenant/finder/configure.do"><spring:message code="configurefinder"/> </a> </li>
+                            <li><a href="actor/tenant/finder/search.do"><spring:message code="executefinder"/> </a> </li>
                         </ul>
                     </li>
-                    <li><a href="/actor/tenant/request/list.do"><spring:message code="yourrequests"/> </a></li>
+                    <li><a href="actor/tenant/request/list.do"><spring:message code="yourrequests"/> </a></li>
                 </security:authorize>
                 <li><a href="property/list.do"><spring:message code="properties"/> </a> </li>
                 <security:authorize access="hasAnyRole('LESSOR')">
                 <li><a href="#"><spring:message code="lessor"/></a>
                 <ul>
-                    <li><a href="/actor/lessor/property/list.do"><spring:message code="listofproperties"/> </a> </li>
+                    <li><a href="actor/lessor/property/list.do"><spring:message code="listofproperties"/> </a> </li>
                 </ul></li>
                 </security:authorize>
             </ul>

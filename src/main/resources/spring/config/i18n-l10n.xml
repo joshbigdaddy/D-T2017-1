@@ -26,6 +26,8 @@
 		<value>/views/actor/messages</value>
 		<value>/views/actor/lessor/messages</value>
 		<value>/views/actor/lessor/property/messages</value>
+		<value>/views/actor/administrator/attribute/messages</value>
+		<value>/views/actor/administrator/messages</value>
 		<value>/views/property/messages</value>
 		<value>/views/actor/tenant/messages</value>
 	</util:list>
