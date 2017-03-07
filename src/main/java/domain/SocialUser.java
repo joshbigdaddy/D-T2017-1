@@ -25,7 +25,7 @@ import javax.persistence.*;
 	}
 	@OneToOne()
 	public CreditCard getCreditCard(){
-	return creditCard;
+	return this.creditCard;
 	}
 
 	public void setCreditCard(CreditCard creditCard){

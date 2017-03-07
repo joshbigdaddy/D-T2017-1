@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class CreditCard extends DomainEntity {
 	public CreditCard() {
-
+		super();
 	}
 
 	private String brandName;
@@ -78,7 +78,7 @@ public class CreditCard extends DomainEntity {
 	public void setCvvCode(Integer cvvCode) {
 		this.cvvCode = cvvCode;
 	}
-	@NotNull
+	
 	public Double getFee() {
 		return fee;
 	}

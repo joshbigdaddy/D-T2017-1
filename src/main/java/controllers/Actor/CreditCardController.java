@@ -1,6 +1,8 @@
 package controllers.Actor;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import domain.Actor;
 import domain.CreditCard;
@@ -44,7 +46,7 @@ public class CreditCardController {
     public ModelAndView editCreditCard(){
         ModelAndView result = new ModelAndView("actor/creditcard/edit");
         checkIsTenantOrLessor();
-        SocialUser user = (SocialUser) actorService.findActorByPrincipal();
+        SocialUser user =(SocialUser) actorService.findActorByPrincipal();
         CreditCard creditCard = (user.getCreditCard()!=null)? user.getCreditCard() : new CreditCard();
         result.addObject("creditcard",creditCard);
 
@@ -56,25 +58,36 @@ public class CreditCardController {
         Assert.isTrue(actor instanceof SocialUser);
     }
 
-    @RequestMapping(value = "/edit}",method = RequestMethod.POST)
-    public ModelAndView editCreditCard(@ModelAttribute("credicard") CreditCard creditCard,
+    @RequestMapping(value = "/edit",method = RequestMethod.POST, params = "save")
+    public ModelAndView editCreditCard(@ModelAttribute("creditcard") CreditCard creditCard,
                                  BindingResult bindingResult){
         ModelAndView result;
-        result = new ModelAndView("redirect:/actor/credicard/edit.do");
+
+        result = new ModelAndView("redirect:/actor/creditcard/edit.do");
+
         Assert.notNull(creditCard);
-        if (bindingResult.hasErrors()){
+
+       if (bindingResult.hasErrors()){
             return result;
         }else{
             try{
-                Date fecha=new Date(creditCard.getExpirationYear(),creditCard.getExpirationMonth(),7);
+
                 Date ahora=new Date();
-                if(!ahora.after(fecha)){
+                Calendar fechac = new GregorianCalendar();
+                fechac.set(creditCard.getExpirationYear(),creditCard.getExpirationMonth(),7);
+                Calendar ahorac = new GregorianCalendar();
+                ahorac.setTime(ahora);
+
+
+                if(!ahorac.after(fechac)){
                 	Lessor l=lessorService.findLessorByPrincipal();
                 	Tenant t=tenantService.findTenantByPrincipal();
                 	if(l!=null){
                 		CreditCard c=creditCardService.save(creditCard);
+
                 		l.setCreditCard(c);
                 		lessorService.save(l);
+
                 	}
                 	if(t!=null){
                 		CreditCard c=creditCardService.save(creditCard);

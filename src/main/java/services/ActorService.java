@@ -80,6 +80,6 @@ public class ActorService {
 
 	public Actor findActorByPrincipal() {
 		UserAccount userAccount = LoginService.getPrincipal();
-		return actorRepository.findActorByUserAccount(userAccount);
+		return actorRepository.findByUserAccountId(userAccount.getId());
 	}
 }

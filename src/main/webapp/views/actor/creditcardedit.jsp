@@ -8,19 +8,21 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
 <article>
 	<form:form modelAttribute="creditcard" method="POST">
-		<acme:textbox path="creditcard.brandName" code="brandName" />
-		<acme:textbox path="creditcard.holderName" code="holderName" />
-		<acme:textbox path="creditcard.number" code="number" />
-		<acme:textbox path="creditcard.expirationMonth" code="expirationMonth" />
-		<acme:textbox path="creditcard.expirationYear" code="expirationYear" />
-		<acme:textbox path="creditcard.cvvCode" code="cvvCode" />
-		<acme:textbox path="creditcard.fee" code="feetopay" />
-		
-		<input name="save" type="submit"
-			value="<spring:message code="save" />" />
-		<a href="/" class="button cancel_button"><spring:message
+		<form:hidden path="id"/>
+        <form:hidden path="version"/>
+		<acme:textbox path="brandName" code="brandName" />
+		<acme:textbox path="holderName" code="holderName" />
+		<acme:textbox path="number" code="number" />
+		<acme:textbox path="expirationMonth" code="expirationMonth" />
+		<acme:textbox path="expirationYear" code="expirationYear" />
+		<acme:textbox path="cvvCode" code="cvvCode" />
+		<acme:textbox path="fee" code="feetopay" />
+		<acme:submit name="save" code="save"/>
+		<a href="" class="button cancel_button"><spring:message
 				code="cancel" /></a>
 	</form:form>
 </article>

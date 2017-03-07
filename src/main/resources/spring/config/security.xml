@@ -50,6 +50,10 @@
                                 access="hasAnyRole('ADMIN','LESSOR','TENANT','AUDITOR')"/>
         <security:intercept-url pattern="/actor/lessor/property/list.do"
                                 access="hasAnyRole('LESSOR')"/>
+                                
+        <security:intercept-url pattern="/actor/creditcard/edit.do"
+                                access="hasAnyRole('LESSOR','TENANT')"/>                          
+                                
 
         <security:intercept-url pattern="/actor/lessor/property/delete/*"
                                 access="hasAnyRole('LESSOR')"/>
