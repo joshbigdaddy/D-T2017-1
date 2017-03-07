@@ -1,9 +1,6 @@
 package domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -20,6 +17,7 @@ public class SocialIdentity extends DomainEntity {
 	private String name;
 	private String link;
 	private String picture;
+	private Actor actor;
 
 	@NotBlank
 	public String getName() {
@@ -56,25 +54,12 @@ public class SocialIdentity extends DomainEntity {
 		this.picture = picture;
 	}
 
-	// private ClasePrueba claseprueba;
-	// private Collection<ClasePrueba> clasesPruebas;
+	@ManyToOne
+	public Actor getActor() {
+		return actor;
+	}
 
-	/*
-	 * @OneToOne() public ClasePrueba getClasePrueba() { return claseprueba; }
-	 * 
-	 * public void setClasePrueba(ClasePrueba claseprueba) { this.claseprueba =
-	 * claseprueba; }
-	 * 
-	 * 
-	 * @OneToMany public ClasePrueba getClasePrueba() { return claseprueba; }
-	 * 
-	 * public void setClasePrueba(ClasePrueba claseprueba) { this.claseprueba =
-	 * claseprueba; }
-	 * 
-	 * @ManyToOne public ClasePrueba getClasePrueba() { return claseprueba; }
-	 * 
-	 * public void setClasePrueba(ClasePrueba claseprueba) { this.claseprueba =
-	 * claseprueba; }
-	 */
-
+	public void setActor(Actor actor) {
+		this.actor = actor;
+	}
 }

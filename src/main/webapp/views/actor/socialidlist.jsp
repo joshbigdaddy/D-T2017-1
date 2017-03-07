@@ -29,13 +29,13 @@
 
 	<spring:message code="edit" var="editHeader" />
 	<display:column title="${editHeader}">
-		<a href="actor/socialidentities/edit.do?socialidentityid=${row.id}"><spring:message
+		<a href="actor/socialidentities/edit.do?id=${row.id}"><spring:message
 				code="edit" /> </a>
 	</display:column>
 
 	<spring:message code="delete" var="deleteHeader" />
 	<display:column title="${deleteHeader}">
-		<a href="actor/socialidentities/delete.do?socialidentityid=${row.id}"><spring:message
+		<a href="actor/socialidentities/delete.do?id=${row.id}"><spring:message
 				code="delete" /> </a>
 	</display:column>
 </display:table>

@@ -24,6 +24,20 @@
 <b><spring:message code="email"/> </b> ${actor.email}<br>
 <b><spring:message code="phone"/> </b> ${actor.phone}<br>
 
+<h2><spring:message code="socialidentities" /> </h2>
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+               name="actor.socialIdentities" requestURI="${requestURI}" id="row">
+    <spring:message code="name" var="nameHeader" />
+    <display:column property="name" title="${nameHeader}" sortable="true" />
+
+    <spring:message code="nick" var="nickHeader" />
+    <display:column property="nick" title="${nickHeader}" sortable="true" />
+
+    <spring:message code="link" var="linkHeader" />
+    <display:column property="link" title="${linkHeader}" sortable="true" />
+</display:table>
+
 <jstl:if test="${not empty cancomment}">
     <h1><spring:message code="comment"/> </h1>
     <form:form modelAttribute="comment" action="${commentUri}">

@@ -28,7 +28,11 @@
                     <security:authorize access="hasAnyRole('ADMIN')">
                         <li><a href="/actor/administrator/attribute/list.do"><spring:message code="attribute"/>s </a> </li>
                     </security:authorize>
-                </ul></li>
+                </ul>
+            <security:authorize access="isAuthenticated()">
+                <li><a href="/actor/socialidentities/list.do"><spring:message code="managesocialidentities"/> </a> </li>
+            </security:authorize>
+                </li>
                 <security:authorize access="hasAnyRole('TENANT')">
                     <li><a href="/actor/tenant/finder/configure.do"><spring:message code="finder"/> </a>
                         <ul>

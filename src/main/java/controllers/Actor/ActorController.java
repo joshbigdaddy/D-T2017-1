@@ -34,6 +34,7 @@ public class ActorController extends AbstractController {
         ModelAndView result = new ModelAndView("actor/profile");
         addCommentsDataSocialUser(result,actor);
         result.addObject("actor",actor);
+        result.addObject("requestURI","/actor/profile/"+actor.getId()+".do");
 
         return result;
     }

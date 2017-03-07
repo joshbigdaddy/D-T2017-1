@@ -79,7 +79,7 @@ public class Actor extends DomainEntity {
 
 	private Collection<SocialIdentity> socialIdentities;
 
-	@OneToMany
+	@OneToMany(mappedBy = "actor")
 	public Collection<SocialIdentity> getSocialIdentities() {
 		return socialIdentities;
 	}

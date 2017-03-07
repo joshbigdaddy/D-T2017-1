@@ -7,7 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,47 +43,65 @@ public class SocialIdentitiesController {
 
 	}
 
-	@RequestMapping("/edit")
-	public ModelAndView editSocialIdentities(@RequestParam int socialidentityid) {
+    @RequestMapping("/new")
+    public ModelAndView newSocialIdentities() {
 
-		ModelAndView result = createEditModelAndView(socialIdentityService
-				.findOne(socialidentityid));
+        return createEditModelAndView(new SocialIdentity());
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST, params = "save")
+    public ModelAndView newSocialIdentitiesPost(@ModelAttribute("socialIdentity") SocialIdentity socialIdentity, BindingResult binding) {
+        return editOrNewSI(socialIdentity,binding);
+
+    }
+
+	@RequestMapping("/edit")
+	public ModelAndView editSocialIdentities(@RequestParam SocialIdentity id) {
+
+		ModelAndView result = createEditModelAndView(id);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView editSocialIdentities(
-			@Valid SocialIdentity socialIdentity, BindingResult binding) {
-		ModelAndView result;
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(socialIdentity);
-		} else {
-			try {
-				socialIdentityService.save(socialIdentity);
-				result = new ModelAndView(
-						"redirect:/actor/socialidentities/list.do");
-			} catch (Throwable oops) {
-				result = createEditModelAndView(socialIdentity, "wrong");
-			}
+	public ModelAndView editSocialIdentities(@RequestParam SocialIdentity id,
+                                             @ModelAttribute("socialIdentity") SocialIdentity socialIdentity, BindingResult binding) {
+        Assert.isTrue(id.getId() == socialIdentity.getId());
+        Assert.isTrue(actorService.findActorByPrincipal().getSocialIdentities().contains(id));
+        return editOrNewSI(socialIdentity,binding);
 
-		}
-
-		return result;
 	}
 
+	private ModelAndView editOrNewSI(SocialIdentity socialIdentity,BindingResult binding){
+        ModelAndView result;
+
+        if (binding.hasErrors()) {
+            result = createEditModelAndView(socialIdentity);
+        } else {
+            try {
+                socialIdentity.setActor(actorService.findActorByPrincipal());
+                socialIdentityService.save(socialIdentity);
+                result = new ModelAndView(
+                        "redirect:/actor/socialidentities/list.do");
+            } catch (Throwable oops) {
+                result = createEditModelAndView(socialIdentity, "wrong");
+            }
+
+        }
+
+        return result;
+    }
 	@RequestMapping(value = "/delete")
-	public ModelAndView deleteCategory(@RequestParam int socialidentityid) {
+	public ModelAndView deleteCategory(@RequestParam SocialIdentity id) {
 		ModelAndView result;
-		SocialIdentity socialIdentity = socialIdentityService
-				.findOne(socialidentityid);
+		SocialIdentity socialIdentity = id;
 		try {
 
 			SocialUser user;
 			user = (SocialUser) actorService.findActorByPrincipal();
 			Collection<SocialIdentity> redes = new ArrayList<>(
 					user.getSocialIdentities());
-			redes.remove(socialIdentityService.findOne(socialidentityid));
+			redes.remove(id);
 			user.setSocialIdentities(redes);
 			socialIdentityService.delete(socialIdentity);
 			result = new ModelAndView(
