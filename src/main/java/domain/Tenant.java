@@ -19,10 +19,10 @@ import javax.persistence.*;
 	public void setRequests(Collection<Request> requests){
 		this.requests=requests;
 	}
-	private Collection<Invoice> invoices;	
+	private Collection<Invoice> invoices;
 	@OneToMany(mappedBy = "tenant")
 	public Collection<Invoice> getInvoices(){
-	return invoices;	
+	return invoices;
 	}
 	public void setInvoices(Collection<Invoice> invoices){
 		this.invoices=invoices;

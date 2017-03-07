@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -23,6 +24,9 @@ public class TenantService {
 	// Managed repositories
 	@Autowired
 	private TenantRepository tenantRepository;
+
+	@Autowired
+	private RequestService requestService;
 
 
 
@@ -75,17 +79,11 @@ public class TenantService {
 	}
 
     public void chargeTenant(Request request) {
-        Double fee = (double) request.getProperty().getRate();
-        Date startDate = request.getCheckinDate();
-        Date endDate = request.getCheckoutDate();
-        long startTime = startDate.getTime();
-        long endTime = endDate.getTime();
-        long diffTime = endTime - startTime;
-        long diffDays = diffTime / (1000 * 60 * 60 * 24);
-        fee = diffDays*fee;
+        Double fee = requestService.getAmount(request);
         Double actualFee = request.getTenant().getCreditCard().getFee();
         request.getTenant().getCreditCard().setFee(actualFee+fee);
     }
+
     public Tenant findTenantByPrincipal() {
     	Tenant result;
 		UserAccount userAccount;
@@ -95,4 +93,25 @@ public class TenantService {
 
 		return result;
 		}
+    
+	public Collection<Tenant> maxRequestsApprovedTenant(){
+		return tenantRepository.maxRequestsApprovedTenant();
+	}
+	public Collection<Tenant> maxRequestsDeniedTenant(){
+		return tenantRepository.maxRequestsDeniedTenant();
+	}
+	public Collection<Tenant> maxRequestsPendingTenant(){
+		return tenantRepository.maxRequestsPendingTenant();
+	}
+
+	public Integer minInvoicesPerTenant(){
+		return tenantRepository.minInvoicesPerTenant();
+	}
+	public Integer maxInvoicesPerTenant(){
+		return tenantRepository.maxInvoicesPerTenant();
+	}
+	public Double avgInvoicesPerTenant(){
+		return tenantRepository.avgInvoicesPerTenant();
+	}
+	
 }

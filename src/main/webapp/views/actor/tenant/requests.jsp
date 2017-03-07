@@ -32,4 +32,11 @@
     <display:column title="${stateHeader}" sortable="true">
         ${row.state}
     </display:column>
+
+    <spring:message code="invoice" var="invoiceHeader" />
+    <display:column title="${invoiceHeader}" sortable="true">
+        <jstl:if test="${row.state=='ACCEPTED'}">
+            <a class="button" href="actor/tenant/invoice/${row.id}.do">${invoiceHeader}</a>
+        </jstl:if>
+    </display:column>
 </display:table>

@@ -78,4 +78,5 @@
 <p><spring:message code="administrator.avgInvoicePerTenant"/> ${avgInvoicePerTenant}</p><br>
 
 <p><spring:message code="administrator.invoicesAmount"/> ${invoicesAmount}</p><br>
-<p><spring:message code="administrator.avgRequestPerProperty"/> ${avgRequestPerProperty}</p><br>
+<p><spring:message code="administrator.avgRequestPerPropertyWithAudits"/> ${avgRequestPerPropertyWithAudits}</p><br>
+<p><spring:message code="administrator.avgRequestPerPropertyWithoutAudits"/> ${avgRequestPerPropertyWithoutAudits}</p><br>

@@ -16,6 +16,7 @@ public class Configuration extends DomainEntity{
 	
 	}
 	private Double fee;
+	private Integer vat;
 	
 	@NotNull
 	public Double getFee() {
@@ -24,9 +25,16 @@ public class Configuration extends DomainEntity{
 	public void setFee(Double fee) {
 		this.fee = fee;
 	}
-	
 
-//RELATIONSHIPS
+	public Integer getVat() {
+		return vat;
+	}
+
+	public void setVat(Integer vat) {
+		this.vat = vat;
+	}
+
+	//RELATIONSHIPS
 	
 	
 	

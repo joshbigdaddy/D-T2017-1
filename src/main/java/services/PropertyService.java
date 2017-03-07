@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.List;
 
 import domain.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -105,4 +107,45 @@ public class PropertyService {
 
         return result;
     }
+    
+    
+    
+	public Double avgAuditsPerProperty(){
+		return propertyRepository.avgAuditsPerProperty();
+	}
+	
+	public Double minAuditsPerProperty(){
+		return propertyRepository.minAuditsPerProperty();
+	}
+	
+	public Double maxAuditsPerProperty(){
+		return propertyRepository.maxAuditsPerProperty();
+	}
+	public Double avgRequestsPerPropertyWithAudits(){
+		return propertyRepository.avgRequestsPerPropertyWithAudits();
+	}
+	
+	public Double avgRequestsPerPropertyWithoutAudits(){
+		return propertyRepository.avgRequestsPerPropertyWithoutAudits();
+	}
+	
+	public Collection<Property> propertiesOrderByAudits(int lessorId){
+		return propertyRepository.propertiesOrderByAudits(lessorId);
+	}
+	
+	public Collection<Property> propertiesOrderByRequests(int lessorId){
+		return propertyRepository.propertiesOrderByRequests(lessorId);
+	}
+	
+	Collection<Property> propertiesOrderByAcceptedRequests(int lessorId){
+		return propertyRepository.propertiesOrderByAcceptedRequests(lessorId);
+	}
+	
+    public Collection<Property> propertiesOrderByDeniedRequests(int lessorId){
+    	return propertyRepository.propertiesOrderByDeniedRequests(lessorId);
+    }
+	
+	public Collection<Property> propertiesOrderByPendingRequests(int lessorId){
+		return propertyRepository.propertiesOrderByPendingRequests(lessorId);
+	}
 }

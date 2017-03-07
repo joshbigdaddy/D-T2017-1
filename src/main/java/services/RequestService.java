@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import com.sun.org.apache.regexp.internal.RE;
 import domain.*;
@@ -101,4 +102,16 @@ public class RequestService {
 
         return request;
     }
+
+	public Double getAmount(Request request) {
+		Double fee = (double) request.getProperty().getRate();
+		Date startDate = request.getCheckinDate();
+		Date endDate = request.getCheckoutDate();
+		long startTime = startDate.getTime();
+		long endTime = endDate.getTime();
+		long diffTime = endTime - startTime;
+		long diffDays = diffTime / (1000 * 60 * 60 * 24);
+		fee = diffDays*fee;
+		return fee;
+	}
 }
