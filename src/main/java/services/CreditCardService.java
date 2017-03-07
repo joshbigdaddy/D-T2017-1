@@ -1,20 +1,16 @@
 package services;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CreditCardRepository;
-import domain.AttributeValue;
 import domain.CreditCard;
-import domain.Lessor;
-import domain.Property;
-import org.springframework.validation.Validator;
 
 @Service
 @Transactional
@@ -61,10 +57,10 @@ public class CreditCardService {
 		Assert.isTrue(creditCardRepository.exists(creditCard.getId()));
 		creditCardRepository.delete(creditCard);
 	}
-	  public CreditCard reconstruct(CreditCard creditCard, BindingResult bindingResult,Boolean edit) {
+	  public CreditCard reconstruct(CreditCard creditCard, BindingResult bindingResult) {
 	        CreditCard result;
 
-	        if (!edit){
+	        if (creditCard.getId()==0){
 	            result = creditCard;
 	        }else {
 	            result = creditCardRepository.findOne(creditCard.getId());
@@ -75,9 +71,10 @@ public class CreditCardService {
 	            result.setFee(creditCard.getFee());
 	            result.setNumber(creditCard.getNumber());
 	            result.setCvvCode(creditCard.getCvvCode());
-	  
+				validator.validate(result, bindingResult); 
 	        }
-			validator.validate(result, bindingResult);
+	        
+
 
 	        return result;
 	    }

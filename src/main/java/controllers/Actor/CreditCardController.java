@@ -4,14 +4,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
 import domain.Actor;
 import domain.CreditCard;
 import domain.Lessor;
-import domain.Property;
 import domain.SocialUser;
 import domain.Tenant;
 import forms.EditCreditCardForm;
-import forms.EditPropertyForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,19 +59,21 @@ public class CreditCardController {
         Assert.isTrue(actor instanceof SocialUser);
     }
 
-    @RequestMapping(value = "/edit",method = RequestMethod.POST, params = "save")
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ModelAndView editCreditCard(@ModelAttribute("creditcard") EditCreditCardForm editCreditCardForm,
                                  BindingResult bindingResult){
         ModelAndView result;
 
         result = new ModelAndView("redirect:/actor/creditcard/edit.do");
-
-        CreditCard creditCard = creditCardService.reconstruct(editCreditCardForm.getCreditCard(),bindingResult,true);
-
+        System.out.println("hola");
+        CreditCard creditCard = creditCardService.reconstruct(editCreditCardForm.getCreditCard(),bindingResult);
        if (bindingResult.hasErrors()){
-            return result;
+           System.out.println("hola2");
+
+       		return createEditModelAndView(editCreditCardForm,"commit.error");
         }else{
             try{
+                System.out.println("hola3");
 
                 Date ahora=new Date();
                 Calendar fechac = new GregorianCalendar();
@@ -85,7 +86,10 @@ public class CreditCardController {
                 	Lessor l=lessorService.findLessorByPrincipal();
                 	Tenant t=tenantService.findTenantByPrincipal();
                 	if(l!=null){
+                        System.out.println("hola4");
+
                 		CreditCard c=creditCardService.save(creditCard);
+                        System.out.println("hola5");
 
                 		l.setCreditCard(c);
                 		lessorService.save(l);
@@ -100,9 +104,18 @@ public class CreditCardController {
                 }
                 return result;
             }catch (Throwable oops){
-                System.out.println(oops.getLocalizedMessage());
+                //System.out.println(oops.getLocalizedMessage());
+            	result=createEditModelAndView(editCreditCardForm,"commit.error");
                 return result;
             }
         }
     }
+    
+    protected ModelAndView createEditModelAndView(EditCreditCardForm m, String message) {
+		ModelAndView result;
+		result = new ModelAndView("redirect:/actor/creditcard/edit.do");
+		
+		result.addObject("message",message);
+		return result;
+	}
 }
