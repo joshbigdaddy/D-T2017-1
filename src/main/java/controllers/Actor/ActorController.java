@@ -42,7 +42,7 @@ public class ActorController extends AbstractController {
         Assert.notNull(actor);
         Assert.isTrue(actorsAllowComments((SocialUser) actor,(SocialUser) actorService.findActorByPrincipal()));
         commentService.newComment(comment,(SocialUser) actorService.findActorByPrincipal(),(SocialUser) actor);
-        return new ModelAndView("redirect:../");
+        return new ModelAndView("redirect:../"+actor.getId()+".do");
         }
 
 
@@ -53,16 +53,18 @@ public class ActorController extends AbstractController {
         if (!(actor instanceof SocialUser)) return false;
         SocialUser socialUserPrincipal = (SocialUser) principal;
         SocialUser socialUserActor = (SocialUser) actor;
-        result.addObject("comments",socialUserActor.getComments());
+        result.addObject("comments",socialUserActor.getCommentsReceived());
         Boolean hasRequestsPrincipal = actorsAllowComments(socialUserActor,socialUserPrincipal);
         if (hasRequestsPrincipal){
             result.addObject("cancomment",true);
+            result.addObject("commentUri","actor/profile/"+actor.getId()+"/comment.do");
             result.addObject("comment",new Comment());
         }
         return true;
     }
 
     private Boolean actorsAllowComments(SocialUser socialUser1, SocialUser socialUser2){
+        if (socialUser1.getId() == socialUser2.getId()) return true;
         String rolPrincipal = getRol(socialUser1);
         String rolActor = getRol(socialUser2);
         if(rolActor.equals(rolPrincipal)) return  false;

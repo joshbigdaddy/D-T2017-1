@@ -62,12 +62,10 @@ public class CommentService {
 		Assert.notNull(socialUser);
 		Assert.notNull(actor);
 		comment.setMoment(new Date());
-		comment.setSocialUser(socialUser);
+		comment.setAuthor(socialUser);
 		comment.setStarRating(0);
-		Collection<Comment> commentsWritten = actor.getCommentsReceived();
-		commentsWritten.add(comment);
-		actor.setComments(commentsWritten);
-		actorService.save(actor);
+		comment.setReceiver(actor);
+		save(comment);
 
     }
 }

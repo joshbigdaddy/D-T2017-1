@@ -26,7 +26,7 @@
 
 <jstl:if test="${not empty cancomment}">
     <h1><spring:message code="comment"/> </h1>
-    <form:form modelAttribute="comment">
+    <form:form modelAttribute="comment" action="${commentUri}">
         <acme:textbox path="title" code="title"/>
         <acme:textarea path="text" code="text"/>
         <br>
@@ -37,7 +37,7 @@
 <h1><spring:message code="comments"/> </h1>
     <jstl:forEach items="${comments}" var="item">
         <h3>${item.title}</h3>
-        <div><small>${item.moment} <spring:message code="by"/> <b>${item.socialUser.name}</b></small> ${item.starRating} <spring:message code="stars"/> </div>
+        <div><small>${item.moment} <spring:message code="by"/> <b>${item.author.name}</b></small> ${item.starRating} <spring:message code="stars"/> </div>
         <p>${item.text}</p>
         <hr />
     </jstl:forEach>

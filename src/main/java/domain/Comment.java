@@ -8,8 +8,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-import domain.DomainEntity;
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Comment extends DomainEntity {
@@ -23,7 +21,8 @@ public class Comment extends DomainEntity {
 	private String title;
 	private String text;
 	private Integer starRating;
-	private SocialUser socialUser;
+	private SocialUser author;
+	private SocialUser receiver;
 
 	
 	@NotNull
@@ -63,12 +62,21 @@ public class Comment extends DomainEntity {
 		this.starRating = starRating;
 	}
 
-	@ManyToOne
-	public SocialUser getSocialUser() {
-		return socialUser;
+	@ManyToOne(cascade = CascadeType.ALL)
+	public SocialUser getAuthor() {
+		return author;
 	}
 
-	public void setSocialUser(SocialUser socialUser) {
-		this.socialUser = socialUser;
+	public void setAuthor(SocialUser socialUser) {
+		this.author = socialUser;
 	}
+
+	@ManyToOne(cascade = CascadeType.ALL)
+    public SocialUser getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(SocialUser receiver) {
+        this.receiver = receiver;
+    }
 }

@@ -16,7 +16,7 @@ import javax.persistence.*;
 	//RELATIONSHIPS
 	private Collection<Comment> comments;
 	private CreditCard creditCard;
-	@OneToMany(mappedBy = "socialUser")
+	@OneToMany(mappedBy = "author")
 	public Collection<Comment> getComments(){
 	return comments;
 	}
@@ -34,7 +34,7 @@ import javax.persistence.*;
 
 	private Collection<Comment> commentsReceived;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "receiver")
 	public Collection<Comment> getCommentsReceived() {
 		return commentsReceived;
 	}
