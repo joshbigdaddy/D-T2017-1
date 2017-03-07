@@ -62,6 +62,10 @@
         <security:intercept-url pattern="/actor/tenant/request/list.do"
                                 access="hasAnyRole('TENANT')"/>
 
+
+		<security:intercept-url pattern="/actor/tenant/invoice/*.do"
+								access="hasAnyRole('TENANT')"/>
+
         <security:intercept-url pattern="/actor/tenant/finder/*"
                                 access="hasAnyRole('TENANT')"/>
 

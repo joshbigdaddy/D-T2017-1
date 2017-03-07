@@ -42,6 +42,7 @@ public class LessorPropertyController extends AbstractController {
         Collection<Property> properties = lessor.getProperties();
         Collection<Request> requests = lessorService.getAllRequestsByLessor(lessor.getId());
         result.addObject("properties",properties);
+        result.addObject("creditcard",lessor.getCreditCard());
         result.addObject("requests",requests);
         result.addObject("fee", getActualFee());
         result.addObject("requestURI","actor/lessor/property/list.do");

@@ -25,6 +25,9 @@ public class TenantService {
 	@Autowired
 	private TenantRepository tenantRepository;
 
+	@Autowired
+	private RequestService requestService;
+
 
 
 	// Constructor
@@ -76,17 +79,11 @@ public class TenantService {
 	}
 
     public void chargeTenant(Request request) {
-        Double fee = (double) request.getProperty().getRate();
-        Date startDate = request.getCheckinDate();
-        Date endDate = request.getCheckoutDate();
-        long startTime = startDate.getTime();
-        long endTime = endDate.getTime();
-        long diffTime = endTime - startTime;
-        long diffDays = diffTime / (1000 * 60 * 60 * 24);
-        fee = diffDays*fee;
+        Double fee = requestService.getAmount(request);
         Double actualFee = request.getTenant().getCreditCard().getFee();
         request.getTenant().getCreditCard().setFee(actualFee+fee);
     }
+
     public Tenant findTenantByPrincipal() {
     	Tenant result;
 		UserAccount userAccount;

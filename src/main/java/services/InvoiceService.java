@@ -1,7 +1,9 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
+import domain.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,12 @@ public class InvoiceService {
 	// Managed repositories
 	@Autowired
 	private InvoiceRepository invoiceRepository;
+
+	@Autowired
+    private RequestService requestService;
+
+	@Autowired
+    private ConfigurationService configurationService;
 
 	// Constructor
 	public InvoiceService() {
@@ -41,9 +49,9 @@ public class InvoiceService {
 
 	}
 
-	public void save(Invoice invoice) {
+	public Invoice save(Invoice invoice) {
 		Assert.notNull(invoice);
-		invoiceRepository.save(invoice);
+		return invoiceRepository.save(invoice);
 	}
 
 	public void delete(Invoice invoice) {
@@ -52,6 +60,19 @@ public class InvoiceService {
 		Assert.isTrue(invoiceRepository.exists(invoice.getId()));
 		invoiceRepository.delete(invoice);
 	}
+
+    public Invoice generateInvoice(Request request) {
+	    Assert.notNull(request);
+		Invoice result = new Invoice();
+		result.setAmount(requestService.getAmount(request));
+		result.setCreditCardNumber(request.getTenant().getCreditCard().getNumber());
+		result.setTenant(request.getTenant());
+		result.setVatNumber(configurationService.getFirstConfiguration().getVat());
+		result.setMoment(new Date());
+		result.setRequest(request);
+
+		return save(result);
+    }
 
 	public Double totalSumOfMoney(){
 		return invoiceRepository.totalSumOfMoney();

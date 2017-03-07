@@ -62,7 +62,7 @@
 
     <spring:message code="actions" var="actionsHeader"/>
     <display:column title="${actionsHeader}" sortable="true">
-        <jstl:if test="${row.state=='PENDING' and creditCard}">
+        <jstl:if test="${row.state=='PENDING' and not empty creditcard}">
         <select title="<spring:message code="requests"/> " onchange="location = this.value;">
             <option value="">
                 ---------------------

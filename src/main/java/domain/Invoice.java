@@ -2,10 +2,7 @@ package domain;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -20,10 +17,10 @@ public class Invoice extends DomainEntity{
 	}
 	
 	private String creditCardNumber;
-	private String details;
 	private Double amount;
 	private Integer vatNumber;
 	private Date moment;
+	private Request request;
 	
 	@NotBlank
 	public String getCreditCardNumber() {
@@ -32,14 +29,7 @@ public class Invoice extends DomainEntity{
 	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
-	
-	@NotBlank
-	public String getDetails() {
-		return details;
-	}
-	public void setDetails(String details) {
-		this.details = details;
-	}
+
 	@NotNull
 	public Double getAmount() {
 		return amount;
@@ -64,7 +54,7 @@ public class Invoice extends DomainEntity{
 		this.moment = moment;
 	}
 	private Tenant tenant;
-	
+
 	@ManyToOne
 	public Tenant getTenant() {
 		return tenant;
@@ -72,5 +62,13 @@ public class Invoice extends DomainEntity{
 	public void setTenant(Tenant tenant) {
 		this.tenant = tenant;
 	}
-	
+
+	@OneToOne(mappedBy = "invoice",cascade = CascadeType.ALL)
+	public Request getRequest() {
+		return request;
+	}
+
+	public void setRequest(Request request) {
+		this.request = request;
+	}
 }

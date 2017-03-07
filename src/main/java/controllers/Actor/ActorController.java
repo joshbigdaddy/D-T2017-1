@@ -102,7 +102,6 @@ public class ActorController extends AbstractController {
             @ModelAttribute("actor") Tenant actor, BindingResult binding
     ) {
         actor.setFinder(null);
-        actor.setInvoices(null);
         actor.setRequests(null);
         return registerPost(actor,binding,"tenant");
     }

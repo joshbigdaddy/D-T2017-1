@@ -30,6 +30,7 @@ public class Request extends DomainEntity{
 	private Date checkinDate;
 	private Date checkoutDate;
 	private Tenant tenant;
+	private Invoice invoice;
 
 	@Enumerated(EnumType.STRING)
 	public RequestType getState() {
@@ -78,6 +79,15 @@ public class Request extends DomainEntity{
 
 	public void setTenant(Tenant tenant) {
 		this.tenant = tenant;
+	}
+
+	@OneToOne
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
 }
 
