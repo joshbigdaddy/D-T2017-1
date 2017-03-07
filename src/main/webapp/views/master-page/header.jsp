@@ -27,6 +27,7 @@
                     </security:authorize>
                     <security:authorize access="hasAnyRole('ADMIN')">
                         <li><a href="/actor/administrator/attribute/list.do"><spring:message code="attribute"/>s </a> </li>
+                        <li><a href="/actor/administrator/auditor/new.do"><spring:message code="new"/> <spring:message code="auditor"/> </a> </li>
                     </security:authorize>
                 </ul>
             <security:authorize access="isAuthenticated()">

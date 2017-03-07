@@ -42,6 +42,7 @@ public class AuditorService {
 
 	public void save(Auditor auditor) {
 		Assert.notNull(auditor);
+		System.out.println(auditor);
 		auditorRepository.save(auditor);
 	}
 

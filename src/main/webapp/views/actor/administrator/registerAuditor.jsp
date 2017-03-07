@@ -15,7 +15,7 @@
             <h2><spring:message code="useraccountdata"/> </h2>
 
             <acme:textbox path="userAccount.username" code="userAccount.username"/>
-
+            <acme:password path="userAccount.password" code="userAccount.password"/>
             <br>
             <form:errors cssClass="error" path="email"/>
         </div>

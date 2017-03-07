@@ -140,10 +140,12 @@ public class AdministratorController extends AbstractController {
                 Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
                 auditor.getUserAccount().setPassword(md5PasswordEncoder
                         .encodePassword(auditor.getUserAccount().getPassword(), null));
+                auditor.setAudits(null);
                 auditorService.save(auditor);
                 result = new ModelAndView("redirect:../../");
                 return result;
             } catch (Throwable oops) {
+                System.out.println(oops.getMessage());
                 result = new ModelAndView("actor/administrator/registerAuditor");
                 result.addObject("actor", auditor);
 
