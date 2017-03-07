@@ -1,9 +1,8 @@
 package controllers.Actor;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import controllers.AbstractController;
-import domain.Actor;
-import domain.Lessor;
-import domain.Tenant;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,11 +27,51 @@ public class ActorController extends AbstractController {
     public ModelAndView profileUser(@PathVariable Actor actor){
         Assert.notNull(actor);
         ModelAndView result = new ModelAndView("actor/profile");
+        addCommentsDataSocialUser(result,actor);
         result.addObject("actor",actor);
 
         return result;
     }
 
+    private Boolean addCommentsDataSocialUser(ModelAndView result,Actor actor) {
+        Actor principal = actorService.findActorByPrincipal();
+        if (!(principal instanceof SocialUser)) return false;
+        if (!(actor instanceof SocialUser)) return false;
+        SocialUser socialUserPrincipal = (SocialUser) principal;
+        SocialUser socialUserActor = (SocialUser) actor;
+        result.addObject("comments",socialUserActor.getComments());
+        String rolPrincipal = getRol(socialUserPrincipal);
+        String rolActor = getRol(socialUserActor);
+        if(rolActor.equals(rolPrincipal)) return  false;
+        Boolean hasRequestsPrincipal = false;
+        if (rolActor.equals("Lessor")){
+            hasRequestsPrincipal = checkRequestsByUsers((Tenant) principal, (Lessor) actor);
+        }else{
+           hasRequestsPrincipal = checkRequestsByUsers((Tenant) actor,(Lessor) principal);
+        }
+        if (hasRequestsPrincipal){
+            result.addObject("cancomment",true);
+            result.addObject("comment",new Comment());
+        }
+        return true;
+    }
+
+    private Boolean checkRequestsByUsers(Tenant tenant, Lessor lessor) {
+        Boolean result = false;
+        for(Property e:lessor.getProperties()){
+            for(Request r:e.getRequests()){
+                if (r.getTenant().getId() == tenant.getId()){
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return  result;
+    }
+
+    private String getRol(SocialUser socialUser){
+        return (socialUser instanceof Lessor) ? "Lessor" : "Tenant";
+    }
 
     @RequestMapping(value = "/edit")
     public ModelAndView editProfile() {

@@ -2,9 +2,7 @@ package domain;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,6 +23,7 @@ public class Comment extends DomainEntity {
 	private String title;
 	private String text;
 	private Integer starRating;
+	private SocialUser socialUser;
 
 	
 	@NotNull
@@ -63,6 +62,13 @@ public class Comment extends DomainEntity {
 	public void setStarRating(Integer starRating) {
 		this.starRating = starRating;
 	}
-	
-	
+
+	@ManyToOne
+	public SocialUser getSocialUser() {
+		return socialUser;
+	}
+
+	public void setSocialUser(SocialUser socialUser) {
+		this.socialUser = socialUser;
+	}
 }

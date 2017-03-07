@@ -14,11 +14,11 @@ import javax.persistence.*;
 		}
 
 	//RELATIONSHIPS
-	private Collection<Comment> comments;	
+	private Collection<Comment> comments;
 	private CreditCard creditCard;
-	@OneToMany()
+	@OneToMany(mappedBy = "socialUser")
 	public Collection<Comment> getComments(){
-	return comments;	
+	return comments;
 	}
 	public void setComments(Collection<Comment> comments){
 		this.comments=comments;
@@ -31,5 +31,15 @@ import javax.persistence.*;
 	public void setCreditCard(CreditCard creditCard){
 		this.creditCard=creditCard;
 	}
-	
+
+	private Collection<Comment> commentsWritten;
+
+	@OneToMany()
+	public Collection<Comment> getCommentsWritten() {
+		return commentsWritten;
+	}
+
+	public void setCommentsWritten(Collection<Comment> commentsWritten) {
+		this.commentsWritten = commentsWritten;
+	}
 }
