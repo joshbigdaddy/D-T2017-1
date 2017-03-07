@@ -1,7 +1,9 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
+import domain.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ public class CommentService {
 	// Managed repositories
 	@Autowired
 	private CommentRepository commentReposiroty;
+
+	@Autowired
+	private ActorService actorService;
 
 	// Constructor
 	public CommentService() {
@@ -51,4 +56,18 @@ public class CommentService {
 		Assert.isTrue(commentReposiroty.exists(comment.getId()));
 		commentReposiroty.delete(comment);
 	}
+
+    public void newComment(Comment comment, SocialUser socialUser,SocialUser actor) {
+		Assert.notNull(comment);
+		Assert.notNull(socialUser);
+		Assert.notNull(actor);
+		comment.setMoment(new Date());
+		comment.setSocialUser(socialUser);
+		comment.setStarRating(0);
+		Collection<Comment> commentsWritten = actor.getCommentsReceived();
+		commentsWritten.add(comment);
+		actor.setComments(commentsWritten);
+		actorService.save(actor);
+
+    }
 }

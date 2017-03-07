@@ -32,14 +32,14 @@ import javax.persistence.*;
 		this.creditCard=creditCard;
 	}
 
-	private Collection<Comment> commentsWritten;
+	private Collection<Comment> commentsReceived;
 
-	@OneToMany()
-	public Collection<Comment> getCommentsWritten() {
-		return commentsWritten;
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<Comment> getCommentsReceived() {
+		return commentsReceived;
 	}
 
-	public void setCommentsWritten(Collection<Comment> commentsWritten) {
-		this.commentsWritten = commentsWritten;
+	public void setCommentsReceived(Collection<Comment> commentsReceived) {
+		this.commentsReceived = commentsReceived;
 	}
 }

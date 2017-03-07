@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
+import services.CommentService;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,9 @@ public class ActorController extends AbstractController {
 
     @Autowired
     ActorService actorService;
+
+    @Autowired
+    CommentService commentService;
 
 
     @RequestMapping("/profile/{actor}")
@@ -36,12 +40,11 @@ public class ActorController extends AbstractController {
     @RequestMapping(value = "/profile/{actor}/comment",method = RequestMethod.POST)
     public ModelAndView postComment(@PathVariable Actor actor,@ModelAttribute("comment") Comment comment){
         Assert.notNull(actor);
-        ModelAndView result = new ModelAndView("actor/profile");
-        addCommentsDataSocialUser(result,actor);
-        result.addObject("actor",actor);
+        Assert.isTrue(actorsAllowComments((SocialUser) actor,(SocialUser) actorService.findActorByPrincipal()));
+        commentService.newComment(comment,(SocialUser) actorService.findActorByPrincipal(),(SocialUser) actor);
+        return new ModelAndView("redirect:../");
+        }
 
-        return result;
-    }
 
     private Boolean addCommentsDataSocialUser(ModelAndView result,Actor actor) {
         if (!LoginService.isAuthorized()) return false;
@@ -51,20 +54,25 @@ public class ActorController extends AbstractController {
         SocialUser socialUserPrincipal = (SocialUser) principal;
         SocialUser socialUserActor = (SocialUser) actor;
         result.addObject("comments",socialUserActor.getComments());
-        String rolPrincipal = getRol(socialUserPrincipal);
-        String rolActor = getRol(socialUserActor);
-        if(rolActor.equals(rolPrincipal)) return  false;
-        Boolean hasRequestsPrincipal = false;
-        if (rolActor.equals("Lessor")){
-            hasRequestsPrincipal = checkRequestsByUsers((Tenant) principal, (Lessor) actor);
-        }else{
-           hasRequestsPrincipal = checkRequestsByUsers((Tenant) actor,(Lessor) principal);
-        }
+        Boolean hasRequestsPrincipal = actorsAllowComments(socialUserActor,socialUserPrincipal);
         if (hasRequestsPrincipal){
             result.addObject("cancomment",true);
             result.addObject("comment",new Comment());
         }
         return true;
+    }
+
+    private Boolean actorsAllowComments(SocialUser socialUser1, SocialUser socialUser2){
+        String rolPrincipal = getRol(socialUser1);
+        String rolActor = getRol(socialUser2);
+        if(rolActor.equals(rolPrincipal)) return  false;
+        Boolean hasRequestsPrincipal = false;
+        if (rolActor.equals("Lessor")){
+            hasRequestsPrincipal = checkRequestsByUsers((Tenant) socialUser1, (Lessor) socialUser2);
+        }else{
+            hasRequestsPrincipal = checkRequestsByUsers((Tenant) socialUser2,(Lessor) socialUser1);
+        }
+        return hasRequestsPrincipal;
     }
 
     private Boolean checkRequestsByUsers(Tenant tenant, Lessor lessor) {
