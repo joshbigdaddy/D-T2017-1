@@ -122,11 +122,11 @@ public class DashboardAdministratorController extends AbstractController{
 	public ModelAndView display(@PathVariable Lessor lessor) {
 		ModelAndView result;
 		
-		result = new ModelAndView("acotr/administrator/display");
+		result = new ModelAndView("actor/administrator/dashboard/display");
 		result.addObject("propertiesOrderedByAudits",propertyService.propertiesOrderByAudits(lessor.getId())) ;
-		result.addObject("propertiesOrderedByDeniedRequest", devuelveAttributes(propertyService.propertiesOrderByDeniedRequests(lessor.getId())));
-		result.addObject("propertiesOrderedByPendingRequest", devuelveAttributes(propertyService.propertiesOrderByPendingRequests(lessor.getId())));
-		result.addObject("propertiesOrderedByAcceptedRequest", devuelveAttributes(propertyService.propertiesOrderByAcceptedRequests(lessor.getId())));
+		result.addObject("propertiesOrderedByDeniedRequest", devuelveProperties(propertyService.propertiesOrderByDeniedRequests(lessor.getId())));
+		result.addObject("propertiesOrderedByPendingRequest", devuelveProperties(propertyService.propertiesOrderByPendingRequests(lessor.getId())));
+		result.addObject("propertiesOrderedByAcceptedRequest", devuelveProperties(propertyService.propertiesOrderByAcceptedRequests(lessor.getId())));
 		
 	
 		
@@ -242,10 +242,12 @@ public class DashboardAdministratorController extends AbstractController{
 		
 	}
 	private Collection<Property> devuelveProperties(Collection<Object[]> col){
+		System.out.println();
+		
 		List<Property> property=new ArrayList<Property>();
 		for(Object[] o:col){
-				property.add((Property) o[0]);
-			
+			property.add((Property) o[0]);
+				
 		}
 		return property;
 		

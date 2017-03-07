@@ -30,13 +30,13 @@ public interface PropertyRepository extends JpaRepository<Property,Integer>{
 	@Query("select p from Lessor l join l.properties p order by p.requests.size")
 	Collection<Property> propertiesOrderByRequests(int lessorId);
 	
-	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'ACCEPTED' and p2.lessor.id=p.lessor.id) as mr from Property p order by mr DESC")
+	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'ACCEPTED' and p2.lessor.id=?1) as mr from Property p where p.lessor.id=?1 order by mr DESC")
 	Collection<Object[]> propertiesOrderByAcceptedRequests(int lessorId);
 	
-	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'DENIED') as mr from Property p  order by mr DESC")
+	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'DENIED' and p2.lessor.id=?1) as mr from Property p where p.lessor.id=?1 order by mr DESC")
 	Collection<Object[]> propertiesOrderByDeniedRequests(int lessorId);
 	
-	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'PENDING' ) as mr from Property p order by mr DESC")
+	@Query("select p,(select count(r) from Property p2 join p2.requests r where r.state = 'PENDING' and p2.lessor.id=?1) as mr from Property p where p.lessor.id=?1 order by mr DESC")
 	Collection<Object[]> propertiesOrderByPendingRequests(int lessorId);
 	
 }

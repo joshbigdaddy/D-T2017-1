@@ -19,16 +19,16 @@
 </display:table>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="lessorDeniedMoreRequest" requestURI="${requestURI}"
-	id="lessorDeniedMoreRequest">
-	<spring:message code="administrator.lessorDeniedMoreRequest" var="name" />
+	name="propertiesOrderedByAudits" requestURI="${requestURI}"
+	id="propertiesOrderedByAudits">
+	<spring:message code="administrator.propertiesOrderedByAudits" var="name" />
 	<display:column property="name" title="${name}" sortable="true" />
 </display:table>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="lessorPendingMoreRequest" requestURI="${requestURI}"
-	id="lessorPendingMoreRequest">
-	<spring:message code="administrator.lessorPendingMoreRequest"
+	name="propertiesOrderedByDeniedRequest" requestURI="${requestURI}"
+	id="propertiesOrderedByDeniedRequest">
+	<spring:message code="administrator.propertiesOrderedByDeniedRequest"
 		var="name" />
 	<display:column property="name" title="${name}" sortable="true" />
 </display:table>
@@ -36,9 +36,9 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="tenantPendingMoreRequest" requestURI="${requestURI}"
-	id="tenantPendingMoreRequest">
-	<spring:message code="administrator.tenantPendingMoreRequest"
+	name="propertiesOrderedByAcceptedRequest" requestURI="${requestURI}"
+	id="propertiesOrderedByAcceptedRequest">
+	<spring:message code="administrator.propertiesOrderedByAcceptedRequest"
 		var="name" />
 	<display:column property="name" title="${name}" sortable="true" />
 </display:table>
