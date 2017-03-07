@@ -21,7 +21,10 @@
             <ul>
                 <li><a href="#"><spring:message code="user"/> </a>
                 <ul>
+<security:authorize access="isAuthenticated()">
                     <li><a href="actor/edit.do"><spring:message code="edit" /><spring:message code="profile"/> </a> </li>
+                <li><a href="j_spring_security_logout"><spring:message code="exit" /> </a> </li>
+</security:authorize>
                     <security:authorize access="hasAnyRole('LESSOR','TENANT')">
                         <li><a href="actor/creditcard/edit.do"><spring:message code="editcreditcard"/> </a> </li>
                     </security:authorize>

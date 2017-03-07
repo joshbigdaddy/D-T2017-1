@@ -24,7 +24,7 @@ public class Attribute extends DomainEntity{
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "attribute")
+    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL)
     public Collection<AttributeValue> getAttributeValues() {
         return attributeValues;
     }
