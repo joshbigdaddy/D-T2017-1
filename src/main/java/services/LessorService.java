@@ -169,7 +169,11 @@ public class LessorService {
 		Collection<Lessor> lessors=findAll();
 		Map<Lessor, Double> map=new HashMap<Lessor,Double>();
 		for(Lessor l:lessors){
-			double resultado=getAllRequestsAcceptedByLessor(l.getId()).size()/getAllRequestsAcceptedByLessor(l.getId()).size();
+			double resultado=0.;
+			if (getAllRequestsAcceptedByLessor(l.getId()).size() != 0) {
+				resultado=getAllRequestsAcceptedByLessor(l.getId()).size()/getAllRequestsAcceptedByLessor(l.getId()).size();
+
+			}
 			map.put(l, resultado);
 		}
 		return map;

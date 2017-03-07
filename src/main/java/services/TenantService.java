@@ -146,8 +146,11 @@ public class TenantService {
 		Collection<Tenant> tenants = findAll();
 		Map<Tenant, Double> map = new HashMap<Tenant, Double>();
 		for (Tenant l : tenants) {
-			double resultado = getAllRequestsAcceptedByTenant(l.getId()).size()
-					/ l.getRequests().size();
+			double resultado = 0.;
+			if (l.getRequests().size() != 0) {
+				resultado = getAllRequestsAcceptedByTenant(l.getId()).size()
+						/ l.getRequests().size();
+			}
 			map.put(l, resultado);
 		}
 		return map;
